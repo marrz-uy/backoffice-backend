@@ -47,22 +47,24 @@ class PuntosInteresController extends Controller
         $puntosInteres->Facebook     = $request->Facebook;
         $puntosInteres->Instagram    = $request->Instagram;
         $puntosInteres->Descripcion  = $request->Descripcion;
+        $puntosInteres->Latitud = $request->Latitud;
+        $puntosInteres->Longitud = $request->Longitud;
         $puntosInteres->save();
             //Imagen
-            if (!$request->Imagen->hasFile('file')) {
-                return $this->returnError(202, 'file is required');
-            }
-            // $response  = Cloudinary::upload($file->getRealPath(), ['folder' => 'products']);
+            // if (!$request->Imagen->hasFile('file')) {
+            //     return $this->returnError(202, 'file is required');
+            // }
+            // // $response  = Cloudinary::upload($file->getRealPath(), ['folder' => 'products']);
             
-            $response = Cloudinary::upload($request->file('file')->getRealPath(), ['folder' => 'feeluy']);
-            $public_id = $response->getPublicId();
-            $url       = $response->getSecurePath();
+            // $response = Cloudinary::upload($request->file('file')->getRealPath(), ['folder' => 'feeluy']);
+            // $public_id = $response->getPublicId();
+            // $url       = $response->getSecurePath();
 
-            ImagenesPuntosDeInteres::create([
-                "url"         => $url,
-                "public_id"   => $public_id,
-                "descripcion" => $request->image_description,
-            ]);
+            // ImagenesPuntosDeInteres::create([
+            //     "url"         => $url,
+            //     "public_id"   => $public_id,
+            //     "descripcion" => $request->image_description,
+            // ]);
             //
         $PuntosDeInteresDetallado  = json_decode($request->InformacionDetalladaPuntoDeInteres);
         $id = PuntosInteres::latest('id')->first();
@@ -178,6 +180,8 @@ class PuntosInteresController extends Controller
         $puntosInteres->Instagram    = $request->Instagram;
         $puntosInteres->Descripcion  = $request->Descripcion;
         $puntosInteres->Imagen       = $request->Imagen;
+        $puntosInteres->Latitud = $request->Latitud;
+        $puntosInteres->Longitud = $request->Longitud;
         $puntosInteres->save();
 
         return response()->json([
