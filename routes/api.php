@@ -5,6 +5,7 @@ use App\Http\Controllers\EventosController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AuthController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -21,3 +22,17 @@ Route::get('/Eventos', [EventosController::class, 'show']);
 Route::post('/Eventos', [EventosController::class, 'store']);
 Route::delete('/Eventos/{id}', [EventosController::class, 'destroy']);
 Route::patch('/Eventos/{id}', [EventosController::class, 'update']);
+
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'auth'
+
+], function ($router) {
+
+    Route::post('login', [AuthController::class,'login']);
+    Route::post('logout',[AuthController::class,'logout']);
+    Route::post('refresh', [AuthController::class,'refresh']);
+    Route::post('me', [AuthController::class,'me']);
+
+});

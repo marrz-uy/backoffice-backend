@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'api',
         'passwords' => 'users',
     ],
 
@@ -36,8 +36,8 @@ return [
     */
 
     'guards' => [
-        'web' => [
-            'driver' => 'session',
+        'api' => [
+            'driver' => 'jwt',
             'provider' => 'users',
         ],
     ],
@@ -60,11 +60,14 @@ return [
     */
 
     'providers' => [
+        // 'users' => [
+        //     'driver' => 'ldap',
+        //     'model' => LdapRecord\Models\OpenLDAP\User::class,
+        // ],
         'users' => [
-            'driver' => 'ldap',
-            'model' => LdapRecord\Models\OpenLDAP\User::class,
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
         ],
-
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
