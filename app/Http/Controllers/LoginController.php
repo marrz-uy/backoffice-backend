@@ -12,12 +12,12 @@ class LoginController extends Controller
 {
     
     protected function credentials(Request $request){
-      if($request->username==null && $request->password==null){
+      if($request->username==null || $request->password==null){
         return [ "respuesta" => "Usuario invalido"];
       };
       try{
         $connection = new Connection([
-          'hosts' => ['192.168.1.9'],
+          'hosts' => ['172.20.10.5'],
           'username' => $request -> username . "@marrz.com",
           'password' => $request -> password
         ]);
@@ -27,7 +27,7 @@ class LoginController extends Controller
      catch(\LdapRecord\Auth\BindException $e){
       $error = $e -> getDetailedError();
       return[
-        "error" => $error -> getErrorMessage(),
+        "respuesta" => $error -> getErrorMessage(),
         "code" => $error -> getErrorCode(),
       ];
      }

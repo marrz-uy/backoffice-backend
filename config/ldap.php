@@ -29,7 +29,7 @@ return [
     'connections' => [
 
         'default' => [
-            'hosts' => [env('LDAP_HOST', '192.168.1.9')],
+            'hosts' => [env('LDAP_HOST', '172.20.10.5')],
             'username' => env('LDAP_USERNAME', 'Administrador@marrz.com'),
             'password' => env('LDAP_PASSWORD', '123$$qwerty'),
             'port' => env('LDAP_PORT', 389),
