@@ -18,7 +18,7 @@ Route::get('/PuntosInteres/{Categoria}', [PuntosInteresController::class, 'Lista
 Route::patch('/PuntosInteres/{id}', [PuntosInteresController::class, 'update']);
 Route::delete('/PuntosInteres/{id}', [PuntosInteresController::class, 'destroy']);
 
-Route::get('/Eventos', [EventosController::class, 'show']);
+Route::get('/Eventos', [EventosController::class, 'show'])->middleware("api");
 Route::post('/Eventos', [EventosController::class, 'store']);
 Route::delete('/Eventos/{id}', [EventosController::class, 'destroy']);
 Route::patch('/Eventos/{id}', [EventosController::class, 'update']);
