@@ -13,7 +13,8 @@
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-        "tomfordrumm/jwt-auth": "dev-develop"
+        "tomfordrumm/jwt-auth": "dev-develop",
+        "cloudinary-labs/cloudinary-laravel": "1.0.4"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

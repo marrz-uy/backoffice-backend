@@ -11,7 +11,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::post('/LoginController', [LoginController::class, 'credentials']);
-
+Route::post('me', [LoginController::class, 'me']);
 
 Route::post('/PuntosInteres', [PuntosInteresController::class, 'store']);
 Route::get('/PuntosInteres/{Categoria}', [PuntosInteresController::class, 'ListarPuntosDeInteres']);
