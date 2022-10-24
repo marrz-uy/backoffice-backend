@@ -7,16 +7,16 @@ use App\Models\ServiciosEsenciales;
 use App\Models\Transporte;
 use App\Models\Telefonos;
 use App\Models\Espectaculos;
+use App\Models\ImagenesPuntosDeInteres;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Validator;
-
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 class PuntosInteresController extends Controller
 {
     public function store(Request $request)
     {
-        
         $validator = Validator::make($request->all(), [
             'Nombre'       => 'required',
             'Departamento' => 'required',
@@ -50,35 +50,23 @@ class PuntosInteresController extends Controller
         $puntosInteres->Latitud = $request->Latitud;
         $puntosInteres->Longitud = $request->Longitud;
         $puntosInteres->save();
-            //Imagen
-            // if (!$request->Imagen->hasFile('file')) {
-            //     return $this->returnError(202, 'file is required');
-            // }
-            // // $response  = Cloudinary::upload($file->getRealPath(), ['folder' => 'products']);
-            
-            // $response = Cloudinary::upload($request->file('file')->getRealPath(), ['folder' => 'feeluy']);
-            // $public_id = $response->getPublicId();
-            // $url       = $response->getSecurePath();
-
-            // ImagenesPuntosDeInteres::create([
-            //     "url"         => $url,
-            //     "public_id"   => $public_id,
-            //     "descripcion" => $request->image_description,
-            // ]);
-            //
+        
         $PuntosDeInteresDetallado  = json_decode($request->InformacionDetalladaPuntoDeInteres);
         $id = PuntosInteres::latest('id')->first();
         $this->AltaDeTelefono($id->id,$request->Telefono);
         if(!empty($request->Celular)){$this->AltaDeTelefono($id->id,$request->Celular);}
-        if ($PuntosDeInteresDetallado->Op === 'ServicioEsencial') {
-            return $this->AltaDeServicio($id->id, $PuntosDeInteresDetallado->Tipo);
+        if(!empty($PuntosDeInteresDetallado->Op)){
+            if ($PuntosDeInteresDetallado->Op === 'ServicioEsencial') {
+                return $this->AltaDeServicio($id->id, $PuntosDeInteresDetallado->Tipo);
+            }
+            if ($PuntosDeInteresDetallado->Op === 'transporte') {
+                return $this->AltaDeTransporte($id->id, $PuntosDeInteresDetallado->Tipo);
+            }
+            if ($PuntosDeInteresDetallado->Op === 'Espectaculos') {
+                return $this->AltaDeEspectaculos($id->id,$PuntosDeInteresDetallado->Artista,$PuntosDeInteresDetallado->PrecioEntrada,$PuntosDeInteresDetallado->Tipo);
+            }
         }
-        if ($PuntosDeInteresDetallado->Op === 'transporte') {
-            return $this->AltaDeTransporte($id->id, $PuntosDeInteresDetallado->Tipo);
-        }
-        if ($PuntosDeInteresDetallado->Op === 'Espectaculos') {
-            return $this->AltaDeEspectaculos($id->id,$PuntosDeInteresDetallado->Artista,$PuntosDeInteresDetallado->PrecioEntrada,$PuntosDeInteresDetallado->Tipo);
-        }
+        
 
         //DB::commit();
         return response()->json([
@@ -89,6 +77,38 @@ class PuntosInteresController extends Controller
     // catch(Exception $e){
     //     DB::rollBack();
     // }
+
+    }
+    public function saveImage($request)
+    {
+        //en request enviar imagen e "image_description"
+        try {
+            if (!$request->hasFile('file')) {
+                return $this->returnError(202, 'file is required');
+            }
+            // $response  = Cloudinary::upload($file->getRealPath(), ['folder' => 'products']);
+            
+            $response = Cloudinary::upload($request->file('file')->getRealPath(), ['folder' => 'feeluy']);
+            $public_id = $response->getPublicId();
+            $url       = $response->getSecurePath();
+
+            ImagenesPuntosDeInteres::create([
+                "url"         => $url,
+                "public_id"   => $public_id,
+                "image_description" => $request->image_description,
+            ]);
+
+            return response()->json([
+                'message' => 'Successfully uploaded image',
+                'url'  => $response->getSecurePath(),
+                "descripcion" => $request->image_description,
+            ]);
+        } catch (\Exception$e) {
+            // return $this->returnError(201, $e->getMessage());
+            return response()->json([
+                'message' => $e,
+            ], 404);
+        }
 
     }
     public function AltaDeServicio($IdPuntoDeInteres, $TipoDetallado)
