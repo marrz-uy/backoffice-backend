@@ -17,70 +17,69 @@ class PuntosInteresController extends Controller
 {
     public function store(Request $request)
     {
-       //return response()->json(['respuesta'=>$request]);
-    $this->saveImage($request);
-    //     $validator = Validator::make($request->all(), [
-    //         'Nombre'       => 'required',
-    //         'Departamento' => 'required',
-    //         'Ciudad'       => 'required',
-    //         'Direccion'    => 'required',
-    //         'Telefono'     => 'required' 
-    //     ], [
-    //         'Nombre.required'       => 'El nombre es obligatorio',
-    //         'Departamento.required' => 'El Departamento es obligatorio',
-    //         'Ciudad.required'       => 'La Ciudad es obligatorio',
-    //         'Direccion.required'    => 'La direccion es obligatorio',
-    //         'Telefono.required'     => 'El Telefono es obligatorio',
-    //     ]
-    //     );
+       
+        $validator = Validator::make($request->all(), [
+            'Nombre'       => 'required',
+            'Departamento' => 'required',
+            'Ciudad'       => 'required',
+            'Direccion'    => 'required',
+            'Telefono'     => 'required' 
+        ], [
+            'Nombre.required'       => 'El nombre es obligatorio',
+            'Departamento.required' => 'El Departamento es obligatorio',
+            'Ciudad.required'       => 'La Ciudad es obligatorio',
+            'Direccion.required'    => 'La direccion es obligatorio',
+            'Telefono.required'     => 'El Telefono es obligatorio',
+        ]
+        );
 
-    //     if ($validator->fails()) {
-    //         return response()->json($validator->errors(), 422);
-    //     }
-    //     //try {
-    //     //DB::beginTransaction();
-    //     $puntosInteres               = new PuntosInteres();
-    //     $puntosInteres->Nombre       = $request->Nombre;
-    //     $puntosInteres->Departamento = $request->Departamento;
-    //     $puntosInteres->Ciudad       = $request->Ciudad;
-    //     $puntosInteres->Direccion    = $request->Direccion;
-    //     $puntosInteres->HoraDeApertura = $request->HoraDeApertura;
-    //     $puntosInteres->HoraDeCierre = $request->HoraDeCierre;
-    //     $puntosInteres->Facebook     = $request->Facebook;
-    //     $puntosInteres->Instagram    = $request->Instagram;
-    //     $puntosInteres->Descripcion  = $request->Descripcion;
-    //     $puntosInteres->Latitud = $request->Latitud;
-    //     $puntosInteres->Longitud = $request->Longitud;
-    //     $puntosInteres->save();
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+        //try {
+        //DB::beginTransaction();
+        $puntosInteres               = new PuntosInteres();
+        $puntosInteres->Nombre          = $request->Nombre;
+        $puntosInteres->Departamento    = $request->Departamento;
+        $puntosInteres->Ciudad          = $request->Ciudad;
+        $puntosInteres->Direccion       = $request->Direccion;
+        $puntosInteres->HoraDeApertura  = $request->HoraDeApertura;
+        $puntosInteres->HoraDeCierre    = $request->HoraDeCierre;
+        $puntosInteres->Facebook        = $request->Facebook;
+        $puntosInteres->Instagram       = $request->Instagram;
+        $puntosInteres->Descripcion     = $request->Descripcion;
+        $puntosInteres->Latitud         = $request->Latitud;
+        $puntosInteres->Longitud        = $request->Longitud;
+        $puntosInteres->save();
         
-    //     $PuntosDeInteresDetallado  = json_decode($request->InformacionDetalladaPuntoDeInteres);
-    //     $id = PuntosInteres::latest('id')->first();
-    //     $this->AltaDeTelefono($id->id,$request->Telefono);
-    //     if(!empty($request->Celular)){$this->AltaDeTelefono($id->id,$request->Celular);}
-    //     if(!empty($PuntosDeInteresDetallado->Op)){
+        $PuntosDeInteresDetallado  = json_decode($request->InformacionDetalladaPuntoDeInteres);
+        $id = PuntosInteres::latest('id')->first();
+        $this->AltaDeTelefono($id->id,$request->Telefono);
+        if(!empty($request->Celular)){$this->AltaDeTelefono($id->id,$request->Celular);}
+        if(!empty($PuntosDeInteresDetallado->Op)){
             
-    //         if ($PuntosDeInteresDetallado->Op === 'ServicioEsencial') {
-    //             return $this->AltaDeServicio($id->id, $PuntosDeInteresDetallado->Tipo);
-    //         }
-    //         if ($PuntosDeInteresDetallado->Op === 'transporte') {
+            if ($PuntosDeInteresDetallado->Op === 'ServicioEsencial') {
+                return $this->AltaDeServicio($id->id, $PuntosDeInteresDetallado->Tipo);
+            }
+            if ($PuntosDeInteresDetallado->Op === 'transporte') {
                 
-    //             return $this->AltaDeTransporte($id->id, $PuntosDeInteresDetallado->Tipo);
-    //         }
-    //         if ($PuntosDeInteresDetallado->Op === 'Espectaculos') {
-    //             return $this->AltaDeEspectaculos($id->id,$PuntosDeInteresDetallado->Artista,$PuntosDeInteresDetallado->PrecioEntrada,$PuntosDeInteresDetallado->Tipo);
-    //         }
-    //     }
+                return $this->AltaDeTransporte($id->id, $PuntosDeInteresDetallado->Tipo);
+            }
+            if ($PuntosDeInteresDetallado->Op === 'Espectaculos') {
+                return $this->AltaDeEspectaculos($id->id,$PuntosDeInteresDetallado->Artista,$PuntosDeInteresDetallado->PrecioEntrada,$PuntosDeInteresDetallado->Tipo);
+            }
+        }
         
 
-    //     //DB::commit();
-    //     return response()->json([
-    //         "codigo"    => "200",
-    //         "respuesta" => "Se ingreso con exito",
-    //     ]);
-    // //}
-    // // catch(Exception $e){
-    // //     DB::rollBack();
-    // // }
+        //DB::commit();
+        return response()->json([
+            "codigo"    => "200",
+            "respuesta" => "Se ingreso con exito",
+        ]);
+    //}
+    // catch(Exception $e){
+    //     DB::rollBack();
+    // }
 
     }
     public function saveImage($Imagen)
@@ -193,19 +192,18 @@ class PuntosInteresController extends Controller
     }
     public function update(Request $request, $IdPuntoDeInteres)
     {
-        $puntosInteres               = PuntosInteres::findOrFail($IdPuntoDeInteres);
-        $puntosInteres->Nombre       = $request->Nombre;
-        $puntosInteres->Departamento = $request->Departamento;
-        $puntosInteres->Ciudad       = $request->Ciudad;
-        $puntosInteres->Direccion    = $request->Direccion;
-        $puntosInteres->HoraDeApertura = $request->HoraDeApertura;
-        $puntosInteres->HoraDeCierre = $request->HoraDeCierre;
-        $puntosInteres->Facebook     = $request->Facebook;
-        $puntosInteres->Instagram    = $request->Instagram;
-        $puntosInteres->Descripcion  = $request->Descripcion;
-        $puntosInteres->Imagen       = $request->Imagen;
-        $puntosInteres->Latitud = $request->Latitud;
-        $puntosInteres->Longitud = $request->Longitud;
+        $puntosInteres                  = PuntosInteres::findOrFail($IdPuntoDeInteres);
+        $puntosInteres->Nombre          = $request->Nombre;
+        $puntosInteres->Departamento    = $request->Departamento;
+        $puntosInteres->Ciudad          = $request->Ciudad;
+        $puntosInteres->Direccion       = $request->Direccion;
+        $puntosInteres->HoraDeApertura  = $request->HoraDeApertura;
+        $puntosInteres->HoraDeCierre    = $request->HoraDeCierre;
+        $puntosInteres->Facebook        = $request->Facebook;
+        $puntosInteres->Instagram       = $request->Instagram;
+        $puntosInteres->Descripcion     = $request->Descripcion;
+        $puntosInteres->Latitud         = $request->Latitud;
+        $puntosInteres->Longitud        = $request->Longitud;
         $puntosInteres->save();
 
         return response()->json([
