@@ -23,13 +23,11 @@ class PuntosInteresController extends Controller
             'Departamento' => 'required',
             'Ciudad'       => 'required',
             'Direccion'    => 'required',
-            'Telefono'     => 'required' 
         ], [
             'Nombre.required'       => 'El nombre es obligatorio',
             'Departamento.required' => 'El Departamento es obligatorio',
             'Ciudad.required'       => 'La Ciudad es obligatorio',
             'Direccion.required'    => 'La direccion es obligatorio',
-            'Telefono.required'     => 'El Telefono es obligatorio',
         ]
         );
 
@@ -155,7 +153,30 @@ class PuntosInteresController extends Controller
         $Telefono->Telefono=$Telefonos;
         $Telefono->save();
     }
+    public function AltaDeAlojamiento($IdPuntoDeInteres, $TipoDetallado)
+    {
+        $alojamiento                   = new Alojamiento();
+        $alojamiento->puntosinteres_id = $IdPuntoDeInteres;
+        $alojamiento->Tipo             = $TipoDetallado;
+        $alojamiento->Costos           = $Costos;
+        $alojamiento->Habitaciones     = $Habitaciones;
+        $alojamiento->Calificaciones   = $Calificaciones;
+        $alojamiento->TvCable          = $TvCable;
+        $alojamiento->Piscina          = $Piscina;
+        $alojamiento->Wifi             = $Wifi;
+        $alojamiento->AireAcondicionado= $AireAcondicionado;
+        $alojamiento->BanoPrivad       = $BanoPrivad;
+        $alojamiento->Casino           = $Casino;
+        $alojamiento->Bar              = $Bar;
+        $alojamiento->Restaurante      = $Restaurante;
+        $alojamiento->Desayuno         = $Desayuno;
 
+        $alojamiento->save();
+        return response()->json([
+            "codigo"    => "200",
+            "respuesta" => "Se ingreso con exito",
+        ]);
+    }
     public function ListarPuntosDeInteres(Request $request, $Categoria)
     {
         if($request->Opcion==='Unico'){
