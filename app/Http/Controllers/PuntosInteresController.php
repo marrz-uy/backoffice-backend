@@ -6,6 +6,7 @@ use App\Models\PuntosInteres;
 use App\Models\ServiciosEsenciales;
 use App\Models\Transporte;
 use App\Models\Telefonos;
+use App\Models\Alojamiento;
 use App\Models\Espectaculos;
 use App\Models\ImagenesPuntosDeInteres;
 use Illuminate\Http\Request;
@@ -59,12 +60,14 @@ class PuntosInteresController extends Controller
             if ($PuntosDeInteresDetallado->Op === 'ServicioEsencial') {
                 return $this->AltaDeServicio($id->id, $PuntosDeInteresDetallado->Tipo);
             }
-            if ($PuntosDeInteresDetallado->Op === 'transporte') {
-                
+            if ($PuntosDeInteresDetallado->Op === 'transporte') { 
                 return $this->AltaDeTransporte($id->id, $PuntosDeInteresDetallado->Tipo);
             }
             if ($PuntosDeInteresDetallado->Op === 'Espectaculos') {
                 return $this->AltaDeEspectaculos($id->id,$PuntosDeInteresDetallado->Artista,$PuntosDeInteresDetallado->PrecioEntrada,$PuntosDeInteresDetallado->Tipo);
+            }
+            if($PuntosDeInteresDetallado->Op === 'Alojamiento'){
+                return $this->AltaDeAlojamiento($id->id,$PuntosDeInteresDetallado->Tipo,$PuntosDeInteresDetallado->Costos,$PuntosDeInteresDetallado->Habitaciones,$PuntosDeInteresDetallado->Calificaciones,$PuntosDeInteresDetallado->Tv,$PuntosDeInteresDetallado->Piscina,$PuntosDeInteresDetallado->Wifi,$PuntosDeInteresDetallado->AireAcondicionado,$PuntosDeInteresDetallado->BanoPrivado,$PuntosDeInteresDetallado->Bar,$PuntosDeInteresDetallado->Casino,$PuntosDeInteresDetallado->Desayno);
             }
         }
         
@@ -153,7 +156,7 @@ class PuntosInteresController extends Controller
         $Telefono->Telefono=$Telefonos;
         $Telefono->save();
     }
-    public function AltaDeAlojamiento($IdPuntoDeInteres, $TipoDetallado)
+    public function AltaDeAlojamiento($IdPuntoDeInteres,$TipoDetallado,$Costos,$Habitaciones,$TvCable,$Piscina,$Wifi,$AireAcondicionado,$BanoPrivad,$Casino,$Bar,$Restaurante,$Desayuno)
     {
         $alojamiento                   = new Alojamiento();
         $alojamiento->puntosinteres_id = $IdPuntoDeInteres;
@@ -170,8 +173,8 @@ class PuntosInteresController extends Controller
         $alojamiento->Bar              = $Bar;
         $alojamiento->Restaurante      = $Restaurante;
         $alojamiento->Desayuno         = $Desayuno;
-
         $alojamiento->save();
+        
         return response()->json([
             "codigo"    => "200",
             "respuesta" => "Se ingreso con exito",
