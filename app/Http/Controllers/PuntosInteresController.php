@@ -51,22 +51,23 @@ class PuntosInteresController extends Controller
         $puntosInteres->Longitud        = $request->Longitud;
         $puntosInteres->save();
         
+        if(!empty($request->Celular)){$this->AltaDeTelefono($id->id,$request->Celular);}
+
         $PuntosDeInteresDetallado  = json_decode($request->InformacionDetalladaPuntoDeInteres,true);
-        //echo "<pre>";var_dump($PuntosDeInteresDetallado);die();
         $id = PuntosInteres::latest('id')->first();
         $this->AltaDeTelefono($id->id,$request->Telefono);
-        if(!empty($request->Celular)){$this->AltaDeTelefono($id->id,$request->Celular);}
+        //echo "<pre>";var_dump($PuntosDeInteresDetallado);die();
         if(!empty($PuntosDeInteresDetallado['Op'])){
             
-            // if ($PuntosDeInteresDetallado->Op === 'ServicioEsencial') {
-            //     return $this->AltaDeServicio($id->id, $PuntosDeInteresDetallado->Tipo);
-            // }
-            // if ($PuntosDeInteresDetallado->Op === 'transporte') { 
-            //     return $this->AltaDeTransporte($id->id, $PuntosDeInteresDetallado->Tipo);
-            // }
-            // if ($PuntosDeInteresDetallado->Op === 'Espectaculos') {
-            //     return $this->AltaDeEspectaculos($id->id,$PuntosDeInteresDetallado->Artista,$PuntosDeInteresDetallado->PrecioEntrada,$PuntosDeInteresDetallado->Tipo);
-            // }
+            if ($PuntosDeInteresDetallado['Op'] === 'ServicioEsencial') {
+                return $this->AltaDeServicio($id->id, $PuntosDeInteresDetallado['Tipo']);
+            }
+            if ($PuntosDeInteresDetallado['Op'] === 'transporte') { 
+                return $this->AltaDeTransporte($id->id, $PuntosDeInteresDetallado['Tipo']);
+            }
+            if ($PuntosDeInteresDetallado['Op'] === 'Espectaculos') {
+                return $this->AltaDeEspectaculos($id->id,$PuntosDeInteresDetallado['Artista'],$PuntosDeInteresDetallado['PrecioEntrada'],$PuntosDeInteresDetallado['Tipo']);
+            }
             if($PuntosDeInteresDetallado['Op'] === 'Alojamiento'){
                 //return $this->AltaDeAlojamiento($id->id,$PuntosDeInteresDetallado->Tipo,$PuntosDeInteresDetallado->Costos,$PuntosDeInteresDetallado->Habitaciones,$PuntosDeInteresDetallado->Calificaciones,$PuntosDeInteresDetallado->Tv,$PuntosDeInteresDetallado->Piscina,$PuntosDeInteresDetallado->Wifi,$PuntosDeInteresDetallado->AireAcondicionado,$PuntosDeInteresDetallado->BanoPrivado,$PuntosDeInteresDetallado->Bar,$PuntosDeInteresDetallado->Casino,$PuntosDeInteresDetallado->Desayno);
                 return $this->AltaDeAlojamiento($id->id,$PuntosDeInteresDetallado);
@@ -164,18 +165,18 @@ class PuntosInteresController extends Controller
         $alojamiento->puntosinteres_id = $IdPuntoDeInteres;
         //return $datos['Tipo'];
         if(isset($datos['Tipo'])) $alojamiento->Tipo = $datos['Tipo'];
-        // if(isset($datos['Costos'])) $alojamiento->Costos = $datos -> Costos;
-        // if(isset($datos ->Habitaciones)) $alojamiento->Habitaciones = $datos -> Habitaciones;
-        // if(isset($datos ->Calificaciones)) $alojamiento->Calificaciones = $datos -> Calificaciones;
-        // if(isset($datos ->TvCable)) $alojamiento->TvCable = $datos -> TvCable;
-        // if(isset($datos ->Piscina)) $alojamiento->Piscina = $datos -> Piscina;
-        // if(isset($datos ->Wifi)) $alojamiento->Wifi = $datos -> Wifi;
-        // if(isset($datos ->AireAcondicionado)) $alojamiento->AireAcondicionado = $datos -> AireAcondicionado;
-        // if(isset($datos ->BanoPrivad)) $alojamiento->BanoPrivad = $datos -> BanoPrivad;
-        // if(isset($datos ->Casino)) $alojamiento->Casino = $datos -> Casino;
-        // if(isset($datos ->Bar)) $alojamiento->Bar = $datos -> Bar;
-        // if(isset($datos ->Restaurante)) $alojamiento->Restaurante = $datos -> Restaurante;
-        // if(isset($datos ->Desayuno)) $alojamiento->Desayuno = $datos -> Desayuno;
+        if(isset($datos['Costos'])) $alojamiento->Costos = $datos['Costos'];
+        if(isset($datos['Habitaciones'])) $alojamiento->Habitaciones = $datos['Habitaciones'];
+        if(isset($datos['Calificaciones'])) $alojamiento->Calificaciones = $datos['Calificaciones'];
+        if(isset($datos['TvCable'])) $alojamiento->TvCable = $datos['TvCable'];
+        if(isset($datos['Piscina'])) $alojamiento->Piscina = $datos['Piscina'];
+        if(isset($datos['Wifi'])) $alojamiento->Wifi = $datos['Wifi'];
+        if(isset($datos['AireAcondicionado'])) $alojamiento->AireAcondicionado = $datos['AireAcondicionado'];
+        if(isset($datos['BanoPrivado'])) $alojamiento->BanoPrivad =$datos['BanoPrivado'];
+        if(isset($datos['Casino'])) $alojamiento->Casino = $datos['Casino'];
+        if(isset($datos['Bar'])) $alojamiento->Bar = $datos['Bar'];
+        if(isset($datos['Restaurante'])) $alojamiento->Restaurante = $datos['Restaurante'];
+        if(isset($datos['Desayuno'])) $alojamiento->Desayuno = $datos['Desayuno'];
        // echo "<pre>";var_dump($datos);die();
         $alojamiento->save();
         return response()->json([
@@ -240,7 +241,9 @@ class PuntosInteresController extends Controller
        // return $this->ModificarTelefonos($IdPuntoDeInteres,$request->Telefono);
         
     }
-    
+    public function ModificarAlojamiento(){
+
+    }
     public function ModificarTelefonos($id,$TelefonoViejo, $TelefonoNuevo){
         $telefono=DB::table('telefonos')
         ->where('puntosinteres_id','=',$id)
