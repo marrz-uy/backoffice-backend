@@ -233,7 +233,10 @@ class PuntosInteresController extends Controller
         $puntosInteres->Latitud         = $request->Latitud;
         $puntosInteres->Longitud        = $request->Longitud;
         $puntosInteres->save();
-
+        $PuntosDeInteresDetallado  = json_decode($request->InformacionDetalladaPuntoDeInteres,true);
+        if($PuntosDeInteresDetallado['Op'] === 'Alojamiento'){
+            return $this->ModificarAlojamiento($IdPuntoDeInteres,$request->InformacionDetalladaPuntoDeInteres);
+        }
         return response()->json([
             "codigo"    => '200',
             "respuesta" => "Se modifico con exito",
@@ -241,8 +244,30 @@ class PuntosInteresController extends Controller
        // return $this->ModificarTelefonos($IdPuntoDeInteres,$request->Telefono);
         
     }
-    public function ModificarAlojamiento(){
-
+    public function ModificarAlojamiento($IdPuntoDeInteres,$datos){
+        $alojamiento = DB::table('alojamientos')
+                ->where('puntosinteres_id','=',$IdPuntoDeInteres)
+                ->get();
+        $alojamiento=Alojamiento::findOrFail($alojamiento[0]->id); 
+        $datos  = json_decode($datos,true);    
+        if(isset($datos['Tipo'])) $alojamiento->Tipo = $datos['Tipo'];
+        if(isset($datos['Costos'])) $alojamiento->Costos = $datos['Costos'];
+        if(isset($datos['Habitaciones'])) $alojamiento->Habitaciones = $datos['Habitaciones'];
+        if(isset($datos['Calificaciones'])) $alojamiento->Calificaciones = $datos['Calificaciones'];
+        if(isset($datos['TvCable'])) $alojamiento->TvCable = $datos['TvCable'];
+        if(isset($datos['Piscina'])) $alojamiento->Piscina = $datos['Piscina'];
+        if(isset($datos['Wifi'])) $alojamiento->Wifi = $datos['Wifi'];
+        if(isset($datos['AireAcondicionado'])) $alojamiento->AireAcondicionado = $datos['AireAcondicionado'];
+        if(isset($datos['BanoPrivado'])) $alojamiento->BanoPrivad =$datos['BanoPrivado'];
+        if(isset($datos['Casino'])) $alojamiento->Casino = $datos['Casino'];
+        if(isset($datos['Bar'])) $alojamiento->Bar = $datos['Bar'];
+        if(isset($datos['Restaurante'])) $alojamiento->Restaurante = $datos['Restaurante'];
+        if(isset($datos['Desayuno'])) $alojamiento->Desayuno = $datos['Desayuno'];
+        $alojamiento->save();
+        return response()->json([
+            "codigo"    => "200",
+            "respuesta" => "Se modifico con exito",
+        ]);      
     }
     public function ModificarTelefonos($id,$TelefonoViejo, $TelefonoNuevo){
         $telefono=DB::table('telefonos')
