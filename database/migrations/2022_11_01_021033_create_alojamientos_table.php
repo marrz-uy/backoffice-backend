@@ -20,7 +20,6 @@ class CreateAlojamientosTable extends Migration
             ->onUpdate('cascade')
             ->onDelete('cascade');
             $table->set('Tipo',['Hotel','Hostel','Motel','Estancia','Camping','Casa']);
-            $table->integer('Costos')->nullable();
             $table->integer('Habitaciones')->nullable();
             $table->integer('Calificaciones')->nullable();
             $table->String('TvCable')->nullable();

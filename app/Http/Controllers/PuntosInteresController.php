@@ -165,7 +165,6 @@ class PuntosInteresController extends Controller
         $alojamiento->puntosinteres_id = $IdPuntoDeInteres;
         //return $datos['Tipo'];
         if(isset($datos['Tipo'])) $alojamiento->Tipo = $datos['Tipo'];
-        if(isset($datos['Costos'])) $alojamiento->Costos = $datos['Costos'];
         if(isset($datos['Habitaciones'])) $alojamiento->Habitaciones = $datos['Habitaciones'];
         if(isset($datos['Calificaciones'])) $alojamiento->Calificaciones = $datos['Calificaciones'];
         if(isset($datos['TvCable'])) $alojamiento->TvCable = $datos['TvCable'];
@@ -251,7 +250,6 @@ class PuntosInteresController extends Controller
         $alojamiento=Alojamiento::findOrFail($alojamiento[0]->id); 
         $datos  = json_decode($datos,true);    
         if(isset($datos['Tipo'])) $alojamiento->Tipo = $datos['Tipo'];
-        if(isset($datos['Costos'])) $alojamiento->Costos = $datos['Costos'];
         if(isset($datos['Habitaciones'])) $alojamiento->Habitaciones = $datos['Habitaciones'];
         if(isset($datos['Calificaciones'])) $alojamiento->Calificaciones = $datos['Calificaciones'];
         if(isset($datos['TvCable'])) $alojamiento->TvCable = $datos['TvCable'];
