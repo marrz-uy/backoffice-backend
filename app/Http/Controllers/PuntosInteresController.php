@@ -8,6 +8,7 @@ use App\Models\Transporte;
 use App\Models\Telefonos;
 use App\Models\Alojamiento;
 use App\Models\Espectaculos;
+use App\Models\Gastronomicos;
 use App\Models\ImagenesPuntosDeInteres;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -71,6 +72,9 @@ class PuntosInteresController extends Controller
             if($PuntosDeInteresDetallado['Op'] === 'Alojamiento'){
                 //return $this->AltaDeAlojamiento($id->id,$PuntosDeInteresDetallado->Tipo,$PuntosDeInteresDetallado->Costos,$PuntosDeInteresDetallado->Habitaciones,$PuntosDeInteresDetallado->Calificaciones,$PuntosDeInteresDetallado->Tv,$PuntosDeInteresDetallado->Piscina,$PuntosDeInteresDetallado->Wifi,$PuntosDeInteresDetallado->AireAcondicionado,$PuntosDeInteresDetallado->BanoPrivado,$PuntosDeInteresDetallado->Bar,$PuntosDeInteresDetallado->Casino,$PuntosDeInteresDetallado->Desayno);
                 return $this->AltaDeAlojamiento($id->id,$PuntosDeInteresDetallado);
+            }
+            if($PuntosDeInteresDetallado['Op'] === 'Gastronomicos'){
+                return $this->AltaDeGastronomico($id->id,$PuntosDeInteresDetallado);
             }
         }
         
@@ -159,7 +163,7 @@ class PuntosInteresController extends Controller
         $Telefono->Telefono=$Telefonos;
         $Telefono->save();
     }
-    public function AltaDeAlojamiento($IdPuntoDeInteres,$datos)//$TipoDetallado,$Costos,$Habitaciones,$Calificaciones,$TvCable,$Piscina,$Wifi,$AireAcondicionado,$BanoPrivad,$Casino,$Bar,$Restaurante,$Desayuno)
+    public function AltaDeAlojamiento($IdPuntoDeInteres,$datos)
     {
         $alojamiento = new Alojamiento();
         $alojamiento->puntosinteres_id = $IdPuntoDeInteres;
@@ -178,6 +182,22 @@ class PuntosInteresController extends Controller
         if(isset($datos['Desayuno'])) $alojamiento->Desayuno = $datos['Desayuno'];
        // echo "<pre>";var_dump($datos);die();
         $alojamiento->save();
+        return response()->json([
+            "codigo"    => "200",
+            "respuesta" => "Se ingreso con exito",
+        ]);
+    }
+    public function AltaDeGastronomico($IdPuntoDeInteres,$datos)
+    {
+        $gastronomico = new Gastronomicos();
+        $gastronomico->puntosinteres_id = $IdPuntoDeInteres;
+        if(isset($datos['Tipo'])) $gastronomico->Tipo = $datos['Tipo'];
+        if(isset($datos['ComidaVegge'])) $gastronomico->ComidaVegge = $datos['ComidaVegge'];
+        if(isset($datos['Comida'])) $gastronomico->Comida = $datos['Comida'];
+        if(isset($datos['Alcohol'])) $gastronomico->Alcohol = $datos['Alcohol'];
+        if(isset($datos['MenuInfantil'])) $gastronomico->MenuInfantil = $datos['MenuInfantil'];
+       // echo "<pre>";var_dump($datos);die();
+        $gastronomico->save();
         return response()->json([
             "codigo"    => "200",
             "respuesta" => "Se ingreso con exito",
@@ -236,6 +256,9 @@ class PuntosInteresController extends Controller
         if($PuntosDeInteresDetallado['Op'] === 'Alojamiento'){
             return $this->ModificarAlojamiento($IdPuntoDeInteres,$request->InformacionDetalladaPuntoDeInteres);
         }
+        if($PuntosDeInteresDetallado['Op'] === 'Gastronomicos'){
+            return $this->ModificarGastronomico($id->id,$PuntosDeInteresDetallado);
+        }
         return response()->json([
             "codigo"    => '200',
             "respuesta" => "Se modifico con exito",
@@ -266,6 +289,24 @@ class PuntosInteresController extends Controller
             "codigo"    => "200",
             "respuesta" => "Se modifico con exito",
         ]);      
+    }
+    public function ModificarGastronomico($IdPuntoDeInteres,$datos){
+        $gastronomico = DB::table('gastronomico')
+                ->where('puntosinteres_id','=',$IdPuntoDeInteres)
+                ->get();
+        $gastronomico=Alojamiento::findOrFail($gastronomico[0]->id); 
+        $datos  = json_decode($datos,true);    
+        if(isset($datos['Tipo'])) $gastronomico->Tipo = $datos['Tipo'];
+        if(isset($datos['ComidaVegge'])) $gastronomico->ComidaVegge = $datos['ComidaVegge'];
+        if(isset($datos['Comida'])) $gastronomico->Comida = $datos['Comida'];
+        if(isset($datos['Alcohol'])) $gastronomico->Alcohol = $datos['Alcohol'];
+        if(isset($datos['MenuInfantil'])) $gastronomico->MenuInfantil = $datos['MenuInfantil'];
+       // echo "<pre>";var_dump($datos);die();
+        $gastronomico->save();
+        return response()->json([
+            "codigo"    => "200",
+            "respuesta" => "Se ingreso con exito",
+        ]);     
     }
     public function ModificarTelefonos($id,$TelefonoViejo, $TelefonoNuevo){
         $telefono=DB::table('telefonos')
