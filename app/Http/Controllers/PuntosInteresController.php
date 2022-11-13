@@ -25,11 +25,15 @@ class PuntosInteresController extends Controller
             'Departamento' => 'required',
             'Ciudad'       => 'required',
             'Direccion'    => 'required',
+            'Latitud'      => 'integer',
+            'Longitud'     => 'integer',
         ], [
             'Nombre.required'       => 'El nombre es obligatorio',
             'Departamento.required' => 'El Departamento es obligatorio',
             'Ciudad.required'       => 'La Ciudad es obligatorio',
             'Direccion.required'    => 'La direccion es obligatorio',
+            'Latitud.integer'       => 'Latitud debe ser un numero',
+            'Longitud.integer'      => 'Longitud debe ser un numero',
         ]
         );
 
@@ -38,6 +42,7 @@ class PuntosInteresController extends Controller
         }
         //try {
         //DB::beginTransaction();
+        
         $puntosInteres               = new PuntosInteres();
         $puntosInteres->Nombre          = $request->Nombre;
         $puntosInteres->Departamento    = $request->Departamento;
@@ -55,6 +60,7 @@ class PuntosInteresController extends Controller
         if(!empty($request->Celular)){$this->AltaDeTelefono($id->id,$request->Celular);}
 
         $PuntosDeInteresDetallado  = json_decode($request->InformacionDetalladaPuntoDeInteres,true);
+        
         $id = PuntosInteres::latest('id')->first();
         $this->AltaDeTelefono($id->id,$request->Telefono);
         //echo "<pre>";var_dump($PuntosDeInteresDetallado);die();
@@ -70,6 +76,7 @@ class PuntosInteresController extends Controller
                 return $this->AltaDeEspectaculos($id->id,$PuntosDeInteresDetallado['Artista'],$PuntosDeInteresDetallado['PrecioEntrada'],$PuntosDeInteresDetallado['Tipo']);
             }
             if($PuntosDeInteresDetallado['Op'] === 'Alojamiento'){
+                
                 //return $this->AltaDeAlojamiento($id->id,$PuntosDeInteresDetallado->Tipo,$PuntosDeInteresDetallado->Costos,$PuntosDeInteresDetallado->Habitaciones,$PuntosDeInteresDetallado->Calificaciones,$PuntosDeInteresDetallado->Tv,$PuntosDeInteresDetallado->Piscina,$PuntosDeInteresDetallado->Wifi,$PuntosDeInteresDetallado->AireAcondicionado,$PuntosDeInteresDetallado->BanoPrivado,$PuntosDeInteresDetallado->Bar,$PuntosDeInteresDetallado->Casino,$PuntosDeInteresDetallado->Desayno);
                 return $this->AltaDeAlojamiento($id->id,$PuntosDeInteresDetallado);
             }
@@ -257,7 +264,7 @@ class PuntosInteresController extends Controller
             return $this->ModificarAlojamiento($IdPuntoDeInteres,$request->InformacionDetalladaPuntoDeInteres);
         }
         if($PuntosDeInteresDetallado['Op'] === 'Gastronomicos'){
-            return $this->ModificarGastronomico($id->id,$PuntosDeInteresDetallado);
+            return $this->ModificarGastronomico($IdPuntoDeInteres,$request->InformacionDetalladaPuntoDeInteres);
         }
         return response()->json([
             "codigo"    => '200',
@@ -291,10 +298,11 @@ class PuntosInteresController extends Controller
         ]);      
     }
     public function ModificarGastronomico($IdPuntoDeInteres,$datos){
-        $gastronomico = DB::table('gastronomico')
+        $gastronomico = DB::table('gastronomicos')
                 ->where('puntosinteres_id','=',$IdPuntoDeInteres)
                 ->get();
-        $gastronomico=Alojamiento::findOrFail($gastronomico[0]->id); 
+                
+        $gastronomico=Gastronomicos::findOrFail($gastronomico[0]->id); 
         $datos  = json_decode($datos,true);    
         if(isset($datos['Tipo'])) $gastronomico->Tipo = $datos['Tipo'];
         if(isset($datos['ComidaVegge'])) $gastronomico->ComidaVegge = $datos['ComidaVegge'];
@@ -305,7 +313,7 @@ class PuntosInteresController extends Controller
         $gastronomico->save();
         return response()->json([
             "codigo"    => "200",
-            "respuesta" => "Se ingreso con exito",
+            "respuesta" => "Se modifico con exito",
         ]);     
     }
     public function ModificarTelefonos($id,$TelefonoViejo, $TelefonoNuevo){
