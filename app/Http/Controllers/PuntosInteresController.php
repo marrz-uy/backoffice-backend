@@ -9,12 +9,16 @@ use App\Models\Telefonos;
 use App\Models\Alojamiento;
 use App\Models\Espectaculos;
 use App\Models\Gastronomicos;
+use App\Models\ActividadesInfantiles;
 use App\Models\ImagenesPuntosDeInteres;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+
 use Validator;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+
 class PuntosInteresController extends Controller
 {
     public function store(Request $request)
@@ -64,25 +68,13 @@ class PuntosInteresController extends Controller
         $id = PuntosInteres::latest('id')->first();
         $this->AltaDeTelefono($id->id,$request->Telefono);
         //echo "<pre>";var_dump($PuntosDeInteresDetallado);die();
-        if(!empty($PuntosDeInteresDetallado['Op'])){
-            
-            if ($PuntosDeInteresDetallado['Op'] === 'ServicioEsencial') {
-                return $this->AltaDeServicio($id->id, $PuntosDeInteresDetallado['Tipo']);
-            }
-            if ($PuntosDeInteresDetallado['Op'] === 'transporte') { 
-                return $this->AltaDeTransporte($id->id, $PuntosDeInteresDetallado['Tipo']);
-            }
-            if ($PuntosDeInteresDetallado['Op'] === 'Espectaculos') {
-                return $this->AltaDeEspectaculos($id->id,$PuntosDeInteresDetallado['Artista'],$PuntosDeInteresDetallado['PrecioEntrada'],$PuntosDeInteresDetallado['Tipo']);
-            }
-            if($PuntosDeInteresDetallado['Op'] === 'Alojamiento'){
-                
-                //return $this->AltaDeAlojamiento($id->id,$PuntosDeInteresDetallado->Tipo,$PuntosDeInteresDetallado->Costos,$PuntosDeInteresDetallado->Habitaciones,$PuntosDeInteresDetallado->Calificaciones,$PuntosDeInteresDetallado->Tv,$PuntosDeInteresDetallado->Piscina,$PuntosDeInteresDetallado->Wifi,$PuntosDeInteresDetallado->AireAcondicionado,$PuntosDeInteresDetallado->BanoPrivado,$PuntosDeInteresDetallado->Bar,$PuntosDeInteresDetallado->Casino,$PuntosDeInteresDetallado->Desayno);
-                return $this->AltaDeAlojamiento($id->id,$PuntosDeInteresDetallado);
-            }
-            if($PuntosDeInteresDetallado['Op'] === 'Gastronomicos'){
-                return $this->AltaDeGastronomico($id->id,$PuntosDeInteresDetallado);
-            }
+        if(!empty($PuntosDeInteresDetallado['Op'])){        
+            if ($PuntosDeInteresDetallado['Op'] === 'ServicioEsencial') {return $this->AltaDeServicio($id->id, $PuntosDeInteresDetallado['Tipo']);}
+            if ($PuntosDeInteresDetallado['Op'] === 'transporte') {return $this->AltaDeTransporte($id->id, $PuntosDeInteresDetallado['Tipo']);}
+            if ($PuntosDeInteresDetallado['Op'] === 'Espectaculos') {return $this->AltaDeEspectaculos($id->id,$PuntosDeInteresDetallado['Artista'],$PuntosDeInteresDetallado['PrecioEntrada'],$PuntosDeInteresDetallado['Tipo']);}
+            if ($PuntosDeInteresDetallado['Op'] === 'Alojamiento'){return $this->AltaDeAlojamiento($id->id,$PuntosDeInteresDetallado);}
+            if ($PuntosDeInteresDetallado['Op'] === 'Gastronomicos'){return $this->AltaDeGastronomico($id->id,$PuntosDeInteresDetallado);}
+            if ($PuntosDeInteresDetallado['Op'] === 'ActividadesInfantiles') {return $this->AltaDeActividadesInfantiles($id->id, $PuntosDeInteresDetallado['Tipo']);}
         }
         
 
@@ -210,6 +202,17 @@ class PuntosInteresController extends Controller
             "respuesta" => "Se ingreso con exito",
         ]);
     }
+    public function AltaDeActividadesInfantiles($IdPuntoDeInteres, $TipoDetallado)
+    {
+        $ActividadesInfantiles                   = new ActividadesInfantiles();
+        $ActividadesInfantiles->puntosinteres_id = $IdPuntoDeInteres;
+        $ActividadesInfantiles->Tipo             = $TipoDetallado;
+        $ActividadesInfantiles->save();
+        return response()->json([
+            "codigo"    => "200",
+            "respuesta" => "Se ingreso con exito",
+        ]);
+    }
     public function ListarPuntosDeInteres(Request $request, $Categoria)
     {
         if($request->Opcion==='Unico'){
@@ -266,6 +269,9 @@ class PuntosInteresController extends Controller
         if($PuntosDeInteresDetallado['Op'] === 'Gastronomicos'){
             return $this->ModificarGastronomico($IdPuntoDeInteres,$request->InformacionDetalladaPuntoDeInteres);
         }
+        if($PuntosDeInteresDetallado['Op'] === 'ActividadesInfantiles'){
+            return $this->ModificarActividadesInfantiles($IdPuntoDeInteres,$request->InformacionDetalladaPuntoDeInteres);
+        }
         return response()->json([
             "codigo"    => '200',
             "respuesta" => "Se modifico con exito",
@@ -315,6 +321,19 @@ class PuntosInteresController extends Controller
             "codigo"    => "200",
             "respuesta" => "Se modifico con exito",
         ]);     
+    }
+    public function ModificarActividadesInfantiles($IdPuntoDeInteres,$datos){
+        $ActividadesInfantiles = DB::table('actividades_infantiles')
+                ->where('puntosinteres_id','=',$IdPuntoDeInteres)
+                ->get();
+        $ActividadesInfantiles=ActividadesInfantiles::findOrFail($ActividadesInfantiles[0]->id); 
+        $datos  = json_decode($datos,true);    
+        if(isset($datos['Tipo'])) $ActividadesInfantiles->Tipo = $datos['Tipo'];
+        $ActividadesInfantiles->save();
+        return response()->json([
+            "codigo"    => "200",
+            "respuesta" => "Se modifico con exito",
+        ]);      
     }
     public function ModificarTelefonos($id,$TelefonoViejo, $TelefonoNuevo){
         $telefono=DB::table('telefonos')
