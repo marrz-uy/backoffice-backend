@@ -10,6 +10,7 @@ use App\Models\Alojamiento;
 use App\Models\Espectaculos;
 use App\Models\Gastronomicos;
 use App\Models\ActividadesInfantiles;
+use App\Models\ActividadesNocturnas;
 use App\Models\ImagenesPuntosDeInteres;
 
 use Illuminate\Http\Request;
@@ -75,6 +76,7 @@ class PuntosInteresController extends Controller
             if ($PuntosDeInteresDetallado['Op'] === 'Alojamiento'){return $this->AltaDeAlojamiento($id->id,$PuntosDeInteresDetallado);}
             if ($PuntosDeInteresDetallado['Op'] === 'Gastronomicos'){return $this->AltaDeGastronomico($id->id,$PuntosDeInteresDetallado);}
             if ($PuntosDeInteresDetallado['Op'] === 'ActividadesInfantiles') {return $this->AltaDeActividadesInfantiles($id->id, $PuntosDeInteresDetallado['Tipo']);}
+            if ($PuntosDeInteresDetallado['Op'] === 'ActividadesNocturnas') {return $this->AltaDeActividadesNocturnas($id->id, $PuntosDeInteresDetallado['Tipo']);}
         }
         
 
@@ -213,6 +215,17 @@ class PuntosInteresController extends Controller
             "respuesta" => "Se ingreso con exito",
         ]);
     }
+    public function AltaDeActividadesNocturnas($IdPuntoDeInteres, $TipoDetallado)
+    {
+        $ActividadesNocturnas                  = new ActividadesNocturnas();
+        $ActividadesNocturnas->puntosinteres_id = $IdPuntoDeInteres;
+        $ActividadesNocturnas->Tipo             = $TipoDetallado;
+        $ActividadesNocturnas->save();
+        return response()->json([
+            "codigo"    => "200",
+            "respuesta" => "Se ingreso con exito",
+        ]);
+    }
     public function ListarPuntosDeInteres(Request $request, $Categoria)
     {
         if($request->Opcion==='Unico'){
@@ -272,6 +285,9 @@ class PuntosInteresController extends Controller
         if($PuntosDeInteresDetallado['Op'] === 'ActividadesInfantiles'){
             return $this->ModificarActividadesInfantiles($IdPuntoDeInteres,$request->InformacionDetalladaPuntoDeInteres);
         }
+        if($PuntosDeInteresDetallado['Op'] === 'ActividadesNocturnas'){
+            return $this->ModificarActividadesNocturnas($IdPuntoDeInteres,$request->InformacionDetalladaPuntoDeInteres);
+        }
         return response()->json([
             "codigo"    => '200',
             "respuesta" => "Se modifico con exito",
@@ -330,6 +346,19 @@ class PuntosInteresController extends Controller
         $datos  = json_decode($datos,true);    
         if(isset($datos['Tipo'])) $ActividadesInfantiles->Tipo = $datos['Tipo'];
         $ActividadesInfantiles->save();
+        return response()->json([
+            "codigo"    => "200",
+            "respuesta" => "Se modifico con exito",
+        ]);      
+    }
+    public function ModificarActividadesNocturnas($IdPuntoDeInteres,$datos){
+        $ActividadesNocturnas = DB::table('actividades_nocturnas')
+                ->where('puntosinteres_id','=',$IdPuntoDeInteres)
+                ->get();
+        $ActividadesNocturnas=ActividadesNocturnas::findOrFail($ActividadesNocturnas[0]->id); 
+        $datos  = json_decode($datos,true);    
+        if(isset($datos['Tipo'])) $ActividadesNocturnas->Tipo = $datos['Tipo'];
+        $ActividadesNocturnas->save();
         return response()->json([
             "codigo"    => "200",
             "respuesta" => "Se modifico con exito",
