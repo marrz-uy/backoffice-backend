@@ -288,6 +288,9 @@ class PuntosInteresController extends Controller
         if($PuntosDeInteresDetallado['Op'] === 'ActividadesNocturnas'){
             return $this->ModificarActividadesNocturnas($IdPuntoDeInteres,$request->InformacionDetalladaPuntoDeInteres);
         }
+        if($PuntosDeInteresDetallado['Op'] === 'transporte'){
+            return $this->ModificarTransporte($IdPuntoDeInteres,$request->InformacionDetalladaPuntoDeInteres);
+        }
         return response()->json([
             "codigo"    => '200',
             "respuesta" => "Se modifico con exito",
@@ -359,6 +362,19 @@ class PuntosInteresController extends Controller
         $datos  = json_decode($datos,true);    
         if(isset($datos['Tipo'])) $ActividadesNocturnas->Tipo = $datos['Tipo'];
         $ActividadesNocturnas->save();
+        return response()->json([
+            "codigo"    => "200",
+            "respuesta" => "Se modifico con exito",
+        ]);      
+    }
+    public function ModificarTransporte($IdPuntoDeInteres,$datos){
+        $transporte = DB::table('transporte')
+                ->where('puntosinteres_id','=',$IdPuntoDeInteres)
+                ->get();
+        $transporte=transporte::findOrFail($transporte[0]->id); 
+        $datos  = json_decode($datos,true);    
+        if(isset($datos['Tipo'])) $transporte->Tipo = $datos['Tipo'];
+        $transporte->save();
         return response()->json([
             "codigo"    => "200",
             "respuesta" => "Se modifico con exito",
