@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PuntosInteres;
 use App\Models\ServiciosEsenciales;
 use App\Models\Transporte;
+use App\Models\Paseos;
 use App\Models\Telefonos;
 use App\Models\Alojamiento;
 use App\Models\Espectaculos;
@@ -77,6 +78,7 @@ class PuntosInteresController extends Controller
             if ($PuntosDeInteresDetallado['Op'] === 'Gastronomicos'){return $this->AltaDeGastronomico($id->id,$PuntosDeInteresDetallado);}
             if ($PuntosDeInteresDetallado['Op'] === 'ActividadesInfantiles') {return $this->AltaDeActividadesInfantiles($id->id, $PuntosDeInteresDetallado['Tipo']);}
             if ($PuntosDeInteresDetallado['Op'] === 'ActividadesNocturnas') {return $this->AltaDeActividadesNocturnas($id->id, $PuntosDeInteresDetallado['Tipo']);}
+            if ($PuntosDeInteresDetallado['Op'] === 'Paseos') {return $this->AltaDePaseos($id->id, $PuntosDeInteresDetallado);}
         }
         
 
@@ -153,6 +155,19 @@ class PuntosInteresController extends Controller
         $Espectaculo->PrecioEntrada    = $PrecioEntrada;
         $Espectaculo->Tipo             = $tipoDeServicio;
         $Espectaculo->save();
+        return response()->json([
+            "codigo"    => "200",
+            "respuesta" => "Se ingreso con exito",
+        ]);
+    }
+    public function AltaDePaseos($IdPuntoDeInteres,$datos)
+    {
+        $Paseos = new Paseos();
+        $Paseos->puntosinteres_id = $IdPuntoDeInteres;
+        if(isset($datos['Tipo'])) $Paseos->Tipo = $datos['Tipo'];
+        if(isset($datos['Recomendaciones'])) $Paseos->Recomendaciones = $datos['Recomendaciones'];
+       // echo "<pre>";var_dump($datos);die();
+        $Paseos->save();
         return response()->json([
             "codigo"    => "200",
             "respuesta" => "Se ingreso con exito",
@@ -291,6 +306,9 @@ class PuntosInteresController extends Controller
         if($PuntosDeInteresDetallado['Op'] === 'transporte'){
             return $this->ModificarTransporte($IdPuntoDeInteres,$request->InformacionDetalladaPuntoDeInteres);
         }
+        if($PuntosDeInteresDetallado['Op'] === 'Paseos'){
+            return $this->ModificarPaseos($IdPuntoDeInteres,$request->InformacionDetalladaPuntoDeInteres);
+        }
         return response()->json([
             "codigo"    => '200',
             "respuesta" => "Se modifico con exito",
@@ -375,6 +393,20 @@ class PuntosInteresController extends Controller
         $datos  = json_decode($datos,true);    
         if(isset($datos['Tipo'])) $transporte->Tipo = $datos['Tipo'];
         $transporte->save();
+        return response()->json([
+            "codigo"    => "200",
+            "respuesta" => "Se modifico con exito",
+        ]);      
+    }
+    public function ModificarPaseos($IdPuntoDeInteres,$datos){
+        $Paseos = DB::table('paseos')
+                ->where('puntosinteres_id','=',$IdPuntoDeInteres)
+                ->get();
+        $Paseos=Paseos::findOrFail($Paseos[0]->id); 
+        $datos  = json_decode($datos,true);    
+        if(isset($datos['Tipo'])) $Paseos->Tipo = $datos['Tipo'];
+        if(isset($datos['Recomendaciones'])) $Paseos->Recomendaciones = $datos['Recomendaciones'];
+        $Paseos->save();
         return response()->json([
             "codigo"    => "200",
             "respuesta" => "Se modifico con exito",
