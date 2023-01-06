@@ -2,10 +2,11 @@
 
 use App\Http\Controllers\PuntosInteresController;
 use App\Http\Controllers\EventosController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ImagenesPuntoInteresController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AuthController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -22,6 +23,9 @@ Route::get('/Eventos', [EventosController::class, 'show'])->middleware("api");
 Route::post('/Eventos', [EventosController::class, 'store']);
 Route::delete('/Eventos/{id}', [EventosController::class, 'destroy']);
 Route::patch('/Eventos/{id}', [EventosController::class, 'update']);
+
+Route::POST('/cargarImagen', [ImagenesPuntoInteresController::class, 'saveImage']);
+Route::GET('/showImages', [ImagenesPuntoInteresController::class, 'showImages']);
 
 Route::group([
 
