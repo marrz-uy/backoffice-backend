@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreatePaseosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('espectaculos', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('puntosinteres_id')
+        Schema::create('paseos', function (Blueprint $table) {
+        $table->foreignId('puntosinteres_id')
             ->constrained('puntosinteres')
             ->onUpdate('cascade')
             ->onDelete('cascade');
-            $table->String('Artista');
-            $table->integer('PrecioEntrada');
-            $table->set('Tipo',['Cine','Carnaval','Teatro','EventoDeportivo']);
-            $table->timestamps();
-            $table->softDeletes();
+        $table->String('Recomendaciones');
+        $table->set('Tipo', ['Playas','Ejercicios al aire libre','Cerros','Sierras']);
+        $table->timestamps();
         });
     }
 
@@ -34,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('espectaculos');
+        Schema::dropIfExists('paseos');
     }
-};
+}

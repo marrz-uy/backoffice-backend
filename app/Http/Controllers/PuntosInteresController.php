@@ -61,19 +61,24 @@ class PuntosInteresController extends Controller
         $puntosInteres->Descripcion     = $request->Descripcion;
         $puntosInteres->Latitud         = $request->Latitud;
         $puntosInteres->Longitud        = $request->Longitud;
+        $puntosInteres->TipoDeLugar     = $request->TipoDeLugar;
+        $puntosInteres->RestriccionDeEdad         = $request->RestriccionDeEdad;
+        $puntosInteres->EnfoqueDePersonas        = $request->EnfoqueDePersonas;
         $puntosInteres->save();
         
-        if(!empty($request->Celular)){$this->AltaDeTelefono($id->id,$request->Celular);}
 
         $PuntosDeInteresDetallado  = json_decode($request->InformacionDetalladaPuntoDeInteres,true);
         
         $id = PuntosInteres::latest('id')->first();
-        $this->AltaDeTelefono($id->id,$request->Telefono);
+        if(!empty($request->Telefono)){$this->AltaDeTelefono($id->id,$request->Telefono);}
+        if(!empty($request->Celular)){$this->AltaDeTelefono($id->id,$request->Celular);}
+        //$this->AltaDeTelefono($id->id,$request->Telefono);
         //echo "<pre>";var_dump($PuntosDeInteresDetallado);die();
+        
         if(!empty($PuntosDeInteresDetallado['Op'])){        
             if ($PuntosDeInteresDetallado['Op'] === 'ServicioEsencial') {return $this->AltaDeServicio($id->id, $PuntosDeInteresDetallado['Tipo']);}
             if ($PuntosDeInteresDetallado['Op'] === 'transporte') {return $this->AltaDeTransporte($id->id, $PuntosDeInteresDetallado['Tipo']);}
-            if ($PuntosDeInteresDetallado['Op'] === 'Espectaculos') {return $this->AltaDeEspectaculos($id->id,$PuntosDeInteresDetallado['Artista'],$PuntosDeInteresDetallado['PrecioEntrada'],$PuntosDeInteresDetallado['Tipo']);}
+            if ($PuntosDeInteresDetallado['Op'] === 'Espectaculos') {return $this->AltaDeEspectaculos($id->id,$PuntosDeInteresDetallado['Tipo']);}
             if ($PuntosDeInteresDetallado['Op'] === 'Alojamiento'){return $this->AltaDeAlojamiento($id->id,$PuntosDeInteresDetallado);}
             if ($PuntosDeInteresDetallado['Op'] === 'Gastronomicos'){return $this->AltaDeGastronomico($id->id,$PuntosDeInteresDetallado);}
             if ($PuntosDeInteresDetallado['Op'] === 'ActividadesInfantiles') {return $this->AltaDeActividadesInfantiles($id->id, $PuntosDeInteresDetallado['Tipo']);}
@@ -147,12 +152,10 @@ class PuntosInteresController extends Controller
             "respuesta" => "Se ingreso con exito",
         ]);
     }
-    public function AltaDeEspectaculos($IdPuntoDeInteres,$Artista,$PrecioEntrada,$tipoDeServicio)
+    public function AltaDeEspectaculos($IdPuntoDeInteres,$tipoDeServicio)
     {
         $Espectaculo                   = new Espectaculos();
         $Espectaculo->puntosinteres_id = $IdPuntoDeInteres;
-        $Espectaculo->Artista          = $Artista;
-        $Espectaculo->PrecioEntrada    = $PrecioEntrada;
         $Espectaculo->Tipo             = $tipoDeServicio;
         $Espectaculo->save();
         return response()->json([

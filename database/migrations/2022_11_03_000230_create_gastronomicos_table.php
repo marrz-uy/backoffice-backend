@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateGastronomicosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('eventos', function (Blueprint $table) {
-            $table->id();
+        Schema::create('gastronomicos', function (Blueprint $table) {
             $table->foreignId('puntosinteres_id')
             ->constrained('puntosinteres')
             ->onUpdate('cascade')
             ->onDelete('cascade');
-            $table->String('Nombre');
-            $table->set('LugarDeVentaDeEntradas',['Abitab','RedPagos','TickAntel','LugarDelEvento','AccesoYa','RedTicket',]);
-            $table->String('FechaInicio');
-            $table->String('FechaFin');
-            $table->String('HoraInicio');
-            $table->String('HoraFin')->nullable();
-            $table->String('Tipo');
+            $table->boolean('ComidaVegge')->nullable();
+            $table->boolean('Comida')->nullable();
+            $table->boolean('Alcohol')->nullable();
+            $table->boolean('MenuInfantil')->nullable();
+            $table->set('Tipo',['Restaurantes','Bares','Comida rapida','Cervezerias']);
             $table->timestamps();
         });
     }
@@ -37,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('eventos');
+        Schema::dropIfExists('gastronomicos');
     }
-};
+}

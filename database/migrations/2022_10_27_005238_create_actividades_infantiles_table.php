@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePaseosTable extends Migration
+class CreateActividadesInfantilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,14 @@ class CreatePaseosTable extends Migration
      */
     public function up()
     {
-        Schema::create('paseos', function (Blueprint $table) {
-            $table->id();
+        Schema::create('actividades_infantiles', function (Blueprint $table) {
             $table->foreignId('puntosinteres_id')
                 ->constrained('puntosinteres')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->String('Recomendaciones')->nullable();
-            $table->set('Tipo', ['Playas','Ejercicios al aire libre','Cerros','Sierras']);
+            $table->set('Tipo', ['Circo','Calesita','Maquinitas','Juegos Infantiles']);
             $table->timestamps();
-            });
+        });
     }
 
     /**
@@ -32,6 +30,6 @@ class CreatePaseosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('paseos');
+        Schema::dropIfExists('actividades_infantiles');
     }
 }

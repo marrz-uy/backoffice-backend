@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsuariosTable extends Migration
+class CreateTourArmadosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,14 @@ class CreateUsuariosTable extends Migration
      */
     public function up()
     {
-        Schema::create('usuarios', function (Blueprint $table) {
+        Schema::create('tour_armados', function (Blueprint $table) {
             $table->id();
-            $table->string('Usuario');
-            $table->string('Password');
+            $table->unsignedBigInteger('usuarioId');
+            $table->foreign('usuarioId')
+                ->references('id')
+                ->on('users');
+            $table->string('nombreTour');
+            $table->string('horaInicioTour');
             $table->timestamps();
         });
     }
@@ -28,6 +32,6 @@ class CreateUsuariosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('usuarios');
+        Schema::dropIfExists('tour_armados');
     }
 }

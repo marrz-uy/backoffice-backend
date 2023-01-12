@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateTourPredefinidoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('transporte', function (Blueprint $table) {
+        Schema::create('tour_predefinido', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('puntosinteres_id')
-            ->constrained('puntosinteres')
-            ->onUpdate('cascade')
-            ->onDelete('cascade');
-            $table->set('Tipo',['Omnibus','Taxi']);
+            $table->string('nombreTourPredefinido');
+            $table->string('horaDeInicioTourPredefinido');
+            $table->string('descripcionTourPredefinido');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transportes');
+        Schema::dropIfExists('tour_predefinido');
     }
-};
+}
