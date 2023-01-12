@@ -15,6 +15,10 @@ class CreateImagenesPuntosDeInteresTable extends Migration
     {
         Schema::create('imagenes_puntos_de_interes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('puntosinteres_id')
+                ->constrained('puntosinteres')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->string('url');
             $table->string('public_id');
             $table->string('image_description');

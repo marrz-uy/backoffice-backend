@@ -25,7 +25,7 @@ Route::delete('/Eventos/{id}', [EventosController::class, 'destroy']);
 Route::patch('/Eventos/{id}', [EventosController::class, 'update']);
 
 Route::POST('/cargarImagen', [ImagenesPuntoInteresController::class, 'saveImage']);
-Route::GET('/showImages', [ImagenesPuntoInteresController::class, 'showImages']);
+Route::GET('/showImages/{id}', [ImagenesPuntoInteresController::class, 'showImages']);
 
 Route::group([
 

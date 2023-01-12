@@ -11,7 +11,9 @@ class ImagenesPuntosDeInteres extends Model
     use HasFactory, MediaAlly;
 
     protected $table = 'imagenes_puntos_de_interes';
-
+    public function PuntosInteres(){
+        return $this->belongsTo(PuntosInteres::class, "puntosinteres_id", "id");
+    }
     public $fillable = [
         'url',
         'public_id',

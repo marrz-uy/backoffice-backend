@@ -101,6 +101,7 @@ class PuntosInteresController extends Controller
     public function saveImage($Imagen)
     {
         //en request enviar imagen e "image_description"
+        
         try {
             if (!$Imagen->hasFile('file')) {
                 return $this->returnError(202, 'file is required');
