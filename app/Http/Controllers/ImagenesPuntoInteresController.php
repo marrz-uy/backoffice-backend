@@ -61,5 +61,14 @@ class ImagenesPuntoInteresController extends Controller
         }
 
     }
-
+    public function EliminarImagen(Request $request){
+        //return $request;
+        $Imagen=ImagenesPuntosDeInteres::where('url','=',$request->url)->first();
+        $Imagen->delete();
+         return response()->json([
+            "codigo"    => "200",
+            "respuesta" => "Se elimino con exito",
+            "Id"=>$Imagen->id
+        ]);
+    }
 }

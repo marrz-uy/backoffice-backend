@@ -293,6 +293,9 @@ class PuntosInteresController extends Controller
         $puntosInteres->Descripcion     = $request->Descripcion;
         $puntosInteres->Latitud         = $request->Latitud;
         $puntosInteres->Longitud        = $request->Longitud;
+        $puntosInteres->TipoDeLugar     = $request->TipoDeLugar;
+        $puntosInteres->RestriccionDeEdad         = $request->RestriccionDeEdad;
+        $puntosInteres->EnfoqueDePersonas        = $request->EnfoqueDePersonas;
         $puntosInteres->save();
         $PuntosDeInteresDetallado  = json_decode($request->InformacionDetalladaPuntoDeInteres,true);
         if($PuntosDeInteresDetallado['Op'] === 'Alojamiento'){
@@ -313,6 +316,12 @@ class PuntosInteresController extends Controller
         if($PuntosDeInteresDetallado['Op'] === 'Paseos'){
             return $this->ModificarPaseos($IdPuntoDeInteres,$request->InformacionDetalladaPuntoDeInteres);
         }
+        if($PuntosDeInteresDetallado['Op'] === 'ServicioEsencial'){
+            return $this->ModificarServiciosEsenciales($IdPuntoDeInteres,$request->InformacionDetalladaPuntoDeInteres);
+        }
+        if($PuntosDeInteresDetallado['Op'] === 'Espectaculos'){
+            return $this->ModificarEspectaculos($IdPuntoDeInteres,$request->InformacionDetalladaPuntoDeInteres);
+        }
         return response()->json([
             "codigo"    => '200',
             "respuesta" => "Se modifico con exito",
@@ -321,96 +330,104 @@ class PuntosInteresController extends Controller
         
     }
     public function ModificarAlojamiento($IdPuntoDeInteres,$datos){
-        $alojamiento = DB::table('alojamientos')
-                ->where('puntosinteres_id','=',$IdPuntoDeInteres)
-                ->get();
-        $alojamiento=Alojamiento::findOrFail($alojamiento[0]->id); 
         $datos  = json_decode($datos,true);    
-        if(isset($datos['Tipo'])) $alojamiento->Tipo = $datos['Tipo'];
-        if(isset($datos['Habitaciones'])) $alojamiento->Habitaciones = $datos['Habitaciones'];
-        if(isset($datos['Calificaciones'])) $alojamiento->Calificaciones = $datos['Calificaciones'];
-        if(isset($datos['TvCable'])) $alojamiento->TvCable = $datos['TvCable'];
-        if(isset($datos['Piscina'])) $alojamiento->Piscina = $datos['Piscina'];
-        if(isset($datos['Wifi'])) $alojamiento->Wifi = $datos['Wifi'];
-        if(isset($datos['AireAcondicionado'])) $alojamiento->AireAcondicionado = $datos['AireAcondicionado'];
-        if(isset($datos['BanoPrivado'])) $alojamiento->BanoPrivad =$datos['BanoPrivado'];
-        if(isset($datos['Casino'])) $alojamiento->Casino = $datos['Casino'];
-        if(isset($datos['Bar'])) $alojamiento->Bar = $datos['Bar'];
-        if(isset($datos['Restaurante'])) $alojamiento->Restaurante = $datos['Restaurante'];
-        if(isset($datos['Desayuno'])) $alojamiento->Desayuno = $datos['Desayuno'];
-        $alojamiento->save();
+        $alojamiento=Alojamiento::where('puntosinteres_id','=',$IdPuntoDeInteres)
+            ->update([
+                'Tipo' => $datos['Tipo'],
+                'Habitaciones'=>$datos['Habitaciones'],
+                'Calificaciones'=>$datos['Calificaciones'],
+                'TvCable'=>$datos['TvCable'],
+                'Piscina'=>$datos['Piscina'],
+                'Wifi' => $datos['Wifi'],
+                'AireAcondicionado'=>$datos['AireAcondicionado'],
+                'BanoPrivad'=>$datos['BanoPrivad'],
+                'Casino'=>$datos['Casino'],
+                'Bar'=>$datos['Bar'],
+                'Restaurante'=>$datos['Restaurante'],
+                'Desayuno'=>$datos['Desayuno']
+            ]);
         return response()->json([
             "codigo"    => "200",
             "respuesta" => "Se modifico con exito",
         ]);      
     }
     public function ModificarGastronomico($IdPuntoDeInteres,$datos){
-        $gastronomico = DB::table('gastronomicos')
-                ->where('puntosinteres_id','=',$IdPuntoDeInteres)
-                ->get();
-                
-        $gastronomico=Gastronomicos::findOrFail($gastronomico[0]->id); 
         $datos  = json_decode($datos,true);    
-        if(isset($datos['Tipo'])) $gastronomico->Tipo = $datos['Tipo'];
-        if(isset($datos['ComidaVegge'])) $gastronomico->ComidaVegge = $datos['ComidaVegge'];
-        if(isset($datos['Comida'])) $gastronomico->Comida = $datos['Comida'];
-        if(isset($datos['Alcohol'])) $gastronomico->Alcohol = $datos['Alcohol'];
-        if(isset($datos['MenuInfantil'])) $gastronomico->MenuInfantil = $datos['MenuInfantil'];
-       // echo "<pre>";var_dump($datos);die();
-        $gastronomico->save();
+        $gastronomico=Gastronomicos::where('puntosinteres_id','=',$IdPuntoDeInteres)
+            ->update([
+                'Tipo' => $datos['Tipo'],
+                'ComidaVegge'=>$datos['ComidaVegge'],
+                'Comida'=>$datos['Comida'],
+                'Alcohol'=>$datos['Alcohol'],
+                'MenuInfantil'=>$datos['MenuInfantil']
+            ]);
         return response()->json([
             "codigo"    => "200",
             "respuesta" => "Se modifico con exito",
         ]);     
     }
     public function ModificarActividadesInfantiles($IdPuntoDeInteres,$datos){
-        $ActividadesInfantiles = DB::table('actividades_infantiles')
-                ->where('puntosinteres_id','=',$IdPuntoDeInteres)
-                ->get();
-        $ActividadesInfantiles=ActividadesInfantiles::findOrFail($ActividadesInfantiles[0]->id); 
         $datos  = json_decode($datos,true);    
-        if(isset($datos['Tipo'])) $ActividadesInfantiles->Tipo = $datos['Tipo'];
-        $ActividadesInfantiles->save();
+        $ActividadesInfantiles=ActividadesInfantiles::where('puntosinteres_id','=',$IdPuntoDeInteres)
+            ->update([
+                'Tipo' => $datos['Tipo']
+            ]);
+        return response()->json([
+            "codigo"    => "200",
+            "respuesta" => "Se modifico con exito",
+        ]);      
+    }
+    public function ModificarServiciosEsenciales($IdPuntoDeInteres,$datos){
+        $datos  = json_decode($datos,true);    
+        $ServiciosEsenciales=ServiciosEsenciales::where('puntosinteres_id','=',$IdPuntoDeInteres)
+            ->update([
+                'Tipo' => $datos['Tipo']
+            ]);
         return response()->json([
             "codigo"    => "200",
             "respuesta" => "Se modifico con exito",
         ]);      
     }
     public function ModificarActividadesNocturnas($IdPuntoDeInteres,$datos){
-        $ActividadesNocturnas = DB::table('actividades_nocturnas')
-                ->where('puntosinteres_id','=',$IdPuntoDeInteres)
-                ->get();
-        $ActividadesNocturnas=ActividadesNocturnas::findOrFail($ActividadesNocturnas[0]->id); 
         $datos  = json_decode($datos,true);    
-        if(isset($datos['Tipo'])) $ActividadesNocturnas->Tipo = $datos['Tipo'];
-        $ActividadesNocturnas->save();
+        $ActividadesNocturnas=ActividadesNocturnas::where('puntosinteres_id','=',$IdPuntoDeInteres)
+            ->update([
+                'Tipo' => $datos['Tipo']
+            ]);
+        return response()->json([
+            "codigo"    => "200",
+            "respuesta" => "Se modifico con exito",
+        ]);      
+    }
+    public function ModificarEspectaculos($IdPuntoDeInteres,$datos){
+        $datos  = json_decode($datos,true);    
+        $Espectaculos=Espectaculos::where('puntosinteres_id','=',$IdPuntoDeInteres)
+            ->update([
+                'Tipo' => $datos['Tipo']
+            ]);
         return response()->json([
             "codigo"    => "200",
             "respuesta" => "Se modifico con exito",
         ]);      
     }
     public function ModificarTransporte($IdPuntoDeInteres,$datos){
-        $transporte = DB::table('transporte')
-                ->where('puntosinteres_id','=',$IdPuntoDeInteres)
-                ->get();
-        $transporte=transporte::findOrFail($transporte[0]->id); 
         $datos  = json_decode($datos,true);    
-        if(isset($datos['Tipo'])) $transporte->Tipo = $datos['Tipo'];
-        $transporte->save();
+        $transporte=Transporte::where('puntosinteres_id','=',$IdPuntoDeInteres)
+            ->update([
+                'Tipo' => $datos['Tipo']
+            ]);
         return response()->json([
             "codigo"    => "200",
             "respuesta" => "Se modifico con exito",
         ]);      
     }
     public function ModificarPaseos($IdPuntoDeInteres,$datos){
-        $Paseos = DB::table('paseos')
-                ->where('puntosinteres_id','=',$IdPuntoDeInteres)
-                ->get();
-        $Paseos=Paseos::findOrFail($Paseos[0]->id); 
         $datos  = json_decode($datos,true);    
-        if(isset($datos['Tipo'])) $Paseos->Tipo = $datos['Tipo'];
-        if(isset($datos['Recomendaciones'])) $Paseos->Recomendaciones = $datos['Recomendaciones'];
-        $Paseos->save();
+        $Paseos=Paseos::where('puntosinteres_id','=',$IdPuntoDeInteres)
+            ->update([
+                'Tipo' => $datos['Tipo'],
+                'Recomendaciones'=>$datos['Recomendaciones']
+            ]);
         return response()->json([
             "codigo"    => "200",
             "respuesta" => "Se modifico con exito",
@@ -432,6 +449,7 @@ class PuntosInteresController extends Controller
          return response()->json([
             "codigo"    => "200",
             "respuesta" => "Se elimino con exito",
+            
         ]);
     
     }

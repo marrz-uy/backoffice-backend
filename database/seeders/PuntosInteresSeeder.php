@@ -16,7 +16,7 @@ class PuntosInteresSeeder extends Seeder
     public function run()
     {
         $faker = Factory::create();
-        for($c = 0;$c<20;$c++){
+        for($c = 1;$c<21;$c++){
             DB::table('puntosinteres')->insert([
                 'Nombre'       => 'Circo ' . $faker->city,
                 'Departamento' => $faker->state,
@@ -35,8 +35,11 @@ class PuntosInteresSeeder extends Seeder
                 'RestriccionDeEdad' => $faker->randomElement(['Todas','Mayores']),
                 'EnfoqueDePersonas' => $faker->randomElement(['Grupo','Familia','Pareja']),
             ]);
-            
+            DB::table('actividades_infantiles')->insert([
+                'puntosinteres_id' => $c,
+                'Tipo'             => 'Circo',
+            ]);
+}
         }
         
-}
 }
