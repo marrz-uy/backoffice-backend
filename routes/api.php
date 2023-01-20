@@ -4,6 +4,7 @@ use App\Http\Controllers\PuntosInteresController;
 use App\Http\Controllers\EventosController;
 use App\Http\Controllers\ImagenesPuntoInteresController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\TourController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,9 @@ Route::patch('/Eventos/{id}', [EventosController::class, 'update']);
 Route::POST('/cargarImagen', [ImagenesPuntoInteresController::class, 'saveImage']);
 Route::GET('/showImages/{id}', [ImagenesPuntoInteresController::class, 'showImages']);
 Route::POST('/EliminarImagen', [ImagenesPuntoInteresController::class, 'EliminarImagen']);
+
+Route::POST('/tourPredefinido', [TourController::class, 'InsertarTourPredefinido']);
+Route::GET('/tourPredefinido', [TourController::class, 'ListarToursPredefinidos']);
 
 Route::group([
 
