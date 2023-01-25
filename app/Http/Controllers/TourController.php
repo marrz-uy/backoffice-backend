@@ -104,5 +104,15 @@ class TourController extends Controller
         ]);
 
     }
-
+    public function destroy($id)
+    {
+        $Tour=TourPredefinido::findOrFail($id);
+        $Tour->delete();
+         return response()->json([
+            "codigo"    => "200",
+            "respuesta" => "Se elimino con exito",
+            
+        ]);
+    
+    }
 }

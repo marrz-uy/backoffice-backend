@@ -31,6 +31,7 @@ Route::POST('/EliminarImagen', [ImagenesPuntoInteresController::class, 'Eliminar
 
 Route::POST('/tourPredefinido', [TourController::class, 'InsertarTourPredefinido']);
 Route::GET('/tourPredefinido', [TourController::class, 'ListarToursPredefinidos']);
+Route::DELETE('/tourPredefinido/{i}', [TourController::class, 'destroy']);
 
 Route::group([
 

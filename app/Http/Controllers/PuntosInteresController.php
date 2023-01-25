@@ -298,30 +298,33 @@ class PuntosInteresController extends Controller
         $puntosInteres->EnfoqueDePersonas        = $request->EnfoqueDePersonas;
         $puntosInteres->save();
         $PuntosDeInteresDetallado  = json_decode($request->InformacionDetalladaPuntoDeInteres,true);
-        if($PuntosDeInteresDetallado['Op'] === 'Alojamiento'){
-            return $this->ModificarAlojamiento($IdPuntoDeInteres,$request->InformacionDetalladaPuntoDeInteres);
+        if(!empty($PuntosDeInteresDetallado['Op'])){
+            if($PuntosDeInteresDetallado['Op'] === 'Alojamiento'){
+                return $this->ModificarAlojamiento($IdPuntoDeInteres,$request->InformacionDetalladaPuntoDeInteres);
+            }
+            if($PuntosDeInteresDetallado['Op'] === 'Gastronomicos'){
+                return $this->ModificarGastronomico($IdPuntoDeInteres,$request->InformacionDetalladaPuntoDeInteres);
+            }
+            if($PuntosDeInteresDetallado['Op'] === 'ActividadesInfantiles'){
+                return $this->ModificarActividadesInfantiles($IdPuntoDeInteres,$request->InformacionDetalladaPuntoDeInteres);
+            }
+            if($PuntosDeInteresDetallado['Op'] === 'ActividadesNocturnas'){
+                return $this->ModificarActividadesNocturnas($IdPuntoDeInteres,$request->InformacionDetalladaPuntoDeInteres);
+            }
+            if($PuntosDeInteresDetallado['Op'] === 'transporte'){
+                return $this->ModificarTransporte($IdPuntoDeInteres,$request->InformacionDetalladaPuntoDeInteres);
+            }
+            if($PuntosDeInteresDetallado['Op'] === 'Paseos'){
+                return $this->ModificarPaseos($IdPuntoDeInteres,$request->InformacionDetalladaPuntoDeInteres);
+            }
+            if($PuntosDeInteresDetallado['Op'] === 'ServicioEsencial'){
+                return $this->ModificarServiciosEsenciales($IdPuntoDeInteres,$request->InformacionDetalladaPuntoDeInteres);
+            }
+            if($PuntosDeInteresDetallado['Op'] === 'Espectaculos'){
+                return $this->ModificarEspectaculos($IdPuntoDeInteres,$request->InformacionDetalladaPuntoDeInteres);
+            }  
         }
-        if($PuntosDeInteresDetallado['Op'] === 'Gastronomicos'){
-            return $this->ModificarGastronomico($IdPuntoDeInteres,$request->InformacionDetalladaPuntoDeInteres);
-        }
-        if($PuntosDeInteresDetallado['Op'] === 'ActividadesInfantiles'){
-            return $this->ModificarActividadesInfantiles($IdPuntoDeInteres,$request->InformacionDetalladaPuntoDeInteres);
-        }
-        if($PuntosDeInteresDetallado['Op'] === 'ActividadesNocturnas'){
-            return $this->ModificarActividadesNocturnas($IdPuntoDeInteres,$request->InformacionDetalladaPuntoDeInteres);
-        }
-        if($PuntosDeInteresDetallado['Op'] === 'transporte'){
-            return $this->ModificarTransporte($IdPuntoDeInteres,$request->InformacionDetalladaPuntoDeInteres);
-        }
-        if($PuntosDeInteresDetallado['Op'] === 'Paseos'){
-            return $this->ModificarPaseos($IdPuntoDeInteres,$request->InformacionDetalladaPuntoDeInteres);
-        }
-        if($PuntosDeInteresDetallado['Op'] === 'ServicioEsencial'){
-            return $this->ModificarServiciosEsenciales($IdPuntoDeInteres,$request->InformacionDetalladaPuntoDeInteres);
-        }
-        if($PuntosDeInteresDetallado['Op'] === 'Espectaculos'){
-            return $this->ModificarEspectaculos($IdPuntoDeInteres,$request->InformacionDetalladaPuntoDeInteres);
-        }
+
         return response()->json([
             "codigo"    => '200',
             "respuesta" => "Se modifico con exito",
