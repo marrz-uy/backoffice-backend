@@ -259,7 +259,14 @@ class PuntosInteresController extends Controller
             ->where('puntosinteres.id','=',$request->id)
             ->get();
             return response()->json($puntoInteres);
-
+        }
+        if($request->Opcion==='BusquedaPorNombre'){
+           
+            $puntosInteres=DB::table('puntosinteres')
+            ->where('Nombre', 'like',"$request->Nombre")
+            ->get();
+                if ($puntosInteres->isEmpty())return response()->json(['Mensaje'=>'No hubo resultado']);;
+            return response()->json($puntosInteres);
         }
         if($Categoria==='PuntosDeInteres'){
             
