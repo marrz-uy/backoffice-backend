@@ -79,7 +79,29 @@ class TourController extends Controller
         }
 
     }
+    public function ModificarTourPredefinido(Request $request){
+        $TourPredenifido=TourPredefinido::find($request->id);
+        $TourPredenifido->nombreTourPredefinido          = $request->nombreTourPredefinido;
+        $TourPredenifido->horaDeInicioTourPredefinido    = $request->horaDeInicioTourPredefinido;
+        $TourPredenifido->descripcionTourPredefinido     = $request->descripcionTourPredefinido;
+        $TourPredenifido->save();
+        
+        DB::table('tour_items_predefinido')->where('tourId', $request->id)->delete();
+        $puntosdeInteresTour = $request->puntosdeInteresTour;
+            $puntos              = explode(',', $puntosdeInteresTour);
+            $id                  = $request->id;
+            foreach ($puntos as $punto) {
+                TourItemsPredefinido::create([
+                    'puntoInteresId' => $punto,
+                    'tourId'         => $id,
+                ]);
+            }
+        
 
+        return response()->json([
+            'Message' => 'Se modifico con exito',
+        ]);
+    }
     public function ListarToursArmados($id)
     {
         $tourArmados = TourArmado::with('TourItems.PuntosInteres')
@@ -93,11 +115,18 @@ class TourController extends Controller
 
     }
 
-    public function ListarToursPredefinidos()
+    public function ListarToursPredefinidos(Request $request)
     {
+        if($request->Opcion==='Unico'){
+            $toursPredefinidos=TourPredefinido::with('TourItems.PuntosInteres')->get()->find($request->id);
+            
+            return response()->json([
+                $toursPredefinidos,
+            ]);
+        }
         $toursPredefinidos = TourPredefinido::with('TourItems.PuntosInteres')
             ->orderBy('id', 'DESC')
-            ->get();
+            ->paginate(10);
 
         return response()->json([
             $toursPredefinidos,

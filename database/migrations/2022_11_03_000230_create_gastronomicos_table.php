@@ -6,11 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateGastronomicosTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+    
     public function up()
     {
         Schema::create('gastronomicos', function (Blueprint $table) {
@@ -19,7 +15,7 @@ class CreateGastronomicosTable extends Migration
             ->onUpdate('cascade')
             ->onDelete('cascade');
             $table->boolean('ComidaVegge')->nullable();
-            $table->boolean('Comida')->nullable();
+            $table->String('Especialidad')->nullable();
             $table->boolean('Alcohol')->nullable();
             $table->boolean('MenuInfantil')->nullable();
             $table->set('Tipo',['Restaurantes','Bares','Comida rapida','Cervezerias']);
@@ -27,11 +23,7 @@ class CreateGastronomicosTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+    
     public function down()
     {
         Schema::dropIfExists('gastronomicos');

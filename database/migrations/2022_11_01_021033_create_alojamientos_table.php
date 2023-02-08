@@ -19,7 +19,6 @@ class CreateAlojamientosTable extends Migration
             ->onUpdate('cascade')
             ->onDelete('cascade');
             $table->set('Tipo',['Hotel','Hostel','Motel','Estancia','Camping','Casa']);
-            $table->integer('Habitaciones')->nullable();
             $table->integer('Calificaciones')->nullable();
             $table->boolean('TvCable')->nullable();
             $table->boolean('Piscina')->nullable();
@@ -30,6 +29,7 @@ class CreateAlojamientosTable extends Migration
             $table->boolean('Bar')->nullable();
             $table->boolean('Restaurante')->nullable();
             $table->boolean('Desayuno')->nullable();
+            $table->boolean('Mascota')->nullable();
             $table->timestamps();
         });
     }
