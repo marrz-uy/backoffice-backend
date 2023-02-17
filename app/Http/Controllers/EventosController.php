@@ -30,7 +30,7 @@ class EventosController extends Controller
     {
         $evento=new Eventos();
         $evento->puntosinteres_id=$request->LugarDelEvento;
-        $evento->Nombre=$request->Nombre;
+        $evento->NombreEvento=$request->NombreEvento;
         $evento->LugarDeVentaDeEntradas=$request->LugarDeVentaDeEntradas;
         $evento->FechaInicio=$request->FechaInicio;
         $evento->FechaFin=$request->FechaFin;

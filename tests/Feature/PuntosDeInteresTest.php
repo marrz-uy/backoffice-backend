@@ -67,7 +67,7 @@ class PuntosDeInteresTest extends TestCase
     public function test_Modificar_Punto_De_Interes_Exitoso(){
         $response = $this->withHeaders([
             'content-type' => 'application/json',
-        ])->patchJson('/api/PuntosInteres/22', [
+        ])->patchJson('/api/PuntosInteres/29', [
             'Nombre'                => 'Punto Simple',
             'Departamento'             => 'Montevideo',
             'Ciudad' =>'Montevideo' ,
@@ -89,7 +89,7 @@ class PuntosDeInteresTest extends TestCase
     public function test_Eliminar_Punto_De_Interes(){
         $response = $this->withHeaders([
             'content-type' => 'application/json',
-        ])->deleteJson('/api/PuntosInteres/26');
+        ])->deleteJson('/api/PuntosInteres/28');
         $response->assertStatus(200);
     }
 }

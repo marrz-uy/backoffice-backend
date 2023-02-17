@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Validator;
+use App\Models\User;
 class AuthController extends Controller
 {
     public function __construct()
@@ -17,11 +18,26 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login()
+    public function login(Request $request)
     {
-        //$credentials = request(['email', 'password']);
-        $credentials=(['email'=>'javi@gmail.com','password'=>'123456']);
-        if (! $token = auth()->attempt($credentials)) {
+
+        $validator = Validator::make($request->all(), [
+            'email'    => 'required|email',
+            'password' => 'required|string|min:6',
+        ], [
+            'email.required'    => 'El Email es obligatorio',
+            'email.unique'      => 'El Email ya existe',
+            'email.email'       => 'El Email debe tener un @',
+            'password.required' => 'La contraseña es obligatoria',
+            'password.min'      => 'La contraseña debe contener 6 caracteres minimo',
+        ]
+        );
+        
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+    
+        if (!$token = auth()->attempt($validator->validated())) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
@@ -72,7 +88,9 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
+            'expires_in' => auth()->factory()->getTTL() * 60,
+            'user'         => auth()->user(),
+            'status'       => 200
         ]);
     }
 }

@@ -13,6 +13,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::post('/LoginController', [LoginController::class, 'credentials']);
+Route::post('/UsuariosAD', [LoginController::class, 'CrearUsuario']);
 Route::post('me', [LoginController::class, 'me']);
 
 Route::post('/PuntosInteres', [PuntosInteresController::class, 'store']);
@@ -40,8 +41,8 @@ Route::group([
     'prefix' => 'auth'
 
 ], function ($router) {
-
-    Route::post('login', [AuthController::class,'login']);
+    Route::post('login','App\Http\Controllers\AuthController@login');
+    //Route::post('login', [AuthController::class,'login']);
     Route::post('logout',[AuthController::class,'logout']);
     Route::post('refresh', [AuthController::class,'refresh']);
     Route::post('me', [AuthController::class,'me']);
