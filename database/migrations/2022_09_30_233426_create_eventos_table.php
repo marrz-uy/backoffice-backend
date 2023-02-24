@@ -14,6 +14,7 @@ class CreateEventosTable extends Migration
     public function up()
     {
         Schema::create('eventos', function (Blueprint $table) {
+            $table->id('Eventos_id');
             $table->foreignId('puntosinteres_id')
                 ->constrained('puntosinteres')
                 ->onUpdate('cascade')
@@ -24,7 +25,8 @@ class CreateEventosTable extends Migration
             $table->date('FechaFin');
             $table->time('HoraInicio');
             $table->time('HoraFin')->nullable();
-            $table->String('Tipo');
+            $table->String('TipoEvento');
+            $table->string('ImagenEvento',500)->nullable();
             $table->timestamps();
         });
     }

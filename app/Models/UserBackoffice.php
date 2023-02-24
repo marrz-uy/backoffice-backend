@@ -5,12 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Usuarios extends Model
+class UserBackoffice extends Model
 {
     use HasFactory;
-    protected $table='usuarios';
-     protected $fillable=[
-        'Usuario',
-        'Password'
-     ];
 }

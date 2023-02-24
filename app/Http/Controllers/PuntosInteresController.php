@@ -344,7 +344,6 @@ class PuntosInteresController extends Controller
         $alojamiento=Alojamiento::where('puntosinteres_id','=',$IdPuntoDeInteres)
             ->update([
                 'Tipo' => $datos['Tipo'],
-                'Habitaciones'=>$datos['Habitaciones'],
                 'Calificaciones'=>$datos['Calificaciones'],
                 'TvCable'=>$datos['TvCable'],
                 'Piscina'=>$datos['Piscina'],

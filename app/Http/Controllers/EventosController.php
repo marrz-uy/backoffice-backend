@@ -36,7 +36,7 @@ class EventosController extends Controller
         $evento->FechaFin=$request->FechaFin;
         $evento->HoraInicio=$request->HoraInicio;
         $evento->HoraFin=$request->HoraFin;
-        $evento->Tipo=$request->TipoDeEvento;
+        $evento->TipoEvento=$request->TipoDeEvento;
         $evento->save();
         return response() ->json(['codigo'=>'200',"respuesta"=>'Se registro el evento correctamente']);
     }
@@ -45,7 +45,9 @@ class EventosController extends Controller
     public function show(Request $request)
     {
         if($request->Opcion==='Unico'){
-            $evento=Eventos::findOrFail($request->id);
+            $evento=DB::table('eventos')
+            ->where('Eventos_id','=',$request->Eventos_id)
+            ->get();
             return response() ->json($evento);
         }
         if($request->Opcion==='Eventoypunto'){
@@ -67,16 +69,19 @@ class EventosController extends Controller
 
     public function update(Request $request,$idEvento)
     {
-        $evento               = Eventos::findOrFail($idEvento);
-        $evento->puntosinteres_id = $request->LugarDelEvento;
-        $evento->Nombre       = $request->Nombre;
-        $evento->LugarDeVentaDeEntradas       = $request->LugarDeVentaDeEntradas;
-        $evento->FechaInicio    = $request->FechaInicio;
-        $evento->FechaFin = $request->FechaFin;
-        $evento->HoraInicio = $request->HoraInicio;
-        $evento->HoraFin     = $request->HoraFin;
-        $evento->Tipo    = $request->TipoDeEvento;
-        $evento->save();
+        
+        $evento=DB::table('eventos')
+            ->where('Eventos_id','=',$idEvento)
+            ->update([
+                'puntosinteres_id' => $request->LugarDelEvento,
+                'NombreEvento' => $request->NombreEvento,
+                'LugarDeVentaDeEntradas' => $request->LugarDeVentaDeEntradas,
+                'FechaInicio' => $request->FechaInicio,
+                'FechaFin' => $request->FechaFin,
+                'HoraInicio' => $request->HoraInicio,
+                'HoraFin' => $request->HoraFin,
+                'TipoEvento' =>$request->TipoDeEvento
+            ]);
 
         return response()->json([
             "codigo"    => '200',

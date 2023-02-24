@@ -24,7 +24,7 @@ class LoginController extends Controller
         ]);
         $connection-> connect();
         return [ "respuesta" => "true"];
-        $credentials=(['email'=>'javi@gmail.com','password'=>'123456']);
+        $credentials=(['email'=>'Javi@gmail.com','password'=>'123456']);
         if (! $token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }

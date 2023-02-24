@@ -18,7 +18,7 @@ class CreateEspectaculosTable extends Migration
             ->constrained('puntosinteres')
             ->onUpdate('cascade')
             ->onDelete('cascade');
-            $table->set('Tipo',['Cine','Teatro','Carnaval','EventoDeportivo']);
+            $table->set('Tipo',['Cine','Teatro','Carnaval','EventoDeportivo','EventoMusical']);
             $table->timestamps();
             $table->softDeletes();
         });

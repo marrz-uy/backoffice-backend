@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTourPredefinidoTable extends Migration
+class CreateUserBackofficesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateTourPredefinidoTable extends Migration
      */
     public function up()
     {
-        Schema::create('tour_predefinido', function (Blueprint $table) {
+        Schema::create('user_backoffices', function (Blueprint $table) {
             $table->id();
-            $table->string('nombreTourPredefinido');
-            $table->string('horaDeInicioTourPredefinido');
-            $table->string('descripcionTourPredefinido');
-            $table->string('imagen',500)->nullable();
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreateTourPredefinidoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tour_predefinido');
+        Schema::dropIfExists('user_backoffices');
     }
 }
