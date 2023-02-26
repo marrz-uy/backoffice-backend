@@ -124,6 +124,14 @@ class TourController extends Controller
                 $toursPredefinidos,
             ]);
         }
+        if($request->Opcion==='BusquedaPorNombre'){
+           
+            $tour=DB::table('tour_predefinido')
+            ->where('nombreTourPredefinido', 'like',"$request->Nombre")
+            ->get();
+                if ($tour->isEmpty())return response()->json(['Mensaje'=>'No hubo resultado']);;
+            return response()->json($tour);
+        }
         $toursPredefinidos = TourPredefinido::with('TourItems.PuntosInteres')
             ->orderBy('id', 'DESC')
             ->paginate(10);

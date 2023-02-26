@@ -50,6 +50,14 @@ class EventosController extends Controller
             ->get();
             return response() ->json($evento);
         }
+        if($request->Opcion==='BusquedaPorNombre'){
+           
+            $evento=DB::table('eventos')
+            ->where('NombreEvento', 'like',"$request->Nombre")
+            ->get();
+                if ($evento->isEmpty())return response()->json(['Mensaje'=>'No hubo resultado']);;
+            return response()->json($evento);
+        }
         if($request->Opcion==='Eventoypunto'){
             $eventopunto = DB::table('puntosinteres')
             ->Join('eventos','puntosinteres.id','=','puntosinteres_id')
