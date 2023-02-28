@@ -100,8 +100,10 @@ class EventosController extends Controller
     
     public function destroy($id)
     {
-        $evento=Eventos::findOrFail($id);
-        $evento->delete();
+        //$evento=Eventos::findOrFail($id);
+        $evento=DB::table('eventos')
+            ->where('Eventos_id','=',$id)
+            ->delete();
          return response()->json([
             "codigo"    => "200",
             "respuesta" => "Se elimino con exito",
