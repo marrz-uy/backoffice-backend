@@ -4,21 +4,32 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateTransporteTable extends Migration
 {
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
     public function up()
     {
-        Schema::create('servicios_esenciales', function (Blueprint $table) {
+        Schema::create('transporte', function (Blueprint $table) {
             $table->foreignId('puntosinteres_id')
             ->constrained('puntosinteres')
             ->onUpdate('cascade')
             ->onDelete('cascade');
-            $table->set('Tipo',['Hospitales','Farmacias','Cerrajerias','Estaciones de Servicio','Seccionales']);
+            $table->set('Tipo',['Omnibus','Taxi']);
             $table->timestamps();
         });
     }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
     public function down()
     {
-        Schema::dropIfExists('servicios_esenciales');
+        Schema::dropIfExists('transporte');
     }
-};
+}

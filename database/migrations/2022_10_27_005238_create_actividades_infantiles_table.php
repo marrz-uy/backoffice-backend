@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateImagenesPuntosDeInteresTable extends Migration
+class CreateActividadesInfantilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,12 @@ class CreateImagenesPuntosDeInteresTable extends Migration
      */
     public function up()
     {
-        Schema::create('imagenes_puntos_de_interes', function (Blueprint $table) {
-            $table->id();
+        Schema::create('actividades_infantiles', function (Blueprint $table) {
             $table->foreignId('puntosinteres_id')
                 ->constrained('puntosinteres')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->string('url');
-            $table->string('public_id');
-            $table->string('image_description');
+            $table->set('Tipo', ['Circo','Calesita','Maquinitas','Juegos Infantiles']);
             $table->timestamps();
         });
     }
@@ -33,6 +30,6 @@ class CreateImagenesPuntosDeInteresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('imagenes_puntos_de_interes');
+        Schema::dropIfExists('actividades_infantiles');
     }
 }

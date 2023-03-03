@@ -14,23 +14,22 @@ class CreateAlojamientosTable extends Migration
     public function up()
     {
         Schema::create('alojamientos', function (Blueprint $table) {
-            $table->id();
             $table->foreignId('puntosinteres_id')
             ->constrained('puntosinteres')
             ->onUpdate('cascade')
             ->onDelete('cascade');
             $table->set('Tipo',['Hotel','Hostel','Motel','Estancia','Camping','Casa']);
-            $table->integer('Habitaciones')->nullable();
             $table->integer('Calificaciones')->nullable();
-            $table->String('TvCable')->nullable();
-            $table->String('Piscina')->nullable();
-            $table->String('Wifi')->nullable();
-            $table->String('AireAcondicionado')->nullable();
-            $table->String('BanoPrivad')->nullable();
-            $table->String('Casino')->nullable();
-            $table->String('Bar')->nullable();
-            $table->String('Restaurante')->nullable();
-            $table->String('Desayuno')->nullable();
+            $table->boolean('TvCable')->nullable();
+            $table->boolean('Piscina')->nullable();
+            $table->boolean('Wifi')->nullable();
+            $table->boolean('AireAcondicionado')->nullable();
+            $table->boolean('BanoPrivad')->nullable();
+            $table->boolean('Casino')->nullable();
+            $table->boolean('Bar')->nullable();
+            $table->boolean('Restaurante')->nullable();
+            $table->boolean('Desayuno')->nullable();
+            $table->boolean('Mascota')->nullable();
             $table->timestamps();
         });
     }

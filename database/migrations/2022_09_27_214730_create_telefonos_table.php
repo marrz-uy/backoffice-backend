@@ -8,17 +8,18 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('servicios_esenciales', function (Blueprint $table) {
+        Schema::create('telefonos', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('puntosinteres_id')
             ->constrained('puntosinteres')
-            ->onUpdate('cascade')
             ->onDelete('cascade');
-            $table->set('Tipo',['Hospitales','Farmacias','Cerrajerias','Estaciones de Servicio','Seccionales']);
+            $table->integer('Telefono');
             $table->timestamps();
         });
     }
+
     public function down()
     {
-        Schema::dropIfExists('servicios_esenciales');
+        Schema::dropIfExists('telefonos');
     }
 };
