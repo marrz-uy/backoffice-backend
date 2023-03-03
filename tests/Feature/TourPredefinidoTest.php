@@ -11,11 +11,7 @@ use App\Models\TourPredefinido;
 
 class TourPredefinidoTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
+    
     public function test_Consultar_TourPredefinido()
     {
         $response = $this->get('/api/tourPredefinido');

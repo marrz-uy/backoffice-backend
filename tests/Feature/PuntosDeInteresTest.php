@@ -8,11 +8,7 @@ use Tests\TestCase;
 use App\Models\PuntosInteres;
 class PuntosDeInteresTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
+    
     public function test_Consultar_Puntos_De_Interes()
     {
         $response = $this->get('/api/PuntosInteres/PuntosDeInteres');

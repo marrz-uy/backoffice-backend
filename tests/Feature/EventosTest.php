@@ -9,11 +9,7 @@ use App\Models\PuntosInteres;
 use App\Models\Eventos;
 class EventosTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
+    
     public function test_ConsultarEventos()
     {
         $response = $this->get('/api/Eventos');

@@ -28,6 +28,36 @@ class EventosController extends Controller
 
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'NombreEvento'       => 'required',
+            'NombreEvento'       => 'string',
+            'LugarDeVentaDeEntradas' => 'required',
+            'FechaInicio'       => 'required',
+            'FechaInicio'       => 'date',
+            'FechaFin'    => 'required',
+            'FechaFin'       => 'date',
+            'HoraInicio'      => 'required',
+           // 'HoraInicio'      => 'time',
+            'TipoEvento'       => 'required',
+            'TipoEvento'       => 'string',
+        ], [
+            'NombreEvento.required'       => 'El nombre es obligatorio',
+            'NombreEvento.string'       => 'El nombre no pueden ser numeros',
+            'LugarDeVentaDeEntradas.required' => 'Indicar donde se venden las entradas es obligatorio',
+            'FechaInicio.required'       => 'La fecha de inicio es obligatorio',
+            'FechaInicio.date'       => 'Se debe ingresar en formato fecha: aaaa-mm-dd',
+            'FechaFin.required'    => 'La fecha de cuando finaliza es obligatorio',
+            'FechaFin.date'       => 'Se debe ingresar en formato fecha: aaaa-mm-dd',
+            'HoraInicio.required'       => 'La hora de inicio es obligatoria',
+            //'HoraInicio.time'       => 'La hora de inicio debe estar en formato time: hh-mm-ss',
+            'TipoEvento.required'      => 'Indicar el tipo de evento es obligatorio',
+            'TipoEvento.string'      => 'El tipo de evento no pueden ser numeros'
+        ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
         $evento=new Eventos();
         $evento->puntosinteres_id=$request->LugarDelEvento;
         $evento->NombreEvento=$request->NombreEvento;
@@ -36,7 +66,7 @@ class EventosController extends Controller
         $evento->FechaFin=$request->FechaFin;
         $evento->HoraInicio=$request->HoraInicio;
         $evento->HoraFin=$request->HoraFin;
-        $evento->TipoEvento=$request->TipoDeEvento;
+        $evento->TipoEvento=$request->TipoEvento;
         $evento->save();
         return response() ->json(['codigo'=>'200',"respuesta"=>'Se registro el evento correctamente']);
     }
@@ -100,7 +130,7 @@ class EventosController extends Controller
     
     public function destroy($id)
     {
-        //$evento=Eventos::findOrFail($id);
+        
         $evento=DB::table('eventos')
             ->where('Eventos_id','=',$id)
             ->delete();
