@@ -11,22 +11,12 @@ use App\Models\Telefonos;
 use App\Models\Espectaculos;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Validator;
 class EventosController extends Controller
 {
    
-    public function index()
-    {
-        //
-    }
-
- 
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
+        public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'NombreEvento'       => 'required',
@@ -70,8 +60,6 @@ class EventosController extends Controller
         $evento->save();
         return response() ->json(['codigo'=>'200',"respuesta"=>'Se registro el evento correctamente']);
     }
-
-    
     public function show(Request $request)
     {
         if($request->Opcion==='Unico'){
@@ -98,13 +86,10 @@ class EventosController extends Controller
         $eventos=Eventos::paginate(10);
         return response() ->json($eventos);
     }
-
-  
     public function edit(Eventos $eventos)
     {
         //
     }
-
     public function update(Request $request,$idEvento)
     {
         
@@ -126,8 +111,6 @@ class EventosController extends Controller
             "respuesta" => "Se modifico con exito",
         ]);
     }
-
-    
     public function destroy($id)
     {
         
@@ -137,6 +120,22 @@ class EventosController extends Controller
          return response()->json([
             "codigo"    => "200",
             "respuesta" => "Se elimino con exito",
+        ]);
+    }
+    public function ModificarImagenesEventos(Request $request,$idEvento){
+        if (!$request->hasFile('file')) {
+            return $this->returnError(202, 'file is required');
+        }
+        $response = Cloudinary::upload($request->file('file')->getRealPath(), ['folder' => 'feeluy']);
+            $url       = $response->getSecurePath();
+        
+            $evento=DB::table('eventos')
+            ->where('Eventos_id','=',$idEvento)
+            ->update(['ImagenEvento' => $url]);
+
+        return response()->json([
+            "codigo"    => "200",
+            "respuesta" => "Se agrego imagen con exito",
         ]);
     }
 }
