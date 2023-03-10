@@ -18,7 +18,7 @@ class CreateGastronomicosTable extends Migration
             $table->String('Especialidad')->nullable();
             $table->boolean('Alcohol')->nullable();
             $table->boolean('MenuInfantil')->nullable();
-            $table->set('Tipo',['Restaurantes','Bares','Comida rapida','Cervezerias']);
+            $table->set('Tipo',['Restaurantes','Bares','Comida rapida','Cervecerias']);
             $table->timestamps();
         });
     }

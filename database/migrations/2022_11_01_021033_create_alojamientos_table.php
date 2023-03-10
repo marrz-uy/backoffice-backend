@@ -24,7 +24,7 @@ class CreateAlojamientosTable extends Migration
             $table->boolean('Piscina')->nullable();
             $table->boolean('Wifi')->nullable();
             $table->boolean('AireAcondicionado')->nullable();
-            $table->boolean('BanoPrivad')->nullable();
+            $table->boolean('BanoPrivado')->nullable();
             $table->boolean('Casino')->nullable();
             $table->boolean('Bar')->nullable();
             $table->boolean('Restaurante')->nullable();

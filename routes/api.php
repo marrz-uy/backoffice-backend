@@ -6,6 +6,7 @@ use App\Http\Controllers\ImagenesPuntoInteresController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TourController;
 use App\Http\Controllers\AuthController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

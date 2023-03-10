@@ -155,18 +155,16 @@ class TourController extends Controller
     }
     public function ModificarImagenesTour(Request $request,$idTour){
         if (!$request->hasFile('file')) {
-            return $this->returnError(202, 'file is required');
+            return $this->returnError(402, 'file is required');
         }
         $response = Cloudinary::upload($request->file('file')->getRealPath(), ['folder' => 'feeluy']);
             $url       = $response->getSecurePath();
         
-            // $evento=DB::table('eventos')
-            // ->where('Eventos_id','=',$idEvento)
-            // ->update(['ImagenEvento' => $url]);
+           
         $Tour=TourPredefinido::findOrFail($idTour);
         $Tour->imagen=$url;
         $Tour->save();
-        return response()->json([
+        return response()->headers('Access-Control-Allow-Origin',"*")->json([
             "codigo"    => "200",
             "respuesta" => "Se agrego imagen con exito",
         ]);

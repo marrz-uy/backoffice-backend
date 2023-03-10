@@ -19,7 +19,7 @@ class CreatePaseosTable extends Migration
             ->onUpdate('cascade')
             ->onDelete('cascade');
         $table->String('Recomendaciones');
-        $table->set('Tipo', ['Playas','Ejercicios al aire libre','Cerros','Sierras']);
+        $table->set('Tipo', ['Playas','Ejercicios al aire libre','Cerros','Sierras','Lugar turistico']);
         $table->timestamps();
         });
     }
