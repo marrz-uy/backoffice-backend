@@ -103,7 +103,7 @@ class EventosController extends Controller
                 'FechaFin' => $request->FechaFin,
                 'HoraInicio' => $request->HoraInicio,
                 'HoraFin' => $request->HoraFin,
-                'TipoEvento' =>$request->TipoDeEvento
+                'TipoEvento' =>$request->TipoEvento
             ]);
 
         return response()->json([
