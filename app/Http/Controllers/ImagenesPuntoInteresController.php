@@ -71,4 +71,20 @@ class ImagenesPuntoInteresController extends Controller
             "Id"=>$Imagen->id
         ]);
     }
+    public function ModificarImagenesEventos(Request $request,$idEvento){
+        if (!$request->hasFile('file')) {
+            return $this->returnError(202, 'file is required');
+        }
+        $response = Cloudinary::upload($request->file('file')->getRealPath(), ['folder' => 'feeluy']);
+            $url       = $response->getSecurePath();
+        
+            $evento=DB::table('eventos')
+            ->where('Eventos_id','=',$idEvento)
+            ->update(['ImagenEvento' => $url]);
+
+        return response()->json([
+            "codigo"    => "200",
+            "respuesta" => "Se agrego imagen con exito",
+        ]);
+    }
 }
