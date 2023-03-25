@@ -17,27 +17,32 @@ Route::post('/LoginController', [LoginController::class, 'credentials']);
 Route::post('/UsuariosAD', [LoginController::class, 'CrearUsuario']);
 Route::post('me', [LoginController::class, 'me']);
 
+//PUNTOS DE INTERES-------------------------------------------------------------------------------------------------------------------------->
 Route::post('/PuntosInteres', [PuntosInteresController::class, 'store']);
 Route::get('/PuntosInteres/{Categoria}', [PuntosInteresController::class, 'ListarPuntosDeInteres']);
 Route::patch('/PuntosInteres/{id}', [PuntosInteresController::class, 'update']);
 Route::delete('/PuntosInteres/{id}', [PuntosInteresController::class, 'destroy']);
 
+//IMAGENES DEPUNTOS DE INTERES-------------------------------------------------------------------------------------------------------------------------->
+Route::POST('/cargarImagen', [ImagenesPuntoInteresController::class, 'saveImage']);
+Route::GET('/showImages/{id}', [ImagenesPuntoInteresController::class, 'showImages']);
+Route::POST('/EliminarImagen', [ImagenesPuntoInteresController::class, 'EliminarImagen']);
+
+//EVENTOS-------------------------------------------------------------------------------------------------------------------------->
 Route::get('/Eventos', [EventosController::class, 'show'])->middleware("api");
 Route::post('/Eventos', [EventosController::class, 'store']);
 Route::delete('/Eventos/{id}', [EventosController::class, 'destroy']);
 Route::patch('/Eventos/{id}', [EventosController::class, 'update']);
 Route::post('/Eventos/{id}',[EventosController::class, 'ModificarImagenesEventos']);
 
-Route::POST('/cargarImagen', [ImagenesPuntoInteresController::class, 'saveImage']);
-Route::GET('/showImages/{id}', [ImagenesPuntoInteresController::class, 'showImages']);
-Route::POST('/EliminarImagen', [ImagenesPuntoInteresController::class, 'EliminarImagen']);
-
+//TOUR PREDEFINIDO-------------------------------------------------------------------------------------------------------------------------->
 Route::POST('/tourPredefinido', [TourController::class, 'InsertarTourPredefinido']);
 Route::GET('/tourPredefinido', [TourController::class, 'ListarToursPredefinidos']);
 Route::PATCH('tourPredefinido',[TourController::class,'ModificarTourPredefinido']);
 Route::DELETE('/tourPredefinido/{i}', [TourController::class, 'destroy']);
 Route::POST('/tourPredefinido/{id}',[TourController::class, 'ModificarImagenesTour']);
 
+//AUXILIARES-------------------------------------------------------------------------------------------------------------------------->
 Route::group([
 
     'middleware' => 'api',

@@ -15,7 +15,15 @@ use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Validator;
 class EventosController extends Controller
 {
-   
+    public function ImagenesEventos()
+    {
+        return response()->json([
+            "codigo"    => "FUNCA",
+            "respuesta" => "Se elimino con exito",
+        ]);
+        $imagen = Eventos::where('Eventos_id','=',$evento_id)->get('ImagenEvento');
+        return response()->json($imagen);
+    }
         public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -62,6 +70,10 @@ class EventosController extends Controller
     }
     public function show(Request $request)
     {
+        if($request->Opcion==='ImagenEvento'){
+            $imagen = Eventos::where('Eventos_id','=',$request->evento_id)->get('ImagenEvento');
+            return response()->json($imagen);
+        }
         if($request->Opcion==='Unico'){
             $evento=DB::table('eventos')
             ->where('Eventos_id','=',$request->Eventos_id)
@@ -111,9 +123,18 @@ class EventosController extends Controller
             "respuesta" => "Se modifico con exito",
         ]);
     }
-    public function destroy($id)
+    public function destroy(request $request,$id)
     {
-        
+        if($request->Opcion==='EliminarImagen'){
+        $evento=DB::table('eventos')
+            ->where('Eventos_id','=',$id)
+            ->update(['ImagenEvento'=>null]);
+         return response()->json([
+            "codigo"    => "200",
+            "respuesta" => "Se elimino con exito la Imagen",
+        ]); 
+        }
+        if($request->Opcion==='EliminarEvento'){
         $evento=DB::table('eventos')
             ->where('Eventos_id','=',$id)
             ->delete();
@@ -121,6 +142,8 @@ class EventosController extends Controller
             "codigo"    => "200",
             "respuesta" => "Se elimino con exito",
         ]);
+        }
+        
     }
     public function ModificarImagenesEventos(Request $request,$idEvento){
         if (!$request->hasFile('file')) {
@@ -138,4 +161,6 @@ class EventosController extends Controller
             "respuesta" => "Se agrego imagen con exito",
         ]);
     }
+    
+    
 }
