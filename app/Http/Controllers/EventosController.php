@@ -159,6 +159,7 @@ class EventosController extends Controller
         return response()->json([
             "codigo"    => "200",
             "respuesta" => "Se agrego imagen con exito",
+            "idEvento" => $idEvento
         ]);
     }
     
