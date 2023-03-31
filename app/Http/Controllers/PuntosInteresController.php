@@ -30,16 +30,23 @@ class PuntosInteresController extends Controller
             'Nombre'       => 'required',
             'Departamento' => 'required',
             'Ciudad'       => 'required',
-            'Direccion'    => 'required',
             'Latitud'      => 'integer',
             'Longitud'     => 'integer',
+            'Latitud'      => 'required',
+            'Longitud'     => 'required',
+            'TipoDeLugar'     => 'required',
+            'RestriccionDeEdad'      => 'required',
+            'EnfoqueDePersonas'     => 'required',
         ], [
             'Nombre.required'       => 'El nombre es obligatorio',
             'Departamento.required' => 'El Departamento es obligatorio',
             'Ciudad.required'       => 'La Ciudad es obligatorio',
-            'Direccion.required'    => 'La direccion es obligatorio',
             'Latitud.integer'       => 'Latitud debe ser un numero',
             'Longitud.integer'      => 'Longitud debe ser un numero',
+            'Latitud.required'       => 'Latitud es requerido',
+            'Longitud.required'      => 'Latitud es requerido',
+            'TipoDeLugar.required'       => 'Tipo De Lugar es requerido',
+            'RestriccionDeEdad.required'      => 'Restriccion De Edad es requerido',
         ]
         );
 

@@ -6,6 +6,7 @@ use App\Models\TourArmado;
 use App\Models\TourItems;
 use App\Models\TourItemsPredefinido;
 use App\Models\TourPredefinido;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -151,5 +152,21 @@ class TourController extends Controller
             
         ]);
     
+    }
+    public function ModificarImagenesTour(Request $request,$idTour){
+        if (!$request->hasFile('file')) {
+            return $this->returnError(402, 'file is required');
+        }
+        $response = Cloudinary::upload($request->file('file')->getRealPath(), ['folder' => 'feeluy']);
+            $url       = $response->getSecurePath();
+        
+           
+        $Tour=TourPredefinido::findOrFail($idTour);
+        $Tour->imagen=$url;
+        $Tour->save();
+        return response()->headers('Access-Control-Allow-Origin',"*")->json([
+            "codigo"    => "200",
+            "respuesta" => "Se agrego imagen con exito",
+        ]);
     }
 }

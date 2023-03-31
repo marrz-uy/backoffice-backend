@@ -16,7 +16,7 @@ class CreateEventosTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->String('NombreEvento');
-            $table->set('LugarDeVentaDeEntradas', ['Abitab', 'RedPagos', 'TickAntel', 'LugarDelEvento', 'AccesoYa', 'RedTicket']);
+            $table->set('LugarDeVentaDeEntradas', ['Abitab', 'RedPagos', 'TickAntel', 'LugarDelEvento', 'AccesoYa', 'RedTickets']);
             $table->date('FechaInicio');
             $table->date('FechaFin');
             $table->time('HoraInicio');

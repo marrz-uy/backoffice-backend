@@ -127,4 +127,6 @@ class PuntosDeInteresTest extends TestCase
         ])->deleteJson('/api/PuntosInteres/'.$id->id);
         $response->assertStatus(200);
     }
+    //SERVICIOS ESENCIALES--------------------------------------------------------------------------------------------------------------------------------------->
+    
 }

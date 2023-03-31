@@ -48,7 +48,7 @@ class EventosTest extends TestCase
             'FechaFin'                => '2023-02-14',
             'HoraInicio'             => '10:00:00',
             'HoraFin' => '20:00:00',
-            'TipoDeEvento'                 => 'Evento del duko'
+            'TipoEvento'                 => 'Evento del duko'
         ]);
         $response->assertStatus(200);
     }
@@ -66,7 +66,7 @@ class EventosTest extends TestCase
             'FechaFin'                => '2023-02-14',
             'HoraInicio'             => '10:00:00',
             'HoraFin' => '20:00:00',
-            'TipoDeEvento'                 => 'Evento del duko'
+            'TipoEvento'                 => 'Evento del duko'
             
         ]);
     }
