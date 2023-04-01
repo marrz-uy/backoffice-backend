@@ -283,8 +283,12 @@ class PuntosInteresController extends Controller
         }
         if($Categoria==='Telefonos'){
             $Telefonos=PuntosInteres::find($request->id);
-            $Telefonos=$Telefonos->VerTelefonos;
-            return response() ->json($Telefonos); 
+                $Telefonos=$Telefonos->VerTelefonos;
+                if($Telefonos!='[]'){
+                    return response() ->json($Telefonos);
+                }
+                
+               // return response()->json(["respuesta" => "No hay telefonos"]);
         }
         $puntosInteres = DB::table('puntosinteres')
         ->Join($Categoria,'puntosinteres.id','=','puntosinteres_id')
