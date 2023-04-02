@@ -26,6 +26,8 @@ class PuntosInteresController extends Controller
     public function store(Request $request)
     {
        
+
+        
         $validator = Validator::make($request->all(), [
             'Nombre'       => 'required',
             'Departamento' => 'required',
