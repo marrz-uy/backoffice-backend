@@ -33,7 +33,7 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
 RUN echo " " > /etc/httpd/conf.d/welcome.conf && \ 
     echo " " > /etc/httpd/conf.d/userdir.conf && \ 
     echo " " > /etc/httpd/conf.d/autoindex.conf 
-
+RUN echo "extension=ldap" > /etc/php.ini
 RUN sed -i 's/AllowOverride\ None/AllowOverride\ All/g' /etc/httpd/conf/httpd.conf && sed -i 's/\/var\/www\/html/\/var\/www\/html\/public/g' /etc/httpd/conf/httpd.conf
 
 COPY . /var/www/html 
