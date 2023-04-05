@@ -18,6 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DB_HOST: mysql
+      DB_DATABASE: laravel
     container:
       image: ggmartinez/laravel:8
     steps:
