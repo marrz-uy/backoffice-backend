@@ -39,4 +39,6 @@ jobs:
           php artisan migrate 
           php artisan db:seed
       - name: Ejecutar pruebas
-        run: php artisan test
+        run: |
+        mkdir ./tests/Unit
+        php artisan test
