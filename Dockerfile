@@ -19,11 +19,12 @@ RUN yum install -y php81-php-bcmath \
     php81-php-pecl-zip \
     php81-php-xml \
     php81-php-pecl-memcached \
-    php81-php-opcache \ 
+    php81-php-opcache \
+    php81-php-ldap \
     unzip \
     httpd \ 
     && yum clean all && rm -rf /var/cache/yum
-
+RUN echo 'extension=/opt/remi/php81/root/usr/lib64/php/modules/ldap.so' >> /etc/php.d/50-ldap.ini
 ENV PHP_PATH "/opt/remi/php81/root/usr/bin/php"
 ENV PATH "/opt/remi/php81/root/usr/bin:/opt/remi/php81/root/usr/sbin${PATH:+:${PATH}}"
 ENV LD_LIBRARY_PATH "/opt/remi/php81/root/usr/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
@@ -32,7 +33,8 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
 
 RUN echo " " > /etc/httpd/conf.d/welcome.conf && \ 
     echo " " > /etc/httpd/conf.d/userdir.conf && \ 
-    echo " " > /etc/httpd/conf.d/autoindex.conf 
+    echo " " > /etc/httpd/conf.d/autoindex.conf
+
 
 RUN sed -i 's/AllowOverride\ None/AllowOverride\ All/g' /etc/httpd/conf/httpd.conf && sed -i 's/\/var\/www\/html/\/var\/www\/html\/public/g' /etc/httpd/conf/httpd.conf
 
