@@ -40,5 +40,5 @@ jobs:
           php artisan db:seed
       - name: Ejecutar pruebas
         run: |
-        mkdir ./tests/Unit
-        php artisan test
+          mkdir ./tests/Unit
+          php artisan test
