@@ -83,7 +83,7 @@ class EventosController extends Controller
         if($request->Opcion==='BusquedaPorNombre'){
            
             $evento=DB::table('eventos')
-            ->where('NombreEvento', 'like',"$request->Nombre")
+            ->where('NombreEvento', 'like',"%".$request->Nombre."%")
             ->get();
                 if ($evento->isEmpty())return response()->json(['Mensaje'=>'No hubo resultado']);;
             return response()->json($evento);
