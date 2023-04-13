@@ -1,14 +1,15 @@
 <?php
 
-use App\Http\Controllers\PuntosInteresController;
-use App\Http\Controllers\EventosController;
-use App\Http\Controllers\ImagenesPuntoInteresController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\TourController;
-use App\Http\Controllers\AuthController;
-
 use Illuminate\Http\Request;
+use App\Events\ClientNotifications;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TourController;
+use App\Http\Controllers\LoginController;
+
+use App\Http\Controllers\EventosController;
+use App\Http\Controllers\PuntosInteresController;
+use App\Http\Controllers\ImagenesPuntoInteresController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -56,3 +57,9 @@ Route::group([
     Route::post('me', [AuthController::class,'me']);
 
 });
+
+/* RUTA DE EVENTO NOTIFICACIONES CON SUS CAMPOS */
+Route::post('/message', function (Request $request) {
+    event(new ClientNotifications($request->title, $request->message));
+    return response()->json(['message' => 'El mensaje ha sido enviado'], 200);
+})->name('send-message');
