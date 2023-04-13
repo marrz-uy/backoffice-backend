@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//? VISTA DE MENSAJES */
+Route::get('/message', function () {
+    return view('message-form');
+})->name('message-form');
