@@ -20,7 +20,7 @@ use Illuminate\Support\Str;
 
 use Validator;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
-
+global $Celular;
 class PuntosInteresController extends Controller
 {
     public function store(Request $request)
@@ -276,6 +276,7 @@ class PuntosInteresController extends Controller
             ->get();
                 if ($puntosInteres->isEmpty())return response()->json(['Mensaje'=>'No hubo resultado']);;
             return response()->json($puntosInteres);
+                
         }
         if($Categoria==='PuntosDeInteres'){
             
@@ -318,6 +319,12 @@ class PuntosInteresController extends Controller
         $puntosInteres->EnfoqueDePersonas        = $request->EnfoqueDePersonas;
         $puntosInteres->save();
         $PuntosDeInteresDetallado  = json_decode($request->InformacionDetalladaPuntoDeInteres,true);
+        $Celular=$request->Celular;
+        //$this->ModificarTelefono($IdPuntoDeInteres,$request->Telefono);
+        if(!empty($request->Telefono)){$this->ModificarTelefono($IdPuntoDeInteres,$request->Telefono);}
+       
+        
+        
         if(!empty($PuntosDeInteresDetallado['Op'])){
             if($PuntosDeInteresDetallado['Op'] === 'Alojamiento'){
                 return $this->ModificarAlojamiento($IdPuntoDeInteres,$request->InformacionDetalladaPuntoDeInteres);
@@ -455,14 +462,13 @@ class PuntosInteresController extends Controller
             "respuesta" => "Se modifico con exito",
         ]);      
     }
-    public function ModificarTelefonos($id,$TelefonoViejo, $TelefonoNuevo){
+    public function ModificarTelefono($id,$Telefono){
+        
         $telefono=DB::table('telefonos')
         ->where('puntosinteres_id','=',$id)
-        ->where('Telefono','=',$TelefonoViejo)
-        ->update(['Telefono' => $TelefonoNuevo]);
-        return $telefono;
-        // $telefono->Telefono=$Telefono;
-        // $telefono->save();
+        ->delete();
+        $this->AltaDeTelefono($id,$Telefono);
+        //$this->AltaDeTelefono($id,$Celular);
     }
     public function destroy($IdPuntoDeInteres)
     {

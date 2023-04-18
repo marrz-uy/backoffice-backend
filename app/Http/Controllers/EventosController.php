@@ -98,10 +98,7 @@ class EventosController extends Controller
         $eventos=Eventos::paginate(10);
         return response() ->json($eventos);
     }
-    public function edit(Eventos $eventos)
-    {
-        //
-    }
+  
     public function update(Request $request,$idEvento)
     {
         
