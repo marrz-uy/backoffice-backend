@@ -274,8 +274,33 @@ class PuntosInteresController extends Controller
             $puntosInteres=DB::table('puntosinteres')
             ->where('Nombre', 'like',"%".$request->Nombre."%")
             ->get();
-                if ($puntosInteres->isEmpty())return response()->json(['Mensaje'=>'No hubo resultado']);;
-            return response()->json($puntosInteres);
+                if ($puntosInteres->isEmpty())return response()->json(['Mensaje'=>'No hubo resultado']);
+                //return response()->json($puntosInteres);
+            for($i=0;$i<$puntosInteres->count();$i++){
+                $p=DB::table('alojamientos')->where('puntosinteres_id','=',$puntosInteres[$i]->id)->first();
+                if ($p!=[])$Categoria='alojamientos';
+                $p=DB::table('transporte')->where('puntosinteres_id','=',$puntosInteres[$i]->id)->first();
+                if ($p!=[])$Categoria='transporte';
+                $p=DB::table('actividades_infantiles')->where('puntosinteres_id','=',$puntosInteres[$i]->id)->first();
+                if ($p!=[])$Categoria='actividades_infantiles';
+                $p=DB::table('actividades_nocturnas')->where('puntosinteres_id','=',$puntosInteres[$i]->id)->first();
+                if ($p!=[])$Categoria='actividades_nocturnas';
+                $p=DB::table('espectaculos')->where('puntosinteres_id','=',$puntosInteres[$i]->id)->first();
+                if ($p!=[])$Categoria='espectaculos';
+                $p=DB::table('gastronomicos')->where('puntosinteres_id','=',$puntosInteres[$i]->id)->first();
+                if ($p!=[])$Categoria='gastronomicos';
+                $p=DB::table('paseos')->where('puntosinteres_id','=',$puntosInteres[$i]->id)->first();
+                if ($p!=[])$Categoria='paseos';
+                $p=DB::table('servicios_esenciales')->where('puntosinteres_id','=',$puntosInteres[$i]->id)->first();
+                if ($p!=[])$Categoria='servicios_esenciales';
+                return $p;
+                $array[$puntosInteres[$i]->id]=$Categoria;
+                
+            }
+            return $puntosInteres;
+            return var_dump($puntosInteres);
+            return response()->json($array);
+                
                 
         }
         if($Categoria==='PuntosDeInteres'){
