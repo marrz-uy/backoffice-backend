@@ -275,33 +275,83 @@ class PuntosInteresController extends Controller
             ->where('Nombre', 'like',"%".$request->Nombre."%")
             ->get();
                 if ($puntosInteres->isEmpty())return response()->json(['Mensaje'=>'No hubo resultado']);
-                //return response()->json($puntosInteres);
+                $ArrayDePuntos=[];
+                
             for($i=0;$i<$puntosInteres->count();$i++){
                 $p=DB::table('alojamientos')->where('puntosinteres_id','=',$puntosInteres[$i]->id)->first();
-                if ($p!=[])$Categoria='alojamientos';
+                if ($p!=[]){
+                    $p=DB::table('puntosinteres')->Join('alojamientos','puntosinteres.id','=','puntosinteres_id')
+                    ->where('puntosinteres.id','=',$puntosInteres[$i]->id)
+                    ->get();
+                    $p[0]->Categoria="alojamientos";
+                    $ArrayDePuntos[]=$p;
+                } 
                 $p=DB::table('transporte')->where('puntosinteres_id','=',$puntosInteres[$i]->id)->first();
-                if ($p!=[])$Categoria='transporte';
+                if ($p!=[]){
+                    $p=DB::table('puntosinteres')->Join('transporte','puntosinteres.id','=','puntosinteres_id')
+                    ->where('puntosinteres.id','=',$puntosInteres[$i]->id)
+                    ->get();
+                    $p[0]->Categoria="transporte";
+                    $ArrayDePuntos[]=$p;
+                }
+
                 $p=DB::table('actividades_infantiles')->where('puntosinteres_id','=',$puntosInteres[$i]->id)->first();
-                if ($p!=[])$Categoria='actividades_infantiles';
+                if ($p!=[]){
+                    $p=DB::table('puntosinteres')->Join('actividades_infantiles','puntosinteres.id','=','puntosinteres_id')
+                    ->where('puntosinteres.id','=',$puntosInteres[$i]->id)
+                    ->get();
+                    $p[0]->Categoria="actividades_infantiles";
+                    $ArrayDePuntos[]=$p;
+                }
+
                 $p=DB::table('actividades_nocturnas')->where('puntosinteres_id','=',$puntosInteres[$i]->id)->first();
-                if ($p!=[])$Categoria='actividades_nocturnas';
+                if ($p!=[]){
+                    $p=DB::table('puntosinteres')->Join('actividades_nocturnas','puntosinteres.id','=','puntosinteres_id')
+                    ->where('puntosinteres.id','=',$puntosInteres[$i]->id)
+                    ->get();
+                    $p[0]->Categoria="actividades_nocturnas";
+                    $ArrayDePuntos[]=$p;
+                }
+
                 $p=DB::table('espectaculos')->where('puntosinteres_id','=',$puntosInteres[$i]->id)->first();
-                if ($p!=[])$Categoria='espectaculos';
+                if ($p!=[]){
+                    $p=DB::table('puntosinteres')->Join('espectaculos','puntosinteres.id','=','puntosinteres_id')
+                    ->where('puntosinteres.id','=',$puntosInteres[$i]->id)
+                    ->get();
+                    $p[0]->Categoria="espectaculos";
+                    $ArrayDePuntos[]=$p;
+                }
+
                 $p=DB::table('gastronomicos')->where('puntosinteres_id','=',$puntosInteres[$i]->id)->first();
-                if ($p!=[])$Categoria='gastronomicos';
+                if ($p!=[]){
+                    $p=DB::table('puntosinteres')->Join('gastronomicos','puntosinteres.id','=','puntosinteres_id')
+                    ->where('puntosinteres.id','=',$puntosInteres[$i]->id)
+                    ->get();
+                    $p[0]->Categoria="gastronomicos";
+                    $ArrayDePuntos[]=$p;
+                }
+
                 $p=DB::table('paseos')->where('puntosinteres_id','=',$puntosInteres[$i]->id)->first();
-                if ($p!=[])$Categoria='paseos';
+                if ($p!=[]){
+                    $p=DB::table('puntosinteres')->Join('paseos','puntosinteres.id','=','puntosinteres_id')
+                    ->where('puntosinteres.id','=',$puntosInteres[$i]->id)
+                    ->get();
+                    $p[0]->Categoria="paseos";
+                    $ArrayDePuntos[]=$p;
+                }
+
                 $p=DB::table('servicios_esenciales')->where('puntosinteres_id','=',$puntosInteres[$i]->id)->first();
-                if ($p!=[])$Categoria='servicios_esenciales';
-                return $p;
-                $array[$puntosInteres[$i]->id]=$Categoria;
+                if ($p!=[]){
+                    $p=DB::table('puntosinteres')->Join('servicios_esenciales','puntosinteres.id','=','puntosinteres_id')
+                    ->where('puntosinteres.id','=',$puntosInteres[$i]->id)
+                    ->get();
+                    $p[0]->Categoria="servicios_esenciales";
+                    $ArrayDePuntos[]=$p;
+                }
                 
-            }
-            return $puntosInteres;
-            return var_dump($puntosInteres);
-            return response()->json($array);
-                
-                
+            } 
+            return response()->json($ArrayDePuntos);
+            
         }
         if($Categoria==='PuntosDeInteres'){
             
