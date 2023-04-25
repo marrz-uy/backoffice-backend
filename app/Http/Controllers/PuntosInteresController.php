@@ -208,6 +208,7 @@ class PuntosInteresController extends Controller
         if(isset($datos['Bar'])) $alojamiento->Bar = $datos['Bar'];
         if(isset($datos['Restaurante'])) $alojamiento->Restaurante = $datos['Restaurante'];
         if(isset($datos['Desayuno'])) $alojamiento->Desayuno = $datos['Desayuno'];
+        if(isset($datos['Mascota'])) $alojamiento->Mascota = $datos['Mascota'];
        // echo "<pre>";var_dump($datos);die();
         $alojamiento->save();
         return response()->json([
@@ -447,7 +448,8 @@ class PuntosInteresController extends Controller
                 'Casino'=>$datos['Casino'],
                 'Bar'=>$datos['Bar'],
                 'Restaurante'=>$datos['Restaurante'],
-                'Desayuno'=>$datos['Desayuno']
+                'Desayuno'=>$datos['Desayuno'],
+                'Mascota'=>$datos['Mascota']
             ]);
         return response()->json([
             "codigo"    => "200",
