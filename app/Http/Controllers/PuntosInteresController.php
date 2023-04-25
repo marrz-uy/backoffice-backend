@@ -20,7 +20,7 @@ use Illuminate\Support\Str;
 
 use Validator;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
-global $Celular;
+
 class PuntosInteresController extends Controller
 {
     public function store(Request $request)
@@ -59,20 +59,21 @@ class PuntosInteresController extends Controller
         //DB::beginTransaction();
         
         $puntosInteres               = new PuntosInteres();
-        $puntosInteres->Nombre          = $request->Nombre;
-        $puntosInteres->Departamento    = $request->Departamento;
-        $puntosInteres->Ciudad          = $request->Ciudad;
-        $puntosInteres->Direccion       = $request->Direccion;
-        $puntosInteres->HoraDeApertura  = $request->HoraDeApertura;
-        $puntosInteres->HoraDeCierre    = $request->HoraDeCierre;
-        $puntosInteres->Facebook        = $request->Facebook;
-        $puntosInteres->Instagram       = $request->Instagram;
-        $puntosInteres->Descripcion     = $request->Descripcion;
-        $puntosInteres->Latitud         = $request->Latitud;
-        $puntosInteres->Longitud        = $request->Longitud;
-        $puntosInteres->TipoDeLugar     = $request->TipoDeLugar;
-        $puntosInteres->RestriccionDeEdad         = $request->RestriccionDeEdad;
-        $puntosInteres->EnfoqueDePersonas        = $request->EnfoqueDePersonas;
+        $puntosInteres->Nombre              = $request->Nombre;
+        $puntosInteres->Departamento        = $request->Departamento;
+        $puntosInteres->Ciudad              = $request->Ciudad;
+        $puntosInteres->Direccion           = $request->Direccion;
+        $puntosInteres->HoraDeApertura      = $request->HoraDeApertura;
+        $puntosInteres->HoraDeCierre        = $request->HoraDeCierre;
+        $puntosInteres->Facebook            = $request->Facebook;
+        $puntosInteres->Instagram           = $request->Instagram;
+        $puntosInteres->Web                 = $request->Web;
+        $puntosInteres->Descripcion         = $request->Descripcion;
+        $puntosInteres->Latitud             = $request->Latitud;
+        $puntosInteres->Longitud            = $request->Longitud;
+        $puntosInteres->TipoDeLugar         = $request->TipoDeLugar;
+        $puntosInteres->RestriccionDeEdad   = $request->RestriccionDeEdad;
+        $puntosInteres->EnfoqueDePersonas   = $request->EnfoqueDePersonas;
         $puntosInteres->save();
         
 
@@ -81,8 +82,6 @@ class PuntosInteresController extends Controller
         $id = PuntosInteres::latest('id')->first();
         if(!empty($request->Telefono)){$this->AltaDeTelefono($id->id,$request->Telefono);}
         if(!empty($request->Celular)){$this->AltaDeTelefono($id->id,$request->Celular);}
-        //$this->AltaDeTelefono($id->id,$request->Telefono);
-        //echo "<pre>";var_dump($PuntosDeInteresDetallado);die();
         
         if(!empty($PuntosDeInteresDetallado['Op'])){        
             if ($PuntosDeInteresDetallado['Op'] === 'ServicioEsencial') {return $this->AltaDeServicio($id->id, $PuntosDeInteresDetallado['Tipo']);}
@@ -204,7 +203,7 @@ class PuntosInteresController extends Controller
         if(isset($datos['Piscina'])) $alojamiento->Piscina = $datos['Piscina'];
         if(isset($datos['Wifi'])) $alojamiento->Wifi = $datos['Wifi'];
         if(isset($datos['AireAcondicionado'])) $alojamiento->AireAcondicionado = $datos['AireAcondicionado'];
-        if(isset($datos['BanoPrivado'])) $alojamiento->BanoPrivad =$datos['BanoPrivado'];
+        if(isset($datos['BanoPrivado'])) $alojamiento->BanoPrivado =$datos['BanoPrivado'];
         if(isset($datos['Casino'])) $alojamiento->Casino = $datos['Casino'];
         if(isset($datos['Bar'])) $alojamiento->Bar = $datos['Bar'];
         if(isset($datos['Restaurante'])) $alojamiento->Restaurante = $datos['Restaurante'];
@@ -275,7 +274,7 @@ class PuntosInteresController extends Controller
             ->where('Nombre', 'like',"%".$request->Nombre."%")
             ->get();
                 if ($puntosInteres->isEmpty())return response()->json(['Mensaje'=>'No hubo resultado']);
-                $ArrayDePuntos=[];
+            $ArrayDePuntos=[];
                 
             for($i=0;$i<$puntosInteres->count();$i++){
                 $p=DB::table('alojamientos')->where('puntosinteres_id','=',$puntosInteres[$i]->id)->first();
@@ -378,24 +377,24 @@ class PuntosInteresController extends Controller
     public function update(Request $request, $IdPuntoDeInteres)
     {
         $puntosInteres                  = PuntosInteres::findOrFail($IdPuntoDeInteres);
-        $puntosInteres->Nombre          = $request->Nombre;
-        $puntosInteres->Departamento    = $request->Departamento;
-        $puntosInteres->Ciudad          = $request->Ciudad;
-        $puntosInteres->Direccion       = $request->Direccion;
-        $puntosInteres->HoraDeApertura  = $request->HoraDeApertura;
-        $puntosInteres->HoraDeCierre    = $request->HoraDeCierre;
-        $puntosInteres->Facebook        = $request->Facebook;
-        $puntosInteres->Instagram       = $request->Instagram;
-        $puntosInteres->Descripcion     = $request->Descripcion;
-        $puntosInteres->Latitud         = $request->Latitud;
-        $puntosInteres->Longitud        = $request->Longitud;
-        $puntosInteres->TipoDeLugar     = $request->TipoDeLugar;
-        $puntosInteres->RestriccionDeEdad         = $request->RestriccionDeEdad;
-        $puntosInteres->EnfoqueDePersonas        = $request->EnfoqueDePersonas;
+        $puntosInteres->Nombre              = $request->Nombre;
+        $puntosInteres->Departamento        = $request->Departamento;
+        $puntosInteres->Ciudad              = $request->Ciudad;
+        $puntosInteres->Direccion           = $request->Direccion;
+        $puntosInteres->HoraDeApertura      = $request->HoraDeApertura;
+        $puntosInteres->HoraDeCierre        = $request->HoraDeCierre;
+        $puntosInteres->Facebook            = $request->Facebook;
+        $puntosInteres->Instagram           = $request->Instagram;
+        $puntosInteres->Web                 = $request->Web;
+        $puntosInteres->Descripcion         = $request->Descripcion;
+        $puntosInteres->Latitud             = $request->Latitud;
+        $puntosInteres->Longitud            = $request->Longitud;
+        $puntosInteres->TipoDeLugar         = $request->TipoDeLugar;
+        $puntosInteres->RestriccionDeEdad   = $request->RestriccionDeEdad;
+        $puntosInteres->EnfoqueDePersonas   = $request->EnfoqueDePersonas;
         $puntosInteres->save();
         $PuntosDeInteresDetallado  = json_decode($request->InformacionDetalladaPuntoDeInteres,true);
-        $Celular=$request->Celular;
-        //$this->ModificarTelefono($IdPuntoDeInteres,$request->Telefono);
+        
         if(!empty($request->Telefono)){$this->ModificarTelefono($IdPuntoDeInteres,$request->Telefono);}
        
         
@@ -444,7 +443,7 @@ class PuntosInteresController extends Controller
                 'Piscina'=>$datos['Piscina'],
                 'Wifi' => $datos['Wifi'],
                 'AireAcondicionado'=>$datos['AireAcondicionado'],
-                'BanoPrivad'=>$datos['BanoPrivad'],
+                'BanoPrivado'=>$datos['BanoPrivad'],
                 'Casino'=>$datos['Casino'],
                 'Bar'=>$datos['Bar'],
                 'Restaurante'=>$datos['Restaurante'],
@@ -461,7 +460,6 @@ class PuntosInteresController extends Controller
             ->update([
                 'Tipo' => $datos['Tipo'],
                 'ComidaVegge'=>$datos['ComidaVegge'],
-                'Comida'=>$datos['Comida'],
                 'Alcohol'=>$datos['Alcohol'],
                 'MenuInfantil'=>$datos['MenuInfantil']
             ]);
