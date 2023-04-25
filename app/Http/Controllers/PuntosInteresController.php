@@ -59,20 +59,21 @@ class PuntosInteresController extends Controller
         //DB::beginTransaction();
         
         $puntosInteres               = new PuntosInteres();
-        $puntosInteres->Nombre          = $request->Nombre;
-        $puntosInteres->Departamento    = $request->Departamento;
-        $puntosInteres->Ciudad          = $request->Ciudad;
-        $puntosInteres->Direccion       = $request->Direccion;
-        $puntosInteres->HoraDeApertura  = $request->HoraDeApertura;
-        $puntosInteres->HoraDeCierre    = $request->HoraDeCierre;
-        $puntosInteres->Facebook        = $request->Facebook;
-        $puntosInteres->Instagram       = $request->Instagram;
-        $puntosInteres->Descripcion     = $request->Descripcion;
-        $puntosInteres->Latitud         = $request->Latitud;
-        $puntosInteres->Longitud        = $request->Longitud;
-        $puntosInteres->TipoDeLugar     = $request->TipoDeLugar;
-        $puntosInteres->RestriccionDeEdad         = $request->RestriccionDeEdad;
-        $puntosInteres->EnfoqueDePersonas        = $request->EnfoqueDePersonas;
+        $puntosInteres->Nombre              = $request->Nombre;
+        $puntosInteres->Departamento        = $request->Departamento;
+        $puntosInteres->Ciudad              = $request->Ciudad;
+        $puntosInteres->Direccion           = $request->Direccion;
+        $puntosInteres->HoraDeApertura      = $request->HoraDeApertura;
+        $puntosInteres->HoraDeCierre        = $request->HoraDeCierre;
+        $puntosInteres->Facebook            = $request->Facebook;
+        $puntosInteres->Instagram           = $request->Instagram;
+        $puntosInteres->Web                 = $request->Web;
+        $puntosInteres->Descripcion         = $request->Descripcion;
+        $puntosInteres->Latitud             = $request->Latitud;
+        $puntosInteres->Longitud            = $request->Longitud;
+        $puntosInteres->TipoDeLugar         = $request->TipoDeLugar;
+        $puntosInteres->RestriccionDeEdad   = $request->RestriccionDeEdad;
+        $puntosInteres->EnfoqueDePersonas   = $request->EnfoqueDePersonas;
         $puntosInteres->save();
         
 
@@ -81,8 +82,6 @@ class PuntosInteresController extends Controller
         $id = PuntosInteres::latest('id')->first();
         if(!empty($request->Telefono)){$this->AltaDeTelefono($id->id,$request->Telefono);}
         if(!empty($request->Celular)){$this->AltaDeTelefono($id->id,$request->Celular);}
-        //$this->AltaDeTelefono($id->id,$request->Telefono);
-        //echo "<pre>";var_dump($PuntosDeInteresDetallado);die();
         
         if(!empty($PuntosDeInteresDetallado['Op'])){        
             if ($PuntosDeInteresDetallado['Op'] === 'ServicioEsencial') {return $this->AltaDeServicio($id->id, $PuntosDeInteresDetallado['Tipo']);}
@@ -204,11 +203,12 @@ class PuntosInteresController extends Controller
         if(isset($datos['Piscina'])) $alojamiento->Piscina = $datos['Piscina'];
         if(isset($datos['Wifi'])) $alojamiento->Wifi = $datos['Wifi'];
         if(isset($datos['AireAcondicionado'])) $alojamiento->AireAcondicionado = $datos['AireAcondicionado'];
-        if(isset($datos['BanoPrivado'])) $alojamiento->BanoPrivad =$datos['BanoPrivado'];
+        if(isset($datos['BanoPrivado'])) $alojamiento->BanoPrivado =$datos['BanoPrivado'];
         if(isset($datos['Casino'])) $alojamiento->Casino = $datos['Casino'];
         if(isset($datos['Bar'])) $alojamiento->Bar = $datos['Bar'];
         if(isset($datos['Restaurante'])) $alojamiento->Restaurante = $datos['Restaurante'];
         if(isset($datos['Desayuno'])) $alojamiento->Desayuno = $datos['Desayuno'];
+        if(isset($datos['Mascota'])) $alojamiento->Mascota = $datos['Mascota'];
        // echo "<pre>";var_dump($datos);die();
         $alojamiento->save();
         return response()->json([
@@ -274,8 +274,84 @@ class PuntosInteresController extends Controller
             $puntosInteres=DB::table('puntosinteres')
             ->where('Nombre', 'like',"%".$request->Nombre."%")
             ->get();
-                if ($puntosInteres->isEmpty())return response()->json(['Mensaje'=>'No hubo resultado']);;
-            return response()->json($puntosInteres);
+                if ($puntosInteres->isEmpty())return response()->json(['Mensaje'=>'No hubo resultado']);
+            $ArrayDePuntos=[];
+                
+            for($i=0;$i<$puntosInteres->count();$i++){
+                $p=DB::table('alojamientos')->where('puntosinteres_id','=',$puntosInteres[$i]->id)->first();
+                if ($p!=[]){
+                    $p=DB::table('puntosinteres')->Join('alojamientos','puntosinteres.id','=','puntosinteres_id')
+                    ->where('puntosinteres.id','=',$puntosInteres[$i]->id)
+                    ->get();
+                    $p[0]->Categoria="alojamientos";
+                    $ArrayDePuntos[]=$p;
+                } 
+                $p=DB::table('transporte')->where('puntosinteres_id','=',$puntosInteres[$i]->id)->first();
+                if ($p!=[]){
+                    $p=DB::table('puntosinteres')->Join('transporte','puntosinteres.id','=','puntosinteres_id')
+                    ->where('puntosinteres.id','=',$puntosInteres[$i]->id)
+                    ->get();
+                    $p[0]->Categoria="transporte";
+                    $ArrayDePuntos[]=$p;
+                }
+
+                $p=DB::table('actividades_infantiles')->where('puntosinteres_id','=',$puntosInteres[$i]->id)->first();
+                if ($p!=[]){
+                    $p=DB::table('puntosinteres')->Join('actividades_infantiles','puntosinteres.id','=','puntosinteres_id')
+                    ->where('puntosinteres.id','=',$puntosInteres[$i]->id)
+                    ->get();
+                    $p[0]->Categoria="actividades_infantiles";
+                    $ArrayDePuntos[]=$p;
+                }
+
+                $p=DB::table('actividades_nocturnas')->where('puntosinteres_id','=',$puntosInteres[$i]->id)->first();
+                if ($p!=[]){
+                    $p=DB::table('puntosinteres')->Join('actividades_nocturnas','puntosinteres.id','=','puntosinteres_id')
+                    ->where('puntosinteres.id','=',$puntosInteres[$i]->id)
+                    ->get();
+                    $p[0]->Categoria="actividades_nocturnas";
+                    $ArrayDePuntos[]=$p;
+                }
+
+                $p=DB::table('espectaculos')->where('puntosinteres_id','=',$puntosInteres[$i]->id)->first();
+                if ($p!=[]){
+                    $p=DB::table('puntosinteres')->Join('espectaculos','puntosinteres.id','=','puntosinteres_id')
+                    ->where('puntosinteres.id','=',$puntosInteres[$i]->id)
+                    ->get();
+                    $p[0]->Categoria="espectaculos";
+                    $ArrayDePuntos[]=$p;
+                }
+
+                $p=DB::table('gastronomicos')->where('puntosinteres_id','=',$puntosInteres[$i]->id)->first();
+                if ($p!=[]){
+                    $p=DB::table('puntosinteres')->Join('gastronomicos','puntosinteres.id','=','puntosinteres_id')
+                    ->where('puntosinteres.id','=',$puntosInteres[$i]->id)
+                    ->get();
+                    $p[0]->Categoria="gastronomicos";
+                    $ArrayDePuntos[]=$p;
+                }
+
+                $p=DB::table('paseos')->where('puntosinteres_id','=',$puntosInteres[$i]->id)->first();
+                if ($p!=[]){
+                    $p=DB::table('puntosinteres')->Join('paseos','puntosinteres.id','=','puntosinteres_id')
+                    ->where('puntosinteres.id','=',$puntosInteres[$i]->id)
+                    ->get();
+                    $p[0]->Categoria="paseos";
+                    $ArrayDePuntos[]=$p;
+                }
+
+                $p=DB::table('servicios_esenciales')->where('puntosinteres_id','=',$puntosInteres[$i]->id)->first();
+                if ($p!=[]){
+                    $p=DB::table('puntosinteres')->Join('servicios_esenciales','puntosinteres.id','=','puntosinteres_id')
+                    ->where('puntosinteres.id','=',$puntosInteres[$i]->id)
+                    ->get();
+                    $p[0]->Categoria="servicios_esenciales";
+                    $ArrayDePuntos[]=$p;
+                }
+                
+            } 
+            return response()->json($ArrayDePuntos);
+            
         }
         if($Categoria==='PuntosDeInteres'){
             
@@ -302,22 +378,28 @@ class PuntosInteresController extends Controller
     public function update(Request $request, $IdPuntoDeInteres)
     {
         $puntosInteres                  = PuntosInteres::findOrFail($IdPuntoDeInteres);
-        $puntosInteres->Nombre          = $request->Nombre;
-        $puntosInteres->Departamento    = $request->Departamento;
-        $puntosInteres->Ciudad          = $request->Ciudad;
-        $puntosInteres->Direccion       = $request->Direccion;
-        $puntosInteres->HoraDeApertura  = $request->HoraDeApertura;
-        $puntosInteres->HoraDeCierre    = $request->HoraDeCierre;
-        $puntosInteres->Facebook        = $request->Facebook;
-        $puntosInteres->Instagram       = $request->Instagram;
-        $puntosInteres->Descripcion     = $request->Descripcion;
-        $puntosInteres->Latitud         = $request->Latitud;
-        $puntosInteres->Longitud        = $request->Longitud;
-        $puntosInteres->TipoDeLugar     = $request->TipoDeLugar;
-        $puntosInteres->RestriccionDeEdad         = $request->RestriccionDeEdad;
-        $puntosInteres->EnfoqueDePersonas        = $request->EnfoqueDePersonas;
+        $puntosInteres->Nombre              = $request->Nombre;
+        $puntosInteres->Departamento        = $request->Departamento;
+        $puntosInteres->Ciudad              = $request->Ciudad;
+        $puntosInteres->Direccion           = $request->Direccion;
+        $puntosInteres->HoraDeApertura      = $request->HoraDeApertura;
+        $puntosInteres->HoraDeCierre        = $request->HoraDeCierre;
+        $puntosInteres->Facebook            = $request->Facebook;
+        $puntosInteres->Instagram           = $request->Instagram;
+        $puntosInteres->Web                 = $request->Web;
+        $puntosInteres->Descripcion         = $request->Descripcion;
+        $puntosInteres->Latitud             = $request->Latitud;
+        $puntosInteres->Longitud            = $request->Longitud;
+        $puntosInteres->TipoDeLugar         = $request->TipoDeLugar;
+        $puntosInteres->RestriccionDeEdad   = $request->RestriccionDeEdad;
+        $puntosInteres->EnfoqueDePersonas   = $request->EnfoqueDePersonas;
         $puntosInteres->save();
         $PuntosDeInteresDetallado  = json_decode($request->InformacionDetalladaPuntoDeInteres,true);
+        
+        if(!empty($request->Telefono)){$this->ModificarTelefono($IdPuntoDeInteres,$request->Telefono);}
+       
+        
+        
         if(!empty($PuntosDeInteresDetallado['Op'])){
             if($PuntosDeInteresDetallado['Op'] === 'Alojamiento'){
                 return $this->ModificarAlojamiento($IdPuntoDeInteres,$request->InformacionDetalladaPuntoDeInteres);
@@ -362,11 +444,12 @@ class PuntosInteresController extends Controller
                 'Piscina'=>$datos['Piscina'],
                 'Wifi' => $datos['Wifi'],
                 'AireAcondicionado'=>$datos['AireAcondicionado'],
-                'BanoPrivad'=>$datos['BanoPrivad'],
+                'BanoPrivado'=>$datos['BanoPrivad'],
                 'Casino'=>$datos['Casino'],
                 'Bar'=>$datos['Bar'],
                 'Restaurante'=>$datos['Restaurante'],
-                'Desayuno'=>$datos['Desayuno']
+                'Desayuno'=>$datos['Desayuno'],
+                'Mascota'=>$datos['Mascota']
             ]);
         return response()->json([
             "codigo"    => "200",
@@ -379,7 +462,6 @@ class PuntosInteresController extends Controller
             ->update([
                 'Tipo' => $datos['Tipo'],
                 'ComidaVegge'=>$datos['ComidaVegge'],
-                'Comida'=>$datos['Comida'],
                 'Alcohol'=>$datos['Alcohol'],
                 'MenuInfantil'=>$datos['MenuInfantil']
             ]);
@@ -455,14 +537,13 @@ class PuntosInteresController extends Controller
             "respuesta" => "Se modifico con exito",
         ]);      
     }
-    public function ModificarTelefonos($id,$TelefonoViejo, $TelefonoNuevo){
+    public function ModificarTelefono($id,$Telefono){
+        
         $telefono=DB::table('telefonos')
         ->where('puntosinteres_id','=',$id)
-        ->where('Telefono','=',$TelefonoViejo)
-        ->update(['Telefono' => $TelefonoNuevo]);
-        return $telefono;
-        // $telefono->Telefono=$Telefono;
-        // $telefono->save();
+        ->delete();
+        $this->AltaDeTelefono($id,$Telefono);
+        //$this->AltaDeTelefono($id,$Celular);
     }
     public function destroy($IdPuntoDeInteres)
     {
