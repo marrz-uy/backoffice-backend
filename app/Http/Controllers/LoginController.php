@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 //use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use LdapRecord\Connection;
 use App\Http\Controllers\AuthController;
+use LdapRecord\Models\ActiveDirectory\User;
 
 class LoginController extends Controller
 {
@@ -22,8 +23,8 @@ class LoginController extends Controller
           'password' => $request -> password
         ]);
         $connection-> connect();
-        //return [ "respuesta" => "true"];
-        $credentials=(['email'=>'javi@gmail.com','password'=>'123456']);
+        return [ "respuesta" => "true"];
+        $credentials=(['email'=>'Javi@gmail.com','password'=>'123456']);
         if (! $token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
@@ -39,6 +40,38 @@ class LoginController extends Controller
      }
 
     }
+    public function CrearUsuario(){
+        $connection = new Connection([
+            'hosts' => ['192.168.0.110'],
+            'username' => "Administrador@marrz.com",
+            'password' => "Marrz654321."
+          ]);
+          $connection-> connect();
+          $user = (new User)->inside('ou=Users,dc=marrz,dc=com');
+          $user->cn = 'John Doe';
+          $user->unicodePwd = 'SecretPassword';
+          $user->samaccountname = 'jdoe';
+          $user->userPrincipalName = 'jdoe@acme.org';
+
+          $user->save();
+
+        //   // Sync the created users attributes.
+        //   $user->refresh();
+
+        //   // Enable the user.
+        //   $user->userAccountControl = 512;
+
+          try {
+              $user->save();
+          } catch (\LdapRecord\LdapRecordException $e) {
+              // Failed saving user.
+              $error = $e -> getDetailedError();
+              return[
+                "respuesta" => $error -> getErrorMessage(),
+                "code" => $error -> getErrorCode(),
+              ];
+          }
+        }
     //JWT----------------------------------------------------------------------------------------------------->
     public function me()
     {

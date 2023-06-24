@@ -6,15 +6,17 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "cloudinary-labs/cloudinary-laravel": "1.0.4",
         "directorytree/ldaprecord-laravel": "^2.6",
-        "fruitcake/laravel-cors": "^2.0",
+        "fruitcake/laravel-cors": "^3.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/fortify": "^1.13",
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
+        "pusher/pusher-php-server": "^7.2",
         "tomfordrumm/jwt-auth": "dev-develop",
-        "cloudinary-labs/cloudinary-laravel": "1.0.4"
+        "tymon/jwt-auth": "dev-dependabot/composer/yoast/phpunit-polyfills-tw-1.0.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

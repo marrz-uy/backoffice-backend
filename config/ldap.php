@@ -29,16 +29,25 @@ return [
     'connections' => [
 
         'default' => [
-            'hosts' => [env('LDAP_HOST', '192.168.0.110')],
+            'hosts' => [env('LDAP_HOST', '192.168.1.28')],
             'username' => env('LDAP_USERNAME', 'Administrador@marrz.com'),
-            'password' => env('LDAP_PASSWORD', '123$$qwerty'),
-            'port' => env('LDAP_PORT', 389),
+            'password' => env('LDAP_PASSWORD', 'Marrz654321.'),
+            'port' => env('LDAP_PORT',389),
             'base_dn' => env('LDAP_BASE_DN', 'dc=marrz,dc=com'),
             'timeout' => env('LDAP_TIMEOUT', 5),
             'use_ssl' => env('LDAP_SSL', false),
             'use_tls' => env('LDAP_TLS', false),
+            //'TLS_REQCERT'=>false
         ],
-
+        //  'custom_options' => [
+        // //     // See: http://php.net/ldap_set_option
+        //     //LDAP_OPT_X_TLS_CACERTFILE=>"C:/xampp/apache/conf/ssl.crt/backoffice-com.crt",
+        //     //LDAP_OPT_X_TLS_CACERTDIR => "C:/xampp/apache/conf/ssl.crt/backoffice-com.crt",
+        //    // LDAP_OPT_X_TLS_REQUIRE_CERT => LDAP_OPT_X_TLS_HARD
+        // TLS_REQCERT => never
+        // //     //389
+        
+        //  ]
     ],
 
     /*

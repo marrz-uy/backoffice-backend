@@ -1,0 +1,44 @@
+name: TestAndBuild
+on:
+  pull_request:
+    branches:
+      - stage
+
+jobs:
+  RunTest:
+    services:
+      mysql:
+        image: mysql:8
+        env:
+          MYSQL_DATABASE: laravel
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
+    runs-on: ubuntu-latest
+    env:
+      DB_HOST: mysql
+      DB_DATABASE: laravel
+    container:
+      image: ggmartinez/laravel:8
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - name: Instalar extension de LDAP
+        run: |
+          yum install php80-php-ldap -y
+          echo 'extension=/opt/remi/php80/root/usr/lib64/php/modules/ldap.so' >> /etc/php.d/50-ldap.ini
+      - name: Preparar Laravel
+        run: |
+          cp .env.example .env
+          composer update
+          php artisan key:generate
+      - name: Preparar base de datos para pruebas
+        run: |
+          php artisan migrate 
+          php artisan db:seed
+      - name: Ejecutar pruebas
+        run: |
+          mkdir ./tests/Unit
+          php artisan test
