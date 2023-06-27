@@ -20,7 +20,7 @@ jobs:
       DB_HOST: mysql
       DB_DATABASE: laravel
     container:
-      image: ggmartinez/laravel:8
+      image: ggmartinez/laravel:php-82
     steps:
       - uses: actions/checkout@v1
         with:
