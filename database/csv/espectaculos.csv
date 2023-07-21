@@ -1,0 +1,103 @@
+Nombre,Departamento,Ciudad,Direccion,HoraDeApertura,HoraDeCierre,Facebook,Instagram,Web,Descripcion,Latitud,Longitud,TipoDeLugar,RestriccionDeEdad,EnfoqueDePersonas,Megusta,Tipo,Telefono
+Antel Arena,Montevideo,Montevideo,Av Damaso A. Larrañaga entre Jose Pedro Varela y Jose Serrato ,19:00:00,23:00:00,,,https://www.antelarena.com.uy/,Lugar de espectaculos y eventos,3486306,5615554,Espacio cerrado,Todas,Grupo,500,EventoMusical,22127362
+Grupocine Ejido,Montevideo,Montevideo,Ejido 1377,0:00:00,23:59:59,,,https://www.grupocine.com.uy/SIGE_CN/servlet/com.sigecn.vercomplejo?4,Salas de cine,3490506,5625711,Espacio cerrado,Todas,Grupo,6000,Cine,29014242
+Grupocine Punta Carretas Shopping,Montevideo,Montevideo,Nivel 3 en Punta Carretas Shopping,0:00:00,23:59:59,,,https://www.grupocine.com.uy/SIGE_CN/servlet/com.sigecn.vercomplejo?4,Salas de cine,3490506,5625711,Espacio cerrado,Todas,Grupo,11500,Cine,29014242
+Grupocine,Montevideo,Montevideo,Luis B. Cavia 2712,0:00:00,23:59:59,,,https://www.grupocine.com.uy/,Salas de cine,3490506,5625711,Espacio cerrado,Todas,Grupo,17000,Cine,29014242
+Movie Montevideo,Montevideo,Montevideo,Montevideo Shopping Av. Luis Alberto de Herrera 1290,0:00:00,23:59:59,,,http://movie.com.uy/,Salas de cine,3490870,5622655,Espacio cerrado,Todas,Grupo,22500,Cine,95038350
+Movie Nuevocentro,Montevideo,Montevideo,Av. Luis Alberto de Herrera 3969,0:00:00,23:59:59,,,http://movie.com.uy/,Salas de cine,3490870,5622655,Espacio cerrado,Todas,Grupo,28000,Cine,29003900
+Movie,Montevideo,Montevideo,F. Garcia Cortinas 2484,0:00:00,23:59:59,,,http://movie.com.uy/,Salas de cine,3490870,5622655,Espacio cerrado,Todas,Grupo,33500,Cine,29003900
+Movie Portones,Montevideo,Montevideo,Avenida Italia 5775,0:00:00,23:59:59,,,http://movie.com.uy/,Salas de cine,3488160,5615121,Espacio cerrado,Todas,Grupo,39000,Cine,95038350
+Life Cinemas 21,Montevideo,Montevideo,21 de Setiembre 2838,0:00:00,23:59:59,,,http://www.lifecinemas.com.uy/,Salas de cine,3491872,5622650,Espacio cerrado,Todas,Grupo,44500,Cine,11111111
+Life Cinemas Punta Carretas,Montevideo,Montevideo,Pta. Carretas Shopping Jose Ellauri 350,0:00:00,23:59:59,,,http://www.lifecinemas.com.uy/,Salas de cine,3492390,5616067,Espacio cerrado,Todas,Grupo,50000,Cine,27073037
+Life Cinemas Tres Cruces,Montevideo,Montevideo,Boulevard Artigas 1825 Shopping Tres Cruces Nivel 2,0:00:00,23:59:59,,,http://www.lifecinemas.com.uy/,Salas de cine,3490587,5617892,Espacio cerrado,Todas,Grupo,55500,Cine,11111111
+Cine Maturana,Montevideo,Montevideo,Av. Agraciada 3024,0:00:00,23:59:59,,,http://www.maturana.edu.uy/,Salas de cine,3487292,5627123,Espacio cerrado,Todas,Grupo,61000,Cine,22033244
+Cine opera,Montevideo,Montevideo,Av. 18 de Julio 1710,0:00:00,23:59:59,,,https://cinesopera.com/,Salas de cine,3487292,5627123,Espacio cerrado,Todas,Grupo,66500,Cine,94474194
+Cinemateca Uruguaya,Montevideo,Montevideo,Bartolome Mitre 1236,0:00:00,23:59:59,,,http://www.cinemateca.org.uy/,Salas de cine,3487292,5627123,Espacio cerrado,Todas,Grupo,72000,Cine,29147569
+Teatro Metro,Montevideo,Montevideo,San Jose 1211,0:00:00,23:59:59,,,http://www.teatrometro.com/,Salas de teatro,3489219,5621561,Espacio cerrado,Mayores,Grupo,77500,Teatro,29022017
+Teatro Solis,Montevideo,Montevideo,Reconquista esquina Bartolome Mitre,0:00:00,23:59:59,,,http://www.teatrosolis.org.uy/,Salas de teatro,3489219,5621561,Espacio cerrado,Mayores,Grupo,83000,Teatro,19503323
+Teatro Victoria,Montevideo,Montevideo,Rio Negro 1477,0:00:00,23:59:59,https://www.facebook.com/victoriateatro/,,,Salas de teatro,3489219,5621561,Espacio cerrado,Mayores,Grupo,88500,Teatro,29019971
+Teatro del Notariado,Montevideo,Montevideo,Guayabo 1729,0:00:00,23:59:59,,,https://teatrodelnotariado.uy/,Salas de teatro,3489219,5621561,Espacio cerrado,Mayores,Grupo,94000,Teatro,24009008
+Teatro El Tinglado,Montevideo,Montevideo,Colonia 2035,0:00:00,23:59:59,,,http://www.teatroeltinglado.com.uy/,Salas de teatro,3489219,5621561,Espacio cerrado,Mayores,Grupo,99500,Teatro,24085362
+Sala Verdi,Montevideo,Montevideo,Camino Soriano 914,0:00:00,23:59:59,,,http://salaverdi.montevideo.gub.uy/,Salas de teatro,3489219,5621561,Ambos,Mayores,Grupo,105000,Teatro,29020325
+El Galpon,Montevideo,Montevideo,Av. 18 de Julio 1618,0:00:00,23:59:59,,,http://www.teatroelgalpon.org.uy/,Salas de teatro,3489219,5621561,Ambos,Mayores,Grupo,110500,Teatro,24083366
+Teatro de Verano Ramon Collazo,Montevideo,Montevideo,Rambla Pte. Wilson,0:00:00,23:59:59,,,http://teatrodeverano.montevideo.gub.uy/,Salas de teatro,3489219,5621561,Espacio cerrado,Mayores,Grupo,116000,Teatro,27124972
+Teatro del Anglo,Montevideo,Montevideo,San Jose 1426,0:00:00,23:59:59,,,http://www.anglo.edu.uy/,Salas de teatro,3489219,5621561,Espacio cerrado,Mayores,Grupo,121500,Teatro,29023773
+Teatro la Candela,Montevideo,Montevideo,Jose Ellauri 308,0:00:00,23:59:59,,,"https://www.cartelera.com.uy/apeliculafunciones.aspx?,303,,OBRA,-1,114",Salas de teatro,3489219,5621561,Espacio cerrado,Mayores,Grupo,127000,Teatro,27123227
+Teatro Odeon,Montevideo,Montevideo,Cerrito 750,0:00:00,23:59:59,,,,Salas de teatro,3490304,5620037,Espacio cerrado,Mayores,Grupo,132500,Teatro,11111111
+Teatro Clara Jackson,Montevideo,Montevideo,Avenida Dr. Luis,0:00:00,23:59:59,,,,Salas de teatro,3486029,5625726,Espacio cerrado,Mayores,Grupo,138000,Teatro,11111111
+Teatro Comedia,Montevideo,Montevideo,Canelones 2150,0:00:00,23:59:59,,,http://www.eaa.uy/,Salas de teatro,3486029,5625726,Espacio cerrado,Mayores,Grupo,143500,Teatro,24006989
+La Gringa Teatro,Montevideo,Montevideo,Galeria de las Americas Av. 18 de Julio 1236,0:00:00,23:59:59,,,,Salas de teatro,3486029,5625726,Espacio cerrado,Mayores,Grupo,149000,Teatro,29032744
+Arteatro,Montevideo,Montevideo,Canelones 1136,0:00:00,23:59:59,http://www.facebook.com/Arteatro,,,Salas de teatro,3486029,5625726,Espacio cerrado,Mayores,Grupo,154500,Teatro,29085377
+Teatro Stella De Italia. La Gaviota.,Montevideo,Montevideo,Mercedes 1805,0:00:00,23:59:59,,,,Salas de teatro,3486029,5625726,Espacio cerrado,Mayores,Grupo,160000,Teatro,24082649
+Vieja Farmacia Solis,Montevideo,Montevideo,Avenida Agraciada 2623,0:00:00,23:59:59,,,https://viejafarmaciasolis.negocio.site/,Salas de teatro,3486029,5625726,Ambos,Mayores,Grupo,165500,Teatro,99086313
+Teatro Circular de Montevideo,Montevideo,Montevideo,Av Gral Rondeau 1388,0:00:00,23:59:59,,,http://www.teatrocircular.org.uy/,Salas de teatro,3486029,5625726,Espacio cerrado,Mayores,Grupo,171000,Teatro,29015952
+Teatro Astral,Montevideo,Montevideo,Durazno 1476,0:00:00,23:59:59,,,,Salas de teatro,3486029,5625726,Espacio cerrado,Mayores,Grupo,176500,Teatro,24103346
+Sodre,Montevideo,Montevideo,Av. 18 de Julio 878 a 900,0:00:00,23:59:59,,,,Salas de teatro,3486029,5625726,Ambos,Mayores,Grupo,182000,Teatro,29007084
+Sala del Museo del Carnaval,Montevideo,Montevideo,Francisco Maciel,0:00:00,23:59:59,,,http://www.saladelmuseo.com.uy/,Teatro Carnaval,3486028,5625726,Ambos,Mayores,Grupo,187500,Carnaval,11111111
+Teatro de Verano Ramon Collazo,Montevideo,Montevideo,Rambla Pte. Wilson,0:00:00,23:59:59,,,http://teatrodeverano.montevideo.gub.uy/,Teatro Carnaval,3491985,5623976,Espacio cerrado,Todas,Grupo,193000,Carnaval,27124972
+Anfiteatro Canario Luna,Montevideo,Montevideo,Av. Damaso A. Larraniaga,0:00:00,23:59:59,,,https://montevideo.gub.uy/ciudad-y-cultura/agenda-cultural/lugares/anfiteatro-cilindrico-canario-luna,Teatro Carnaval,3486183,5622191,Espacio cerrado,Todas,Grupo,198500,Carnaval,11111111
+Tablado Primero de Mayo,Montevideo,Montevideo,Plaza Primero de Mayo,0:00:00,23:59:59,https://www.facebook.com/2018carnaval.1demayo/?locale=es_LA,https://www.instagram.com/tablado1demayo/?hl=es,,Tablado Carnaval,3486183,5622191,Ambos,Todas,Grupo,204000,Carnaval,11111111
+Teatro de Verano de Colon,Montevideo,Montevideo,Colon y Noroeste,0:00:00,23:59:59,,,http://teatrodeveranodecolon.com.uy/,Teatro Carnaval,3480524,5630197,Espacio cerrado,Todas,Grupo,209500,Carnaval,23208307
+Museo del Carnaval,Montevideo,Montevideo,Museo del Carnaval Rambla 25 de Agosto de 1825,0:00:00,23:59:59,,,http://www.museodelcarnaval.org/,Teatro Carnaval,3490582,5628232,Ambos,Todas,Grupo,215000,Carnaval,29165493
+Tablado del Botanico,Montevideo,Montevideo,Av. Atilio Pelosi 1969,0:00:00,23:59:59,,,,Tablado Carnaval,3489121,5632689,Ambos,Todas,Grupo,220500,Carnaval,96429080
+Tablado juan taranto,Montevideo,Montevideo,Francisco de Quevedo 6081,0:00:00,23:59:59,,,,Tablado Carnaval,3484605,5629083,Ambos,Todas,Grupo,226000,Carnaval,11111111
+Tablado Malvin,Montevideo,Montevideo,Tablado Malvin Retamosa 1784,0:00:00,23:59:59,,https://instagram.com/tablado_malvin,,Tablado Carnaval,3489003,5611422,Ambos,Todas,Grupo,231500,Carnaval,11111111
+Tablado Cesar Gallo Duran,Montevideo,Montevideo,Avenida Ceibos,0:00:00,23:59:59,,,,Tablado Carnaval,3480619,5614838,Ambos,Todas,Grupo,237000,Carnaval,11111111
+Museo del Carnaval,Montevideo,Montevideo,Rambla 25 de Agosto de 1825 218,0:00:00,23:59:59,,,http://www.museodelcarnaval.org/,Tablado Carnaval,3490582,5622979,Ambos,Todas,Grupo,242500,Carnaval,29165493
+Velodromo Municipal de Montevideo,Montevideo,Montevideo,Av. Ramon V. Benzano 3471,0:00:00,23:59:59,,,http://carnavalvelodromo.com.uy/,Tablado Carnaval,3489782,5617341,Ambos,Todas,Grupo,248000,Carnaval,27083013
+Gigante del Buceo,Montevideo,Montevideo,Avenida Malvin Norte,0:00:00,23:59:59,https://www.facebook.com/Gigante-DEL-BUCEO-731770203640671/,,,Tablado Carnaval,3489718,5614226,Ambos,Todas,Grupo,253500,Carnaval,95980366
+Parque de los Fogones,Montevideo,Montevideo,Avenida Millan 5109,0:00:00,23:59:59,https://m.facebook.com/parque.d.fogones,,,Tablado Carnaval,3483387,5623060,Ambos,Todas,Grupo,259000,Carnaval,11111111
+Paso De Las Duranas,Montevideo,Montevideo,Pedro Trapani 1350,0:00:00,23:59:59,,,,Tablado Carnaval,3485404,5619432,Ambos,Todas,Grupo,264500,Carnaval,23361174
+Molino del galgo,Montevideo,Montevideo,General Timoteo Aparicio 4026,0:00:00,23:59:59,,,,Tablado Carnaval,3487334,5613758,Ambos,Todas,Grupo,270000,Carnaval,25079645
+Tablado Del Prado,Montevideo,Montevideo, Camino Juan Martinez,0:00:00,23:59:59,,,,Tablado Carnaval,3486122,5620859,Ambos,Todas,Grupo,275500,Carnaval,11111111
+Tablado Parque Rodo,Montevideo,Montevideo,Av. Jose Requena y Garcia,0:00:00,23:59:59,,,,Tablado Carnaval,3491504,5617127,Ambos,Todas,Grupo,281000,Carnaval,11111111
+Teatro De Barrio Lavalleja,Montevideo,Montevideo,Avenida Instrucciones entre camino Edinson y Jose Maria Silva,0:00:00,23:59:59,,,,Tablado Carnaval,3483643,5619513,Espacio cerrado,Todas,Grupo,286500,Carnaval,94085023
+Club Victoria,Montevideo,Montevideo,Joaquin Requena 2716 Esquina Itapebi,0:00:00,23:59:59,,,,Cancha Futbol,3490581,5628232,Ambos,Todas,Grupo,292000,EventoDeportivo,22090518
+Canchas de Futbol 5,Montevideo,Montevideo,Avenida Luis Alberto de Herrera 2581,0:00:00,23:59:59,,,http://www.futbol5.com.uy/detalle.php?id=644,Cancha Futbol,3490581,5628232,Espacio cerrado,Todas,Grupo,297500,EventoDeportivo,24801733
+Medio Campo Futbol 5,Montevideo,Montevideo,Av. Luis Alberto de Herrera 2992,0:00:00,23:59:59,,,http://www.futbol5.com.uy/detalle.php?id=26,Cancha Futbol,3490581,5627163,Espacio cerrado,Todas,Grupo,303000,EventoDeportivo,24874347
+Cancha San Miguel City (Aufi),Montevideo,Montevideo,Aires puros,0:00:00,23:59:59,,,,Cancha Futbol,3485555,5627163,Ambos,Todas,Grupo,308500,EventoDeportivo,11111111
+Quiero Futbol 5,Montevideo,Montevideo,Bv. Gral. Artigas,0:00:00,23:59:59,,,https://quierofutbol5.business.site/,Cancha Futbol,3485555,5627163,Espacio cerrado,Todas,Grupo,314000,EventoDeportivo,91317000
+Canchas de Futbol 5,Montevideo,Montevideo,Guana,0:00:00,23:59:59,,,http://www.futbol5.com.uy/detalle.php?id=68,Cancha Futbol,3485555,5627163,Espacio cerrado,Todas,Grupo,319500,EventoDeportivo,24008996
+Cancha Futbol 5 Club Montevideo,Montevideo,Montevideo,Porongos 2165,0:00:00,23:59:59,,,,Cancha Futbol,3485555,5627163,Espacio cerrado,Todas,Grupo,325000,EventoDeportivo,92656565
+Cancha Danubio Ingeniero del campo,Montevideo,Montevideo,Ing. Enrique Chiancone,0:00:00,23:59:59,,,,Cancha Futbol,3487643,5618510,Ambos,Todas,Grupo,330500,EventoDeportivo,11111111
+Cancha de cerro juniors baby,Montevideo,Montevideo,Localidad del cerro,0:00:00,23:59:59,,,,Cancha Futbol,3488269,5635121,Ambos,Todas,Grupo,336000,EventoDeportivo,11111111
+Club Deportivo Uruguayo,Montevideo,Montevideo,Virrey Elio,0:00:00,23:59:59,https://www.facebook.com/DeportivoUruguayo/,,,Cancha Futbol,3485381,5620728,Ambos,Todas,Grupo,341500,EventoDeportivo,91227806
+Montevideo Basket-Ball Club,Montevideo,Montevideo,Porongos 2203,0:00:00,23:59:59,https://m.facebook.com/MontevideoBasketBallClubOficial/?locale2=es_LA,,,Cancha Futbol y Club Basket,3488786,5625217,Ambos,Todas,Grupo,347000,EventoDeportivo,22017636
+2 Cabezas Futbol 5,Montevideo,Montevideo,Dr. Salvador Ferrer Serra 2281,0:00:00,23:59:59,https://www.facebook.com/2cabezasfutbol5,,,Cancha Futbol,3488786,5625217,Espacio cerrado,Todas,Grupo,352500,EventoDeportivo,99598161
+Libertad Washington,Montevideo,Montevideo,Colon y Noroeste,0:00:00,23:59:59,,,,Cancha Futbol,3479520,5630155,Ambos,Todas,Grupo,358000,EventoDeportivo,11111111
+Cancha de Baby Futbol club Enrique Lopez,Montevideo,Montevideo,Dr. Javier Barrios Amorin esquina,0:00:00,23:59:59,,,,Cancha Futbol,3491401,5625339,Ambos,Todas,Grupo,363500,EventoDeportivo,29028129
+El Galpon Futbol 5,Montevideo,Montevideo,Paraguay 2211,0:00:00,23:59:59,,,,Cancha Futbol,3491401,5625339,Espacio cerrado,Todas,Grupo,369000,EventoDeportivo,29248880
+Centenario Futbol 5,Montevideo,Montevideo,Av. Luis Alberto de Herrera 2581,0:00:00,23:59:59,,,http://canchea.com.uy/complejo/centenario-futbol-5/,Cancha Futbol,3491401,5625339,Espacio cerrado,Todas,Grupo,374500,EventoDeportivo,24801733
+Goleadores Futbol 5,Montevideo,Montevideo,Tomas Gomensoro 2915,0:00:00,23:59:59,,,http://www.goleadores.com.uy/,Cancha Futbol,3491401,5625339,Espacio cerrado,Todas,Grupo,380000,EventoDeportivo,24822121
+Cancha de Poco Sitio Baby Futbol,Montevideo,Montevideo,Avenida Buceo,0:00:00,23:59:59,,,,Cancha Futbol,3491401,5625339,Ambos,Todas,Grupo,385500,EventoDeportivo,22039904
+Cancha Basquetbol,Montevideo,Montevideo,Brig Gral. Diego Lamas 1488,0:00:00,23:59:59,,,,Cancha Basketball,3491811,5625163,Ambos,Todas,Grupo,391000,EventoDeportivo,11111111
+Futbol Y Rugby Montero,Montevideo,Montevideo,Positos Avenida Brasil,0:00:00,23:59:59,,,,Cancha Futbol y Rugby,3491811,5625163,Ambos,Todas,Grupo,396500,EventoDeportivo,11111111
+Canchas Centenario,Montevideo,Montevideo,Avenida Buceo,0:00:00,23:59:59,,,,Cancha Futbol,3491811,5625163,Ambos,Todas,Grupo,402000,EventoDeportivo,11111111
+Cancha de Basket,Montevideo,Montevideo,Minas 917,0:00:00,23:59:59,,,,Cancha Basketball,3491811,5625163,Ambos,Todas,Grupo,407500,EventoDeportivo,11111111
+Zona Futbol Fiestas Y Eventos,Montevideo,Montevideo,C. Emilio Rania 2671,0:00:00,23:59:59,,,,Cancha Futbol,3491811,5625163,Ambos,Todas,Grupo,413000,EventoDeportivo,91741792
+Fanaticos Futbol 5,Montevideo,Montevideo,Blvr. Aparicio Saravia,0:00:00,23:59:59,https://m.facebook.com/Fanaticos-Futbol-5-1306606486021830/,,,Cancha Futbol,3482826,5620118,Espacio cerrado,Todas,Grupo,418500,EventoDeportivo,97370059
+Montevideo Wanderers FC,Montevideo,Montevideo,Av. Buschental 3820,0:00:00,23:59:59,,,,Cancha Futbol,3485990,5627718,Ambos,Todas,Grupo,424000,EventoDeportivo,11111111
+Estadio La Bombonera Club Atletico Basaniez,Montevideo,Montevideo,Mallorca 4406,0:00:00,23:59:59,,,,Cancha Futbol,3487892,5619210,Ambos,Todas,Grupo,429500,EventoDeportivo,11111111
+Estadio Gran Parque Central Club Nacional de Football,Montevideo,Montevideo,Carlos Anaya 2900,0:00:00,23:59:59,https://www.facebook.com/nacional/?ref=page_internal,https://www.instagram.com/nacional/?fbclid=IwAR3bf8FEsdVlrtjlRuSHhNcdXZKbyJ9P0LY7AibFmpAAKjUE6OX5MeJDD2M,https://www.nacional.uy/,Cancha Futbol,3487892,5619210,Al aire libre,Todas,Grupo,435000,EventoDeportivo,24873636
+Varadero Futbol 5,Montevideo,Montevideo,Avda. Dr Av. Luis Alberto de Herrera 4171,0:00:00,23:59:59,,,,Cancha Futbol,3486046,5625775,Espacio cerrado,Todas,Grupo,440500,EventoDeportivo,99633378
+Estadio Campeon Del Siglo,Montevideo,Montevideo,Cam. Manganga y Camino Maldonado,0:00:00,23:59:59,https://www.facebook.com/OficialCAP/?ref=page_internal,https://www.instagram.com/oficialcap/?hl=es,http://www.visitacds.uy/,Cancha Futbol,3479686,5606934,Al aire libre,Todas,Grupo,446000,EventoDeportivo,11111111
+La Trastienda,Montevideo,Montevideo,Daniel Fernandez Crespo 1763,0:00:00,23:59:59,,,http://www.latrastienda.com.uy/,Lugar de eventos musicales,3489838,5631848,Ambos,Mayores,Grupo,451500,EventoMusical,24026929
+Montevideo Music Box,Montevideo,Montevideo,Av. Damaso A. Larraniaga 3195,0:00:00,23:59:59,,,https://www.montevideomusicbox.com.uy/,Lugar de eventos musicales,3489838,5631848,Ambos,Mayores,Grupo,457000,EventoMusical,24840712
+Auditorio Nacional Adela Reta,Montevideo,Montevideo,Andes esquina,0:00:00,23:59:59,,,https://sodre.gub.uy/auditorio-nacional-adela-reta/,Lugar de eventos musicales,3489838,5631848,Ambos,Mayores,Grupo,462500,EventoMusical,29007084
+Sala Zitarrosa,Montevideo,Montevideo,Avenida 18 de julio 1012,0:00:00,23:59:59,,,http://www.salazitarrosa.montevideo.gub.uy/,Lugar de eventos musicales,3489838,5631848,Ambos,Mayores,Grupo,468000,EventoMusical,29017303
+Plaza Mateo,Montevideo,Montevideo,Av. Sarmiento,0:00:00,23:59:59,,,http://www.plazamateo.com/,Lugar de eventos musicales,3489838,5631848,Ambos,Mayores,Grupo,473500,EventoMusical,27126634
+Sala Jorge Lazaroff,Montevideo,Montevideo,Avenida Villa Espaniola,0:00:00,23:59:59,,,http://www.montevideo.gub.uy/,Lugar de eventos musicales,3489838,5631848,Ambos,Mayores,Grupo,479000,EventoMusical,11111111
+Sala de Espectaculos Budapest Concert,Montevideo,Montevideo,Arenal Grande 1681,0:00:00,23:59:59,,,,Lugar de eventos musicales,3489838,5631848,Ambos,Mayores,Grupo,484500,EventoMusical,93977921
+Sala Camacua,Montevideo,Montevideo,Camacua 575,0:00:00,23:59:59,,,https://www.salacamacua.uy/,Lugar de eventos musicales,3489838,5631848,Ambos,Mayores,Grupo,490000,EventoMusical,29161060
+Astrobar,Montevideo,Montevideo,Libertad 2436,0:00:00,23:59:59,,,https://astrobarmontevideo.negocio.site/?utm_source=gmb&utm_medium=referral,Lugar de eventos musicales,3489838,5631848,Ambos,Mayores,Grupo,495500,EventoMusical,94881521
+Complejo Sala Show,Montevideo,Montevideo,Rio Branco 1627,0:00:00,23:59:59,,,,Lugar de eventos musicales,3489838,5631848,Ambos,Mayores,Grupo,501000,EventoMusical,98810551
+Espacio Guambia,Montevideo,Montevideo,25 de Mayo 591,0:00:00,23:59:59,,,,Lugar de eventos musicales,3489121,5632689,Ambos,Mayores,Grupo,506500,EventoMusical,29163800
+Blast,Montevideo,Montevideo,Uruguay 960,0:00:00,23:59:59,,,,Lugar de eventos musicales,3489121,5632689,Ambos,Mayores,Grupo,512000,EventoMusical,29017593
+Sala Verdi,Montevideo,Montevideo,Camino Soriano 914,0:00:00,23:59:59,,,http://salaverdi.montevideo.gub.uy/,Lugar de eventos musicales,3489121,5632689,Ambos,Mayores,Grupo,517500,EventoMusical,29020325
+El Milongon- Cena Show,Montevideo,Montevideo,Gaboto 1812,0:00:00,23:59:59,,,http://www.elmilongon.uy/,Lugar de eventos musicales,3489121,5632689,Ambos,Mayores,Grupo,523000,EventoMusical,29248535
+El Galpon,Montevideo,Montevideo,Av. 18 de Julio 1618,0:00:00,23:59:59,,,http://www.teatroelgalpon.org.uy/,Lugar de eventos musicales,3489121,5632689,Ambos,Mayores,Grupo,528500,EventoMusical,24083366
+Sala Hugo Balzo Sodre,Montevideo,Montevideo,Estudio Auditorio del Sodre Andes,0:00:00,23:59:59,,,http://www.auditorio.com.uy/,Lugar de eventos musicales,3489121,5632689,Ambos,Mayores,Grupo,534000,EventoMusical,29007084
+Teatro de Verano Ramon Collazo,Montevideo,Montevideo,Rambla Pte. Wilson,0:00:00,23:59:59,,,http://teatrodeverano.montevideo.gub.uy/,Lugar de eventos musicales,3491985,5623976,Espacio cerrado,Mayores,Grupo,539500,EventoMusical,27124972
+Auditorio del Sodre Nelly Goitinio,Montevideo,Montevideo,Av. 18 de Julio 930,0:00:00,23:59:59,,,http://www.xn--auditorionellygoitio-m7b.gub.uy/,Lugar de eventos musicales,3489121,5632689,Ambos,Mayores,Grupo,545000,EventoMusical,29003071
+Auditorio Vaz Ferreira,Montevideo,Montevideo,Av. 18 de Julio 1790,0:00:00,23:59:59,,,http://www.auditoriovazferreira.gub.uy/,Lugar de eventos musicales,3488468,5624100,Ambos,Mayores,Grupo,550500,EventoMusical,24005179
+Teatro Metro,Montevideo,Montevideo,San Jose 1211,0:00:00,23:59:59,,,http://www.teatrometro.com/,Lugar de eventos musicales,3488468,5624100,Espacio cerrado,Mayores,Grupo,556000,EventoMusical,29022017

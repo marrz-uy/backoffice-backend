@@ -12,13 +12,5 @@ class PuntosInteres extends Model
     public function VerTelefonos(){
         return $this->hasMany(Telefonos::class,'puntosinteres_id','id');
     }
-    // protected $fillable=[
-    //     'Nombre',
-    //     'Departamento',
-    //     'Ciudad',
-    //     'Direccion',
-    //     'Contacto',
-    //     'Horario',
-    //     'Descripcion'
-    // ];
+   
 }
