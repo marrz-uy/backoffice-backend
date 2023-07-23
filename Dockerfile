@@ -20,9 +20,11 @@ RUN yum install -y php81-php-bcmath \
     php81-php-xml \
     php81-php-pecl-memcached \
     php81-php-opcache \
+    php81-php-ldap \
     unzip \
     httpd \
     && yum clean all && rm -rf /var/cache/yum
+
 RUN echo 'extension=/opt/remi/php81/root/usr/lib64/php/modules/ldap.so' >> /etc/opt/remi/php81/php.d/50-ldap.ini
 ENV PHP_PATH "/opt/remi/php81/root/usr/bin/php"
 ENV PATH "/opt/remi/php81/root/usr/bin:/opt/remi/php81/root/usr/sbin${PATH:+:${PATH}}"
@@ -45,3 +47,4 @@ RUN composer update && cp .env.example .env && php artisan key:generate && php a
 EXPOSE 80
 
 CMD httpd -D FOREGROUND
+
