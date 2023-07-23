@@ -29,9 +29,9 @@ return [
     'connections' => [
 
         'default' => [
-            'hosts' => [env('LDAP_HOST', '192.168.1.28')],
+            'hosts' => [env('LDAP_HOST', '192.168.1.110')],
             'username' => env('LDAP_USERNAME', 'Administrador@marrz.com'),
-            'password' => env('LDAP_PASSWORD', 'Marrz654321.'),
+            'password' => env('LDAP_PASSWORD', '123$$qwerty'),
             'port' => env('LDAP_PORT',389),
             'base_dn' => env('LDAP_BASE_DN', 'dc=marrz,dc=com'),
             'timeout' => env('LDAP_TIMEOUT', 5),
