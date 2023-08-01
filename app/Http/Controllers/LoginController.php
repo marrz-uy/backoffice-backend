@@ -18,7 +18,7 @@ class LoginController extends Controller
       };
       try{
         $connection = new Connection([
-          'hosts' => ['192.168.1.110'],
+          'hosts' => ['172.20.10.6'],
           'username' => $request -> username . "@marrz.com",
           'password' => $request -> password
         ]);
