@@ -46,35 +46,36 @@ class TourPredefinidoTest extends TestCase
             'nombreTourPredefinido'                => 'Tour nocturno de FeelUy2',
             'horaDeInicioTourPredefinido'             => '12:00:00',
             'descripcionTourPredefinido' =>'Un tour creado para disfrutar de la noche montevideana' ,
+            'imagenTour' =>'Imagen Para Test',
             'puntosdeInteresTour'                 => "$id->id"
+            
+        ]);
+        $response->assertStatus(201);
+    }
+    public function test_ModificarTourPredefinido_Exitoso()
+    {
+        $this->test_RegistroTourPredefinido_Exitoso();
+
+        $idPuntoDeInteres=PuntosInteres::latest('id')->first();
+        $idTourPredefinido=TourPredefinido::latest('id')->first();
+        $response = $this->withHeaders([
+            'content-type' => 'application/json',
+        ])->patchJson('/api/tourPredefinido', [
+            'nombreTourPredefinido'                => 'Tour nocturno de FeelUy3',
+            'horaDeInicioTourPredefinido'             => '12:00:00',
+            'descripcionTourPredefinido' =>'Un tour creado para disfrutar de la noche montevideana' ,
+            'id'=>$idTourPredefinido->id,
+            'puntosdeInteresTour'                 => "$idPuntoDeInteres->id"
             
         ]);
         $response->assertStatus(200);
     }
-    // public function test_ModificarTourPredefinido_Exitoso()
-    // {
-    //     $this->test_RegistroTourPredefinido_Exitoso();
-
-    //     $idPuntoDeInteres=PuntosInteres::latest('id')->first();
-    //     $idTourPredefinido=TourPredefinido::latest('id')->first();
-    //     $response = $this->withHeaders([
-    //         'content-type' => 'application/json',
-    //     ])->patchJson('/api/tourPredefinido', [
-    //         'nombreTourPredefinido'                => 'Tour nocturno de FeelUy3',
-    //         'horaDeInicioTourPredefinido'             => '12:00:00',
-    //         'descripcionTourPredefinido' =>'Un tour creado para disfrutar de la noche montevideana' ,
-    //         'id'=>$idTourPredefinido->id,
-    //         'puntosdeInteresTour'                 => "$idPuntoDeInteres->id"
-            
-    //     ]);
-    //     $response->assertStatus(200);
-    // }
-    // public function test_EliminarTourPredefinido(){
-    //     $this->test_RegistroTourPredefinido_Exitoso();
-    //     $id=TourPredefinido::latest('id')->first();
-    //     $response = $this->withHeaders([
-    //         'content-type' => 'application/json',
-    //     ])->deleteJson('/api/tourPredefinido/'.$id->id);
-    //     $response->assertStatus(200);
-    // }
+    public function test_EliminarTourPredefinido(){
+        $this->test_RegistroTourPredefinido_Exitoso();
+        $id=TourPredefinido::latest('id')->first();
+        $response = $this->withHeaders([
+            'content-type' => 'application/json',
+        ])->deleteJson('/api/tourPredefinido/'.$id->id);
+        $response->assertStatus(200);
+    }
 }

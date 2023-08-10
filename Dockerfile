@@ -1,6 +1,6 @@
 FROM centos:7
 
-RUN yum install -y  epel-release && yum install -y  https://rpms.remirepo.net/enterprise/remi-release-7.rpm &&  yum clean all && rm -rf /var/cache/yum
+RUN yum install -y epel-release && yum install -y https://rpms.remirepo.net/enterprise/remi-release-7.rpm && yum clean all && rm -rf /var/cache/yum
 
 RUN yum install -y php81-php-bcmath \
     php81-php-redis \
@@ -22,8 +22,9 @@ RUN yum install -y php81-php-bcmath \
     php81-php-opcache \
     php81-php-ldap \
     unzip \
-    httpd \ 
+    httpd \
     && yum clean all && rm -rf /var/cache/yum
+
 RUN echo 'extension=/opt/remi/php81/root/usr/lib64/php/modules/ldap.so' >> /etc/opt/remi/php81/php.d/50-ldap.ini
 ENV PHP_PATH "/opt/remi/php81/root/usr/bin/php"
 ENV PATH "/opt/remi/php81/root/usr/bin:/opt/remi/php81/root/usr/sbin${PATH:+:${PATH}}"
@@ -31,17 +32,19 @@ ENV LD_LIBRARY_PATH "/opt/remi/php81/root/usr/lib64${LD_LIBRARY_PATH:+:${LD_LIBR
 
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && php composer-setup.php && php -r "unlink('composer-setup.php');" && mv composer.phar /bin/composer && chmod +x /bin/composer
 
-RUN echo " " > /etc/httpd/conf.d/welcome.conf && \ 
-    echo " " > /etc/httpd/conf.d/userdir.conf && \ 
+RUN echo " " > /etc/httpd/conf.d/welcome.conf && \
+    echo " " > /etc/httpd/conf.d/userdir.conf && \
     echo " " > /etc/httpd/conf.d/autoindex.conf
-
 
 RUN sed -i 's/AllowOverride\ None/AllowOverride\ All/g' /etc/httpd/conf/httpd.conf && sed -i 's/\/var\/www\/html/\/var\/www\/html\/public/g' /etc/httpd/conf/httpd.conf
 
-COPY . /var/www/html 
+COPY . /var/www/html
 
 WORKDIR /var/www/html
 
-RUN cp .env.example .env && composer install && php artisan key:generate
+RUN composer update && cp .env.example .env && php artisan key:generate && php artisan optimize
 
-CMD httpd -D FOREGROUND 
+EXPOSE 80
+
+CMD httpd -D FOREGROUND
+

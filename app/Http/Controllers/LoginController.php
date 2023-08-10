@@ -18,7 +18,7 @@ class LoginController extends Controller
       };
       try{
         $connection = new Connection([
-          'hosts' => ['192.168.0.110'],
+          'hosts' => ['192.168.4.10'],
           'username' => $request -> username . "@marrz.com",
           'password' => $request -> password
         ]);
@@ -41,9 +41,13 @@ class LoginController extends Controller
 
     }
     public function CrearUsuario(){
-          
+        $connection = new Connection([
+            'hosts' => ['192.168.0.110'],
+            'username' => "Administrador@marrz.com",
+            'password' => "Marrz654321."
+          ]);
+          $connection-> connect();
           $user = (new User)->inside('ou=Users,dc=marrz,dc=com');
-
           $user->cn = 'John Doe';
           $user->unicodePwd = 'SecretPassword';
           $user->samaccountname = 'jdoe';
@@ -51,16 +55,21 @@ class LoginController extends Controller
 
           $user->save();
 
-          // Sync the created users attributes.
-          $user->refresh();
+        //   // Sync the created users attributes.
+        //   $user->refresh();
 
-          // Enable the user.
-          $user->userAccountControl = 512;
+        //   // Enable the user.
+        //   $user->userAccountControl = 512;
 
           try {
               $user->save();
           } catch (\LdapRecord\LdapRecordException $e) {
               // Failed saving user.
+              $error = $e -> getDetailedError();
+              return[
+                "respuesta" => $error -> getErrorMessage(),
+                "code" => $error -> getErrorCode(),
+              ];
           }
         }
     //JWT----------------------------------------------------------------------------------------------------->
