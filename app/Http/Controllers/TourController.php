@@ -16,59 +16,42 @@ class TourController extends Controller
     
     public function InsertarTourPredefinido(Request $request)
     {
-        if($request->Opcion==='AltaDeTour'){
-            try {
-                DB::beginTransaction();
-                $tour = TourPredefinido::create([
-                    'nombreTourPredefinido'       => $request->nombreTourPredefinido,
-                    'horaDeInicioTourPredefinido' => $request->horaDeInicioTourPredefinido,
-                    'descripcionTourPredefinido'  => $request->descripcionTourPredefinido,
-                ]);
-    
-                $puntosdeInteresTour = $request->puntosdeInteresTour;
-                $puntos              = explode(',', $puntosdeInteresTour);
-                $id                  = $tour->id;
-                foreach ($puntos as $punto) {
-                    TourItemsPredefinido::create([
-                        'puntoInteresId' => $punto,
-                        'tourId'         => $id,
-                    ]);
-                }
-                DB::commit();
-                return response()->json([
-                    'Message' => 'Tour Predefinido Creado correctamente ' . $tour->nombreTourPredefinido,
-                ]);
-    
-            } catch (\Exception$e) {
-                DB::rollBack();
-    
-                return response()->json([
-                    'Message' => 'No se pudo crear el tour predefinido, revise los datos enviados',
-                ]);
-            }
-        }
-        if($request->Opcion==='AltaDeImagenTour'){
-            if (!$request->hasFile('file')) {
-                return $this->returnError(202, 'file is required');
-            }
-            // return response()->json([
-            //         "codigo"    => "200",
-            //         "respuesta" => "Se agrego imagen con exito",
-            //         "idEvento" => $request->idTour
-            //     ]);
-            $response = Cloudinary::upload($request->file('file')->getRealPath(), ['folder' => 'feeluy']);
-                $url       = $response->getSecurePath();
-            
-                $tour=DB::table('tour_predefinido')
-                ->where('id','=',$request->idTour)
-                ->update(['imagen' => $url]);
-                return response()->json([
-                    "codigo"    => "200",
-                    "respuesta" => "Se agrego imagen con exito",
-                    "idTour" => $request->idTour
-                ]);
-        }
+        $nombre      = $request->nombreTourPredefinido;
+        $hora        = $request->horaDeInicioTourPredefinido;
+        $descripcion = $request->descripcionTourPredefinido;
+        $imagen      = $request->imagenTour;
+        $puntosTour  = $request->puntosdeInteresTour;
 
+        try {
+            DB::beginTransaction();
+            $tour                              = new TourPredefinido();
+            $tour->nombreTourPredefinido       = $nombre;
+            $tour->horaDeInicioTourPredefinido = $hora;
+            $tour->descripcionTourPredefinido  = $descripcion;
+            $tour->imagenTour                  = $imagen;
+            $tour->save();
+
+            $puntosdeInteresTour = $puntosTour;
+            $puntos              = explode(',', $puntosdeInteresTour);
+            $id                  = $tour->id;
+            foreach ($puntos as $punto) {
+                TourItemsPredefinido::create([
+                    'puntoInteresId' => $punto,
+                    'tourId'         => $id,
+                ]);
+            }
+            DB::commit();
+            return response()->json([
+                'Message' => 'Tour Predefinido Creado correctamente',
+            ], 201);
+
+        } catch (\Exception$e) {
+            DB::rollBack();
+
+            return response()->json([
+                'Message' => 'No se pudo crear el tour predefinido, revise los datos enviados' . $e,
+            ], 404);
+        }
     }
     public function ModificarTourPredefinido(Request $request){
         $TourPredenifido=TourPredefinido::find($request->id);
