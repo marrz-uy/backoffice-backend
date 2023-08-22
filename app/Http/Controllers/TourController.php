@@ -58,6 +58,7 @@ class TourController extends Controller
         $TourPredenifido->nombreTourPredefinido          = $request->nombreTourPredefinido;
         $TourPredenifido->horaDeInicioTourPredefinido    = $request->horaDeInicioTourPredefinido;
         $TourPredenifido->descripcionTourPredefinido     = $request->descripcionTourPredefinido;
+        $TourPredenifido->imagenTour     = $request->imagenTour;
         $TourPredenifido->save();
         
         DB::table('tour_items_predefinido')->where('tourId', $request->id)->delete();
