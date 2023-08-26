@@ -32,7 +32,7 @@ jobs:
       - name: Preparar Laravel
         run: |
           cp .env.example .env
-          composer install
+          composer update
           php artisan key:generate
       - name: Preparar base de datos para pruebas
         run: |
