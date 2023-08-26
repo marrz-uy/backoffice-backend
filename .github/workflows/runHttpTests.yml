@@ -27,8 +27,8 @@ jobs:
           fetch-depth: 1
       - name: Instalar extension de LDAP
         run: |
-          yum install php80-php-ldap -y
-          echo 'extension=/opt/remi/php80/root/usr/lib64/php/modules/ldap.so' >> /etc/php.d/50-ldap.ini
+          yum install php81-php-ldap -y
+          echo 'extension=/opt/remi/php81/root/usr/lib64/php/modules/ldap.so' >> /etc/php.d/50-ldap.ini
       - name: Preparar Laravel
         run: |
           cp .env.example .env
