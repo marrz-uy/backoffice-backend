@@ -25,7 +25,7 @@ RUN yum install -y php81-php-bcmath \
     httpd \
     && yum clean all && rm -rf /var/cache/yum
 
-RUN echo 'extension=/opt/remi/php81/root/usr/lib64/php/modules/ldap.so' >> /etc/opt/remi/php81/php.d/50-ldap.ini
+RUN sed -i echo 'extension=/opt/remi/php81/root/usr/lib64/php/modules/ldap.so' >> /etc/opt/remi/php81/php.d/50-ldap.ini
 ENV PHP_PATH "/opt/remi/php81/root/usr/bin/php"
 ENV PATH "/opt/remi/php81/root/usr/bin:/opt/remi/php81/root/usr/sbin${PATH:+:${PATH}}"
 ENV LD_LIBRARY_PATH "/opt/remi/php81/root/usr/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
