@@ -33,7 +33,6 @@ jobs:
       - name: Preparar base de datos para pruebas
         run: |
           php artisan migrate 
-          php artisan db:seed
       - name: Ejecutar pruebas
         run: |
           mkdir ./tests/Unit
