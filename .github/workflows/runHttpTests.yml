@@ -18,17 +18,13 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DB_HOST: mysql
-      DB_DATABASE: laravel
+      DB_DATABASE: feeluy
     container:
-      image: ggmartinez/laravel:php-82
+      image: marrzuy/laravel-img
     steps:
       - uses: actions/checkout@v1
         with:
           fetch-depth: 1
-      - name: Instalar extension de LDAP
-        run: |
-          yum install php80-php-ldap -y
-          echo 'extension=/opt/remi/php80/root/usr/lib64/php/modules/ldap.so' >> /etc/opt/remi/php80/php.d/50-ldap.ini
       - name: Preparar Laravel
         run: |
           cp .env.example .env
