@@ -13,6 +13,8 @@ use App\Models\Gastronomicos;
 use App\Models\ActividadesInfantiles;
 use App\Models\ActividadesNocturnas;
 use App\Models\ImagenesPuntosDeInteres;
+use App\Models\TourPredefinido;
+use App\Models\Eventos;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -555,5 +557,15 @@ class PuntosInteresController extends Controller
             
         ]);
     
+    }
+    public function Estadisticas(){
+        $PuntosInteres=PuntosInteres::all()->count();
+        $Eventos=Eventos::all()->count();
+        $TourPredefinido=TourPredefinido::all()->count();
+        return response()->json([
+            "PuntosInteres"=>$PuntosInteres,
+            "Eventos"=>$Eventos,
+            "TourPredefinido"=>$TourPredefinido,
+        ]);
     }
 }

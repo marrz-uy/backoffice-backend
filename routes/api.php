@@ -43,6 +43,7 @@ Route::DELETE('/tourPredefinido/{i}', [TourController::class, 'destroy']);
 Route::POST('/tourPredefinido/{id}', [TourController::class, 'ModificarImagenesTour']);
 
 //AUXILIARES-------------------------------------------------------------------------------------------------------------------------->
+Route::GET('/Estadisticas', [PuntosInteresController::class, 'Estadisticas']);
 Route::group([
 
     'middleware' => 'api',

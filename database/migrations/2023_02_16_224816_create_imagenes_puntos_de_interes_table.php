@@ -19,12 +19,14 @@ class CreateImagenesPuntosDeInteresTable extends Migration
                 ->constrained('puntosinteres')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->string('url');
-            $table->string('public_id');
-            $table->string('image_description');
+            $table->string('url'); //https://res.cloudinary.com/dioeqw1za/image/upload/v1676599422/feeluy/fzwgsvgdf2topw9arcav.png
+            $table->string('public_id'); //feeluy/fzwgsvgdf2topw9arcav
+            $table->string('image_description'); //descripcion
             $table->timestamps();
         });
     }
+    //https://res.cloudinary.com/dioeqw1za/image/upload -/v1676599422/- /feeluy/fzwgsvgdf2topw9arcav.extension
+    //https://res.cloudinary.com/dioeqw1za/image/upload/v1676599422/feeluy/fzwgsvgdf2topw9arcav.png
 
     /**
      * Reverse the migrations.
