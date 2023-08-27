@@ -18,8 +18,8 @@ class CreateTranslationsTable extends Migration
             $table->collation = 'utf8mb4_general_ci';
             $table->id();
             $table->string('tagName')->default('tagname');
-            $table->string('es')->nullable();
-            $table->string('en')->nullable();
+            $table->string('es', 500)->nullable();
+            $table->string('en', 500)->nullable();
         });
     }
 

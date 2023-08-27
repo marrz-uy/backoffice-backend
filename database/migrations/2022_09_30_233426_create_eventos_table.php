@@ -6,7 +6,11 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateEventosTable extends Migration
 {
-    
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
     public function up()
     {
         Schema::create('eventos', function (Blueprint $table) {
@@ -22,7 +26,7 @@ class CreateEventosTable extends Migration
             $table->time('HoraInicio');
             $table->time('HoraFin')->nullable();
             $table->String('TipoEvento');
-            $table->string('ImagenEvento',500)->nullable();
+            $table->String('ImagenEvento', 500);
             $table->timestamps();
         });
     }
