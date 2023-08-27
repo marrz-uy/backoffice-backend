@@ -39,5 +39,4 @@ jobs:
           php artisan migrate 
       - name: Ejecutar pruebas
         run: |
-          mkdir ./tests/Unit
           php artisan test
