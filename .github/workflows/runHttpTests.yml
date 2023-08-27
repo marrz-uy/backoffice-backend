@@ -20,7 +20,7 @@ jobs:
       DB_HOST: mysql
       DB_DATABASE: feeluy
     container:
-      image: ggmartinez/laravel:php-82
+      image: marrzuy/laravel-img
     steps:
       - uses: actions/checkout@v1
         with:
