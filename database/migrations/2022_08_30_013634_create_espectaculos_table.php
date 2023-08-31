@@ -15,10 +15,10 @@ class CreateEspectaculosTable extends Migration
     {
         Schema::create('espectaculos', function (Blueprint $table) {
             $table->foreignId('puntosinteres_id')
-            ->constrained('puntosinteres')
-            ->onUpdate('cascade')
-            ->onDelete('cascade');
-            $table->set('Tipo',['Cine','Teatro','Carnaval','Evento Deportivo','Evento Musical']);
+                ->constrained('puntosinteres')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->set('Tipo', ['Cine', 'Teatro', 'Carnaval', 'Evento Deportivo', 'Evento Musical']);
             $table->timestamps();
             $table->softDeletes();
         });

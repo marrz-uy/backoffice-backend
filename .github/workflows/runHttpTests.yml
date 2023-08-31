@@ -8,7 +8,7 @@ jobs:
   RunTest:
     services:
       mysql:
-        image: mysql:8
+        image: mysql:5.7
         env:
           MYSQL_DATABASE: feeluy
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
@@ -28,13 +28,11 @@ jobs:
       - name: Preparar Laravel
         run: |
           cp .env.example .env
-          composer update
+          composer install
           php artisan key:generate
       - name: Preparar base de datos para pruebas
         run: |
           php artisan migrate 
-          php artisan db:seed
       - name: Ejecutar pruebas
         run: |
-          mkdir ./tests/Unit
           php artisan test

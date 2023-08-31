@@ -40,7 +40,6 @@ class CreateAlojamientosTable extends Migration
      * @return void
      */
     public function down()
-    
     {
         Schema::dropIfExists('alojamientos');
     }

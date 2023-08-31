@@ -17,8 +17,8 @@ class CreateTourPredefinidoTable extends Migration
             $table->id();
             $table->string('nombreTourPredefinido');
             $table->string('horaDeInicioTourPredefinido');
-            $table->string('descripcionTourPredefinido');
-            $table->string('imagen',500)->nullable();
+            $table->string('descripcionTourPredefinido', 500);
+            $table->string('imagenTour', 500);
             $table->timestamps();
         });
     }
