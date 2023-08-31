@@ -21,3 +21,9 @@ jobs:
         run: |
           cd /var/www/html/Arquitectura-de-Backoffice
           docker compose up -d
+      - name: Generarndo Key
+        run: |   
+            docker exec -i backoffice-backend php artisan key:generate
+      - name: Optimizando
+        run: | 
+            docker exec -i backoffice-backend php artisan optimize
