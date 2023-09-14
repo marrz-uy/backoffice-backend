@@ -12,17 +12,15 @@ jobs:
           fetch-depth: 1
       - name: Actualizar imagen
         run: |
+          cd /var/www/html/Arquitectura-de-Backoffice
+          docker compose down
+          docker rmi marrzuy/backoffice-backend:latest || true
           docker pull marrzuy/backoffice-backend:latest
-      - name: Detenes contenedores
+      - name: Detener contenedores
         run: |
           cd /var/www/html/Arquitectura-de-Backoffice
           docker compose down
       - name: Iniciar contenedores
         run: |
           cd /var/www/html/Arquitectura-de-Backoffice
-          docker compose up -d
-      - name: Preparar contenedores
-        run: |
-          docker exec -i backoffice-backend chmod o+w ./storage/ -R
-          docker exec -i backoffice-backend php artisan key:generate
-          docker exec -i backoffice-backend php artisan optimize
+          ./RUN_BACKO.sh
